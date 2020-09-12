@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/App.css";
-import logo from "../images/logo.svg";
+import logo from "../images/logo-alone.svg";
 import crane from "../images/crane.gif";
 
 function App() {
