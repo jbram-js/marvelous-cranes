@@ -11,6 +11,7 @@ function App() {
         Welcome to the Cranger Zone! <br></br>🏗️ Under construction 🏗️
       </h1>
       <img src={crane} alt="gif" className="crane-gif" />
+      <p>Test</p>
     </div>
   );
 }
