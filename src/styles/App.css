@@ -3,13 +3,13 @@
 .App {
   background: white;
   font-family: "Amaranth", sans-serif;
-  font-size: 14px;
+  font-size: 10px;
   text-align: center;
   line-height: 45px;
 }
 
 .logo-home {
-  max-width: max-content;
+  max-width: 70px;
   padding-top: 10px;
 }
 
