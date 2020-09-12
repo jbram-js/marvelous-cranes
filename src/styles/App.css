@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Amaranth:ital@0;1&display=swap");
+
+.App {
+  background: white;
+  font-family: "Amaranth", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  line-height: 45px;
+}
+
+.logo-home {
+  max-width: 360px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.crane-gif {
+  padding-top: 20px;
+  max-width: 360px;
+}
