@@ -6,24 +6,21 @@ import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
 import Map from "./Map";
 import Profile from "./Profile";
+import Rules from "./Rules";
 
 import "../styles/App.css";
-<<<<<<< HEAD
-=======
-import logo from "../images/logo-alone.svg";
-import crane from "../images/crane.gif";
->>>>>>> 27e1f0269fbd21670cf722f492983863bd9c2c0b
 
 function App() {
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  const [firstVisit, setFirstVisit] = useState(false);
 
   return (
     <div className="App">
-<<<<<<< HEAD
       {!userLoggedIn ? (
         <LogIn setUserLoggedIn={setUserLoggedIn} />
       ) : (
         <>
+          {firstVisit && <Rules setFirstVisit={setFirstVisit} />}
           <NavBar />
           <Switch>
             <Route exact path="/cranes">
@@ -41,13 +38,6 @@ function App() {
           </Switch>
         </>
       )}
-=======
-      <img src={logo} alt="Logo" className="logo-home" />
-      <h1 className="app-header">
-        Welcome to the Cranger Zone! <br></br>🏗️ Under construction 🏗️
-      </h1>
-      <img src={crane} alt="gif" className="crane-gif" />
->>>>>>> 27e1f0269fbd21670cf722f492983863bd9c2c0b
     </div>
   );
 }

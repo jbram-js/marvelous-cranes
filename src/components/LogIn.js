@@ -16,7 +16,8 @@ const LogIn = ({ setUserLoggedIn }) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setUserLoggedIn(true);
   };
 
