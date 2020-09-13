@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "../styles/Register.css";
 
 const initialState = {
   fields: {
-    email: "",
+    emailAddress: "",
     username: "",
     password: "",
   },
@@ -13,57 +14,73 @@ const initialState = {
 const Register = ({ setUserLoggedIn }) => {
   const [value, setValue] = useState(initialState.fields);
 
-  const handleInput = (event) => {
-    setValue({ ...value, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setUserLoggedIn(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (value.password === value.confirmPassword) {
+      console.log("success");
+      axios.post("http://localhost:5000", {
+        username: value.username,
+        emailAddress: value.emailAddress,
+        password: value.password,
+      }).then((response) => {
+        console.log(response);
+        setUserLoggedIn(true);
+      }).catch((err) => {
+        console.log(err);
+      });
+    } else {
+      console.log("Check passwords match");
+    }
+
   };
 
-  return (
-    <div className="Register">
-      <h1>Register</h1>
-      <form className="register-form" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={handleInput}
-          value={value.email}
-          required
-        ></input>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          name="username"
-          onChange={handleInput}
-          value={value.username}
-          required
-        ></input>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={handleInput}
-          value={value.password}
-          required
-        ></input>
-        <label htmlFor="confirm-password">Confirm Password</label>
-        <input
-          id="confirm-password"
-          name="confirm-password"
-          type="password"
-          onChange={handleInput}
-          required
-        ></input>
-        <button type="submit">Register and Login</button>
-      </form>
-    </div>
-  );
-};
+
+    return (
+      <div className="App">
+        <h1>Register</h1>
+        <form action="submit" onSubmit={handleSubmit}>
+          <input 
+            type="email"
+            placeholder="Email..."
+            required
+            name="emailAddress" 
+            onChange={handleChange} 
+          />
+          <input 
+            type="text"
+            placeholder="Username..."
+            required
+            name="username"
+            onChange={handleChange} 
+          />
+          <input 
+            type="password"
+            placeholder="Password..."
+            required
+            name="password"
+            onChange={handleChange} 
+          />
+          <input
+            type="password"
+            placeholder="Repeat Password..."
+            required
+            name="confirmPassword"
+            onChange={handleChange} 
+          />
+          
+          <button type="submit">Register</button>
+        </form>
+        <Link to="/">Already got an account?</Link>
+      </div>
+    )
+  };
 
 export default Register;

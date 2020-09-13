@@ -7,17 +7,24 @@ import AddCrane from "./AddCrane";
 import Map from "./Map";
 import Profile from "./Profile";
 import Rules from "./Rules";
+import Register from "./Register";
 
 import "../styles/App.css";
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [firstVisit, setFirstVisit] = useState(false);
-
   return (
     <div className="App">
-      {!userLoggedIn ? (
-        <LogIn setUserLoggedIn={setUserLoggedIn} />
+      {userLoggedIn ? (
+        <Switch>
+          <Route exact path="/">
+            <LogIn setUserLoggedIn={setUserLoggedIn} />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+        </Switch>
       ) : (
         <>
           {firstVisit && <Rules setFirstVisit={setFirstVisit} />}
