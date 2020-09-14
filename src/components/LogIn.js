@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "../styles/LogIn.css";
 
 const initialState = {
@@ -14,8 +15,14 @@ const LogIn = ({ setUserLoggedIn }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("logged in")
-    setUserLoggedIn(true);
+      axios.post("http://localhost:5000/login", {
+        username: value.username,
+        password: value.password,
+      }).then((response) => {
+        console.log(response);
+      }).catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

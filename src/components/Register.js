@@ -32,7 +32,7 @@ const Register = ({ setUserLoggedIn }) => {
         password: value.password,
       }).then((response) => {
         console.log(response);
-        setUserLoggedIn(true);
+        //setUserLoggedIn(true);
       }).catch((err) => {
         console.log(err);
       });

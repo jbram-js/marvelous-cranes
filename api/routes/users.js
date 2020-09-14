@@ -20,9 +20,27 @@ router.post("/", async (req,res) => {
 })
 
 //User Login
-//router.post("/login", function(req,res) => {
-//    User.findOne({ username: req.body.username }).then((user) =>())
-//})
+router.post("/login", function(req,res) {
+    User.findOne({ username: req.body.username }).then((user) =>{
+        if(!user) {
+            res.status(401).json({
+                message: "User/Password not found."
+            })
+        } else {
+            if(user.validatePassword(req.body.password)) {
+                res.status(200).json(user)
+                //jwt token/cookies - remember me log in
+            } else {
+                res.status(401).json({
+                    message: "Password/User not found."
+                });
+            }
+        }
+    }).catch((err) => {
+        console.log(err);
+        res.status(500);
+    });
+});
 
 
 module.exports = router;
