@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Rules from "./Rules";
 import "../styles/Register.css";
 
 const initialState = {

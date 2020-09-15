@@ -6,9 +6,11 @@ const { model } = require("./models/users");
 const cors = require('cors');
 const PORT = 5000;
 
+
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 });
 const db = mongoose.connection;
 app.use(cors({ credentials: true, origin: true }));
@@ -24,4 +26,3 @@ app.use("/", usersRouter);
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
 });
-

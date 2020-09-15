@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "../styles/LogIn.css";
 
@@ -7,8 +8,9 @@ const initialState = {
   fields: { username: "", password: "" },
 };
 
-const LogIn = ({ setUserLoggedIn }) => {
+const LogIn = ({ setUser }) => {
   const [value, setValue] = useState(initialState.fields);
+  const history = useHistory();
   
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
@@ -19,9 +21,11 @@ const LogIn = ({ setUserLoggedIn }) => {
         username: value.username,
         password: value.password,
       }).then((response) => {
-        console.log(response);
+        setUser(response);
+        history.push("/cranes")
       }).catch((err) => {
         console.log(err);
+        alert("Error Logging in!")
       });
   };
 
