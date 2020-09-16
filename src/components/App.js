@@ -16,23 +16,23 @@ function App() {
     <div className="App">
       <>
         <Switch>
-              <Route exact path="/login"
+              <Route exact path="/"
                 render={() => <LogIn setUser={setUser} />} >
               </Route>
               <Route exact path="/register">
                   <Register />
               </Route>
               <Route exact path="/cranes"
-                render={() => (user ? <Cranes user={user} /> : <Redirect to="/login" />)}>
+                render={() => (user ? <Cranes user={user} /> : <Redirect to="/" />)}>
               </Route>
               <Route exact path="/add-crane"
-                render={() => (user ? <AddCrane user={user} /> : <Redirect to="/login" />)}>  
+                render={() => (user ? <AddCrane user={user} /> : <Redirect to="/" />)}>  
               </Route>
               <Route exact path="/map"
-                render={() => (user ? <Map user={user} /> : <Redirect to="/login" />)}>
+                render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}>
               </Route>
               <Route exact path="/profile"
-                render={() => (user ? <Profile user={user} /> : <Redirect to="/login" />)}>
+                render={() => (user ? <Profile user={user} /> : <Redirect to="/" />)}>
               </Route>
           </Switch>
         </>
