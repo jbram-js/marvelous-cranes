@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Rules from "./Rules";
 import "../styles/Register.css";
@@ -8,13 +8,14 @@ const initialState = {
   fields: {
     emailAddress: "",
     username: "",
+    phoneNumber: 0,
     password: "",
   },
 };
 
 const Register = ({ setUserLoggedIn }) => {
   const [value, setValue] = useState(initialState.fields);
-
+  const history = useHistory();
   const handleChange = (e) => {
     setValue({
       ...value,
@@ -24,16 +25,20 @@ const Register = ({ setUserLoggedIn }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
 
     if (value.password === value.confirmPassword) {
       console.log("success");
       axios.post("http://localhost:5000", {
         username: value.username,
         emailAddress: value.emailAddress,
+        phoneNumber: value.phoneNumber,
         password: value.password,
       }).then((response) => {
         console.log(response);
         //setUserLoggedIn(true);
+        alert("Successful registration, redirecting you to log in!")
+        history.push("/")
       }).catch((err) => {
         console.log(err);
       });
@@ -60,6 +65,13 @@ const Register = ({ setUserLoggedIn }) => {
             placeholder="Username..."
             required
             name="username"
+            onChange={handleChange} 
+          />
+          <input 
+            type="text"
+            placeholder="Phone Number..."
+            required
+            name="phoneNumber"
             onChange={handleChange} 
           />
           <input 
