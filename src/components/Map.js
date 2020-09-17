@@ -31,7 +31,7 @@ const Map = () => {
   const [selected, setSelected] = useState(null);
 
   const onMapClick = useCallback((event) => {
-    setMarkers((current) => [
+    setMarkers(() => [
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
