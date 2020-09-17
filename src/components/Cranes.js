@@ -1,7 +1,24 @@
 import React from "react";
+import CraneCard from "./CraneCard";
+
+import placeholder from "../images/cranesafety.jpg";
+
+import "../styles/Cranes.css";
 
 const Cranes = () => {
-  return <div className="Cranes">All Cranes</div>;
+  return (
+    <div className="Cranes">
+      <h1>All Cranes</h1>
+      <CraneCard
+        user="ethanscranes"
+        image={placeholder}
+        caption="Beauty"
+        craneRate="10"
+        backdropRate="6"
+        comment="Not much wrong"
+      />
+    </div>
+  );
 };
 
 export default Cranes;

@@ -21,7 +21,10 @@ function App() {
       ) : (
         <>
           {firstVisit && <Rules setFirstVisit={setFirstVisit} />}
-          <NavBar />
+
+          <Route>
+            <NavBar />
+          </Route>
           <Switch>
             <Route exact path="/cranes">
               <Cranes />

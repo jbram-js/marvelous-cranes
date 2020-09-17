@@ -1,0 +1,32 @@
+.CraneCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.6em;
+}
+
+.CraneCard button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.card-image {
+  margin-left: 23px;
+  object-fit: cover;
+  width: 330px;
+  height: 300px;
+}
+
+.CraneCard div {
+  margin-left: 22px;
+}
+
+.username {
+  margin-top: -29px;
+  background-color: white;
+  padding: 0px;
+  width: 90px;
+  height: 30px;
+  text-align: center;
+}
