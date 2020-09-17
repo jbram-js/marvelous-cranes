@@ -26,6 +26,8 @@ const AddCrane = () => {
   console.log(value.image);
 
   return (
+  
+  
     <div className="AddCrane">
       <h1>Add crane</h1>
       <form className="add-crane-form" onSubmit={handleAddCrane}>
@@ -98,6 +100,7 @@ const AddCrane = () => {
         <button type="submit">ADD</button>
       </form>
     </div>
+    
   );
 };
 

@@ -1,67 +1,97 @@
 import React, { useState } from "react";
-
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import Rules from "./Rules";
 import "../styles/Register.css";
 
 const initialState = {
   fields: {
-    email: "",
+    emailAddress: "",
     username: "",
+    phoneNumber: 0,
     password: "",
   },
 };
 
 const Register = ({ setUserLoggedIn }) => {
   const [value, setValue] = useState(initialState.fields);
-
-  const handleInput = (event) => {
-    setValue({ ...value, [event.target.name]: event.target.value });
+  const history = useHistory();
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setUserLoggedIn(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (value.password === value.confirmPassword) {
+      console.log("success");
+      axios
+        .post("http://localhost:5000", {
+          username: value.username,
+          emailAddress: value.emailAddress,
+          phoneNumber: value.phoneNumber,
+          password: value.password,
+        })
+        .then((response) => {
+          console.log(response);
+          //setUserLoggedIn(true);
+          alert("Successful registration, redirecting you to log in!");
+          history.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      console.log("Check passwords match");
+    }
   };
 
   return (
-    <div className="Register">
+    <div className="App">
       <h1>Register</h1>
-      <form className="register-form" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+      <form action="submit" onSubmit={handleSubmit}>
         <input
-          id="email"
-          name="email"
           type="email"
-          onChange={handleInput}
-          value={value.email}
+          placeholder="Email..."
           required
-        ></input>
-        <label htmlFor="username">Username</label>
+          name="emailAddress"
+          onChange={handleChange}
+        />
         <input
-          id="username"
+          type="text"
+          placeholder="Username..."
+          required
           name="username"
-          onChange={handleInput}
-          value={value.username}
-          required
-        ></input>
-        <label htmlFor="password">Password</label>
+          onChange={handleChange}
+        />
         <input
-          id="password"
+          type="text"
+          placeholder="Phone Number..."
+          required
+          name="phoneNumber"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          required
           name="password"
-          type="password"
-          onChange={handleInput}
-          value={value.password}
-          required
-        ></input>
-        <label htmlFor="confirm-password">Confirm Password</label>
+          onChange={handleChange}
+        />
         <input
-          id="confirm-password"
-          name="confirm-password"
           type="password"
-          onChange={handleInput}
+          placeholder="Repeat Password..."
           required
-        ></input>
-        <button type="submit">Register and Login</button>
+          name="confirmPassword"
+          onChange={handleChange}
+        />
+
+        <button type="submit">Register</button>
       </form>
+      <Link to="/">Already got an account?</Link>
     </div>
   );
 };
