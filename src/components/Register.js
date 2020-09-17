@@ -19,81 +19,81 @@ const Register = ({ setUserLoggedIn }) => {
   const handleChange = (e) => {
     setValue({
       ...value,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
 
     if (value.password === value.confirmPassword) {
       console.log("success");
-      axios.post("https://www.marvelouscranes.com", {
-        username: value.username,
-        emailAddress: value.emailAddress,
-        phoneNumber: value.phoneNumber,
-        password: value.password,
-      }).then((response) => {
-        console.log(response);
-        //setUserLoggedIn(true);
-        alert("Successful registration, redirecting you to log in!")
-        history.push("/")
-      }).catch((err) => {
-        console.log(err);
-      });
+      axios
+        .post("http://localhost:5000", {
+          username: value.username,
+          emailAddress: value.emailAddress,
+          phoneNumber: value.phoneNumber,
+          password: value.password,
+        })
+        .then((response) => {
+          console.log(response);
+          //setUserLoggedIn(true);
+          alert("Successful registration, redirecting you to log in!");
+          history.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       console.log("Check passwords match");
     }
-
   };
 
+  return (
+    <div className="App">
+      <h1>Register</h1>
+      <form action="submit" onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email..."
+          required
+          name="emailAddress"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Username..."
+          required
+          name="username"
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Phone Number..."
+          required
+          name="phoneNumber"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          required
+          name="password"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          placeholder="Repeat Password..."
+          required
+          name="confirmPassword"
+          onChange={handleChange}
+        />
 
-    return (
-      <div className="App">
-        <h1>Register</h1>
-        <form action="submit" onSubmit={handleSubmit}>
-          <input 
-            type="email"
-            placeholder="Email..."
-            required
-            name="emailAddress" 
-            onChange={handleChange} 
-          />
-          <input 
-            type="text"
-            placeholder="Username..."
-            required
-            name="username"
-            onChange={handleChange} 
-          />
-          <input 
-            type="text"
-            placeholder="Phone Number..."
-            required
-            name="phoneNumber"
-            onChange={handleChange} 
-          />
-          <input 
-            type="password"
-            placeholder="Password..."
-            required
-            name="password"
-            onChange={handleChange} 
-          />
-          <input
-            type="password"
-            placeholder="Repeat Password..."
-            required
-            name="confirmPassword"
-            onChange={handleChange} 
-          />
-          
-          <button type="submit">Register</button>
-        </form>
-        <Link to="/">Already got an account?</Link>
-      </div>
-    )
-  };
+        <button type="submit">Register</button>
+      </form>
+      <Link to="/">Already got an account?</Link>
+    </div>
+  );
+};
 
 export default Register;
