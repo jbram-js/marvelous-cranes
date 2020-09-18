@@ -29,7 +29,7 @@ const Register = ({ setUserLoggedIn }) => {
     if (value.password === value.confirmPassword) {
       console.log("success");
       axios
-        .post("http://localhost:5000", {
+        .post("https://test-crane.herokuapp.com/Users", {
           username: value.username,
           emailAddress: value.emailAddress,
           phoneNumber: value.phoneNumber,
