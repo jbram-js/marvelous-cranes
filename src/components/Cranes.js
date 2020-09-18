@@ -1,6 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import CraneCard from "./CraneCard";
+import NavBar from "../components/NavBar";
 
 import placeholder from "../images/cranesafety.jpg";
 
@@ -18,20 +18,9 @@ const Cranes = () => {
         backdropRate="6"
         comment="Not much wrong"
       />
+      <NavBar />
     </div>
   );
-=======
-import NavBar from "./NavBar";
-
-const Cranes = ({ userLoggedIn }) => {
-  return (
-    <>
-      <NavBar />
-      <div className="Cranes">All Cranes</div>
-    </>
-  );
-
->>>>>>> 3ade560b6b114bffc7a46f27af5ec9b5863e3dd9
 };
 
 export default Cranes;
