@@ -14,9 +14,6 @@ const NavBar = () => {
           <Link to="/add-crane">Add</Link>
         </li>
         <li className="navbar-links-item">
-          <Link to="/add-crane-2">AddCrane2</Link>
-        </li>
-        <li className="navbar-links-item">
           <Link to="/map">Map</Link>
         </li>
         <li className="navbar-links-item">

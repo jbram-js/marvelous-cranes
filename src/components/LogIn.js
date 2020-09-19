@@ -21,7 +21,7 @@ const LogIn = ({ setUser }) => {
         username: value.username,
         password: value.password,
       }).then((response) => {
-        setUser(response);
+        setUser(response.data);
         history.push("/cranes")
       }).catch((err) => {
         console.log(err);

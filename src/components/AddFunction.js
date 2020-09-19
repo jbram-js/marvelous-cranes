@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
+import axios from "axios";
 
-const AddFunction = ({ fields, setFields }) => {
+const AddFunction = ({ user,  fields, setFields }) => {
+  
   const handleAddCrane = (event) => {
     event.preventDefault();
     console.log(fields);
+    axios.post("https://test-crane.herokuapp.com/addCrane", fields
+    ).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   const handleFieldChange = (event) => {
@@ -30,7 +38,7 @@ const AddFunction = ({ fields, setFields }) => {
           <input
             id="craneRate"
             name="craneRate"
-            type="number"
+            type="Number"
             min={0}
             max={10}
             step={0.1}
@@ -44,7 +52,7 @@ const AddFunction = ({ fields, setFields }) => {
           <input
             id="craneBackgroundRate"
             name="craneBackgroundRate"
-            type="number"
+            type="Number"
             min={0}
             max={10}
             step={0.1}

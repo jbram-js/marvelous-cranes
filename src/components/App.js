@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
-import AddCranes2 from "./AddCrane2";
+import AddCranes2 from "./AddCrane";
 import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
@@ -35,13 +35,6 @@ function App() {
             path="/add-crane"
             render={() =>
               user ? <AddCrane user={user} /> : <Redirect to="/" />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/add-crane-2"
-            render={() =>
-              user ? <AddCranes2 user={user} /> : <Redirect to="/" />
             }
           ></Route>
           <Route
