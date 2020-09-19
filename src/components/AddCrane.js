@@ -24,8 +24,6 @@ const AddCrane = () => {
     event.preventDefault();
   };
 
-  console.log(value.image);
-
   return (
     <div className="AddCrane">
       <h1>Add crane</h1>

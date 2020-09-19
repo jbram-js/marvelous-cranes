@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 1.6em;
+  font-size: 1.7em;
+  width: 90vw;
 }
 
 .CraneCard button {
@@ -31,4 +32,28 @@
   height: 30px;
   text-align: center;
   color: black;
+}
+
+.showMoreButton {
+  width: 200px;
+  margin: -42px 0px 0px 250px;
+  font-size: 1em;
+}
+
+.extraInfo {
+  text-align: start;
+  margin: -2vh;
+  width: 100vw;
+}
+
+.extraInfo-items {
+  margin-bottom: -8px;
+}
+
+.extraInfo button {
+  background-color: orange;
+  color: white;
+}
+
+.modal {
 }

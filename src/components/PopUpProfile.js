@@ -12,9 +12,9 @@ const PopUpProfile = ({
   return (
     <div className="PopUpProfile">
       <div>{user}</div>
-      <div>{memberSince}</div>
-      <div>{addedCranes}</div>
-      <div>{respects}</div>
+      <div>MEMBER SINCE- {memberSince}</div>
+      <div>CRANES ADDED- {addedCranes}</div>
+      <div>RESPECTS GIVEN- {respects}</div>
       <button type="submit" onClick={() => handleHideProfile()}>
         Close
       </button>

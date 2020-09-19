@@ -7,6 +7,7 @@ import Map from "./Map";
 import Profile from "./Profile";
 import Register from "./Register";
 import "../styles/App.css";
+import NavBar from "./NavBar";
 
 function App() {
   const [user, setUser] = useState();
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <>
+        <NavBar />
         <Switch>
           <Route
             exact
