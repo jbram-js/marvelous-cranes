@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import "../styles/App.css";
+import NavBar from "./NavBar";
 
 function App() {
   const [user, setUser] = useState();

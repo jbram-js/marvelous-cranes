@@ -1,0 +1,7 @@
+.PopUpProfile {
+  position: absolute;
+  background-color: red;
+  height: 400px;
+  width: 200px;
+  margin: 30px -60px 0px 60px;
+}

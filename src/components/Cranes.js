@@ -9,16 +9,14 @@ import "../styles/Cranes.css";
 const Cranes = () => {
   return (
     <div className="Cranes">
-      <h1>All Cranes</h1>
       <CraneCard
-        user="ethanscranes"
+        username="ethanscranes"
         image={placeholder}
         caption="Beauty"
         craneRate="10"
         backdropRate="6"
         comment="Not much wrong"
       />
-      <NavBar />
     </div>
   );
 };

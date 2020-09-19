@@ -47,6 +47,8 @@ const AddCrane = ({ user }) => {
     setFields({ ...fields, markers });
   }, [markers]);
 
+<<<<<<< HEAD
+=======
   const onMapClick = useCallback((event) => {
     setMarkers(() => [
       {
@@ -69,6 +71,7 @@ const AddCrane = ({ user }) => {
   //console.log(markers);
   //console.log(fields);
 
+>>>>>>> 21d1a979248f93d8fcff10bf50534fe4e1faad4f
   return (
     <div className="Map">
       <Search panTo={panTo} />
