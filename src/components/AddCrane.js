@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import NavBar from "../components/NavBar";
 
 import "../styles/AddCrane.css";
 
@@ -26,8 +27,6 @@ const AddCrane = () => {
   console.log(value.image);
 
   return (
-  
-  
     <div className="AddCrane">
       <h1>Add crane</h1>
       <form className="add-crane-form" onSubmit={handleAddCrane}>
@@ -99,8 +98,8 @@ const AddCrane = () => {
         <input id="comment" name="comment" onChange={handleFieldChange}></input>
         <button type="submit">ADD</button>
       </form>
+      <NavBar />
     </div>
-    
   );
 };
 

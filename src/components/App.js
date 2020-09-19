@@ -27,26 +27,18 @@ function App() {
           <Route
             exact
             path="/cranes"
-            render={() => (user ? <Cranes user={user} /> : <Redirect to="/" />)}
+            render={() => <Cranes user={user} />}
           ></Route>
           <Route
             exact
             path="/add-crane"
-            render={() =>
-              user ? <AddCrane user={user} /> : <Redirect to="/" />
-            }
+            render={() => <AddCrane user={user} />}
           ></Route>
-          <Route
-            exact
-            path="/map"
-            render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}
-          ></Route>
+          <Route exact path="/map" render={() => <Map user={user} />}></Route>
           <Route
             exact
             path="/profile"
-            render={() =>
-              user ? <Profile user={user} /> : <Redirect to="/" />
-            }
+            render={() => <Profile user={user} />}
           ></Route>
         </Switch>
       </>

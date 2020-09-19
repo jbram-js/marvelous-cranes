@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import PopUpProfile from "./PopUpProfile";
 
 import "../styles/CraneCard.css";
 
 const CraneCard = ({
   image,
-  user,
+  username,
   caption,
   craneRate,
   backdropRate,
@@ -12,6 +13,7 @@ const CraneCard = ({
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
+  const [showProfile, setShowProfile] = useState(false);
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -22,10 +24,19 @@ const CraneCard = ({
     setShowInfo(false);
     setShowMoreButton(true);
   };
+
+  const handleShowProfile = () => {
+    setShowProfile(true);
+  };
+  const handleHideProfile = () => {
+    setShowProfile(false);
+  };
   return (
     <div className="CraneCard">
       <img className="card-image" src={image} alt="crane"></img>
-      <div className="username">{user}</div>
+      <div className="username" onClick={() => handleShowProfile()}>
+        {username}
+      </div>
       <div>{caption}</div>
       <button type="submit">Like</button>
 
@@ -42,6 +53,18 @@ const CraneCard = ({
           <div>COMMENT{comment}</div>
           <button type="submit">VIEW ON MAP</button>
           <button onClick={handleHideInfo}>Show less</button>
+        </>
+      )}
+
+      {showProfile && (
+        <>
+          <PopUpProfile
+            user="ethanscranes"
+            memberSince="Ages ago"
+            addedCranes="10"
+            respects="10"
+            handleHideProfile={handleHideProfile}
+          />
         </>
       )}
     </div>
