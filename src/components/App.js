@@ -3,9 +3,10 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
-import Map from "./Map";
+import AddCranes2 from "./AddCrane";
 import Profile from "./Profile";
 import Register from "./Register";
+import Map from "./Map";
 import "../styles/App.css";
 import NavBar from "./NavBar";
 
@@ -16,7 +17,6 @@ function App() {
   return (
     <div className="App">
       <>
-        <NavBar />
         <Switch>
           <Route
             exact
@@ -29,18 +29,26 @@ function App() {
           <Route
             exact
             path="/cranes"
-            render={() => <Cranes user={user} />}
+            render={() => (user ? <Cranes user={user} /> : <Redirect to="/" />)}
           ></Route>
           <Route
             exact
             path="/add-crane"
-            render={() => <AddCrane user={user} />}
+            render={() =>
+              user ? <AddCrane user={user} /> : <Redirect to="/" />
+            }
           ></Route>
-          <Route exact path="/map" render={() => <Map user={user} />}></Route>
+          <Route
+            exact
+            path="/map"
+            render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}
+          ></Route>
           <Route
             exact
             path="/profile"
-            render={() => <Profile user={user} />}
+            render={() =>
+              user ? <Profile user={user} /> : <Redirect to="/" />
+            }
           ></Route>
         </Switch>
       </>
