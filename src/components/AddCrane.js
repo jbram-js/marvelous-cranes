@@ -47,8 +47,6 @@ const AddCrane = ({ user }) => {
     setFields({ ...fields, markers });
   }, [markers]);
 
-<<<<<<< HEAD
-=======
   const onMapClick = useCallback((event) => {
     setMarkers(() => [
       {
@@ -68,10 +66,6 @@ const AddCrane = ({ user }) => {
     mapRef.current.setZoom(14);
   }, []);
 
-  //console.log(markers);
-  //console.log(fields);
-
->>>>>>> 21d1a979248f93d8fcff10bf50534fe4e1faad4f
   return (
     <div className="Map">
       <Search panTo={panTo} />
@@ -91,7 +85,7 @@ const AddCrane = ({ user }) => {
               url: "crane-pin.svg",
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
+              anchor: new window.google.maps.Point(15, 30),
             }}
             onClick={() => {
               setSelected(marker);

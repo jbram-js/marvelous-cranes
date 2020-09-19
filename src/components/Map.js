@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import React, { useCallback, useRef, useState } from "react";
+import { GoogleMap } from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
   getGeocode,

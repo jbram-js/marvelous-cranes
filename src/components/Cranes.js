@@ -17,6 +17,7 @@ const Cranes = () => {
         backdropRate="6"
         comment="Not much wrong"
       />
+      <NavBar />
     </div>
   );
 };

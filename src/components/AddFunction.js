@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
 
-const AddFunction = ({ user,  fields, setFields }) => {
-  
+const AddFunction = ({ user, fields, setFields }) => {
   const handleAddCrane = (event) => {
     event.preventDefault();
     console.log(fields);
-    axios.post("https://test-crane.herokuapp.com/addCrane", fields
-    ).then((response) => {
-      console.log(response);
-    }).catch((err) => {
-      console.log(err);
-    });
+    axios
+      .post("https://test-crane.herokuapp.com/addCrane", fields)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleFieldChange = (event) => {

@@ -3,12 +3,10 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
-import AddCranes2 from "./AddCrane";
 import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import "../styles/App.css";
-import NavBar from "./NavBar";
 
 function App() {
   const [user, setUser] = useState();
