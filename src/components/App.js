@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
-import Map from "./Map";
+import AddCranes2 from "./AddCrane2";
 import Profile from "./Profile";
 import Register from "./Register";
 import "../styles/App.css";
@@ -39,7 +39,9 @@ function App() {
           <Route
             exact
             path="/map"
-            render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}
+            render={() =>
+              user ? <AddCranes2 user={user} /> : <Redirect to="/" />
+            }
           ></Route>
           <Route
             exact

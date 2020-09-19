@@ -1,6 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-import { formatRelative } from "date-fns";
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -15,6 +14,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import NavBar from "./NavBar";
+import AddFunction from "./AddFunction";
 import "../styles/Map.css";
 
 const mapContainerStyle = {
@@ -30,12 +30,28 @@ const Map = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
+  const initialState = {
+    fields: {
+      craneCaption: "",
+      craneRate: "",
+      craneBackgroundRate: "",
+      craneDescription: "",
+      craneUser: "",
+      markers: [{ lat: "", lng: "" }],
+    },
+  };
+
+  const [fields, setFields] = useState(initialState.fields);
+
+  useEffect(() => {
+    setFields({ ...fields, markers });
+  }, [markers]);
+
   const onMapClick = useCallback((event) => {
     setMarkers(() => [
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
-        time: new Date(),
       },
     ]);
   }, []);
@@ -50,12 +66,14 @@ const Map = () => {
     mapRef.current.setZoom(14);
   }, []);
 
+  console.log(markers);
+  console.log(fields);
+
   return (
     <div className="App">
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <NavBar />
-
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
@@ -65,7 +83,6 @@ const Map = () => {
       >
         {markers.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: "crane-pin.svg",
@@ -88,11 +105,11 @@ const Map = () => {
           >
             <div>
               <h2>Crane Added!</h2>
-              <p>Added {formatRelative(selected.time, new Date())}</p>
             </div>
           </InfoWindow>
         ) : null}
       </GoogleMap>
+      <AddFunction fields={fields} setFields={setFields} />
     </div>
   );
 };
