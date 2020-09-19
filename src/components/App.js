@@ -6,6 +6,7 @@ import AddCrane from "./AddCrane";
 import AddCranes2 from "./AddCrane2";
 import Profile from "./Profile";
 import Register from "./Register";
+import Map from "./Map";
 import "../styles/App.css";
 
 function App() {
@@ -38,10 +39,15 @@ function App() {
           ></Route>
           <Route
             exact
-            path="/map"
+            path="/add-crane-2"
             render={() =>
               user ? <AddCranes2 user={user} /> : <Redirect to="/" />
             }
+          ></Route>
+          <Route
+            exact
+            path="/map"
+            render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}
           ></Route>
           <Route
             exact

@@ -26,7 +26,7 @@ const center = {
   lng: -2.242631,
 };
 
-const Map = () => {
+const AddCrane2 = () => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -70,7 +70,7 @@ const Map = () => {
   console.log(fields);
 
   return (
-    <div className="App">
+    <div className="Map">
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <NavBar />
@@ -185,4 +185,4 @@ const Search = ({ panTo }) => {
   );
 };
 
-export default Map;
+export default AddCrane2;
