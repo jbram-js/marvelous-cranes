@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
@@ -7,36 +7,30 @@ import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
 
-const Cranes = () => {
+const Cranes = ({ craneUser }) => {
+  const [allCranes, setAllCranes] = useState([]);
 
-const handleAllCranes = (event) => {
-  event.preventDefault();
-  axios
-    .get("https://test-crane.herokuapp.com/cranes")
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-
-
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("https://test-crane.herokuapp.com/cranes")
+        .then(({ data }) => {
+          setAllCranes(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
+  });
 
   return (
     <div className="Cranes">
-      <CraneCard
-        username="ethanscranes"
-        image={placeholder}
-        caption="Beauty"
-        craneRate="10"
-        backdropRate="6"
-        comment="Not much wrong"
-      />
-      <div>
-        <button onClick={handleAllCranes}>load all</button>
-      </div>
+      {allCranes.map((cranes) => (
+        <div>
+          <CraneCard {...cranes} image={placeholder} />
+        </div>
+      ))}
       <NavBar />
     </div>
   );

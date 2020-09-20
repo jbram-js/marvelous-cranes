@@ -1,35 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 import "../styles/LogIn.css";
 
-const initialState = {
-  fields: { username: "", password: "" },
-};
-
-const LogIn = ({ setUser }) => {
-  const [value, setValue] = useState(initialState.fields);
-  const history = useHistory();
-  
-  const handleInput = (event) => {
-    setValue({ ...value, [event.target.name]: event.target.value });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-      axios.post("https://test-crane.herokuapp.com/login", {
-        username: value.username,
-        password: value.password,
-      }).then((response) => {
-        setUser(response.data);
-        localStorage.setItem("login", response.data.username);
-        history.push("/cranes")
-      }).catch((err) => {
-        console.log(err);
-        alert("Error Logging in!")
-      });
-  };
-
+const LogIn = ({ setUser, handleSubmit, handleInput, value }) => {
   return (
     <div className="App">
       <h1>User Login</h1>
@@ -49,12 +24,12 @@ const LogIn = ({ setUser }) => {
           name="password"
           onChange={handleInput}
           value={value.password}
-        />        
+        />
         <button type="submit">Login</button>
       </form>
       <Link to="/register">Don't have an account? Sign up!</Link>
     </div>
-  )
+  );
 };
 
 export default LogIn;

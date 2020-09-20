@@ -6,11 +6,11 @@ import "../styles/CraneCard.css";
 
 const CraneCard = ({
   image,
-  username,
-  caption,
+  craneUser,
+  craneCaption,
   craneRate,
-  backdropRate,
-  comment,
+  craneBackgroundRate,
+  craneDescription,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -36,9 +36,9 @@ const CraneCard = ({
     <div className="CraneCard">
       <img className="card-image" src={image} alt="crane"></img>
       <div className="username" onClick={() => handleShowProfile()}>
-        {username}
+        {craneUser}
       </div>
-      <div>{caption}</div>
+      <div>{craneCaption}</div>
 
       {showMoreButton && (
         <button
@@ -53,8 +53,10 @@ const CraneCard = ({
       {showInfo && (
         <div className="extraInfo">
           <div className="extraInfo-items">CRANE RATE- {craneRate}</div>
-          <div className="extraInfo-items">BACKDROP RATE- {backdropRate}</div>
-          <div className="extraInfo-items">COMMENT- {comment}</div>
+          <div className="extraInfo-items">
+            BACKDROP RATE- {craneBackgroundRate}
+          </div>
+          <div className="extraInfo-items">COMMENT- {craneDescription}</div>
           <button type="submit">VIEW ON MAP</button>
           <button type="submit" className="likeButton">
             Like
