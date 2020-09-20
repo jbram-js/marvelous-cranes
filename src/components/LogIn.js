@@ -49,9 +49,7 @@ const LogIn = ({ setUser }) => {
           name="password"
           onChange={handleInput}
           value={value.password}
-        />
-        <div>Remember Me?<input type="checkbox" className="remember"/></div>
-        
+        />        
         <button type="submit">Login</button>
       </form>
       <Link to="/register">Don't have an account? Sign up!</Link>
