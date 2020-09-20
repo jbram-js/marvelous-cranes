@@ -1,45 +1,52 @@
 import React from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
+import "../styles/AddFunction.css";
 
 const AddFunction = ({ fields, setFields }) => {
+
   const handleAddCrane = (event) => {
     event.preventDefault();
-    console.log(fields);
     axios
       .post("https://test-crane.herokuapp.com/addCrane", fields)
       .then((response) => {
         console.log(response);
+        alert(` ${response.data.craneCaption} succesfully added`)
+        {resetForm()}
       })
       .catch((err) => {
+        alert(` ${fields.craneCaption} could not be added - check console`)
         console.log(err);
       });
   };
-
+const resetForm = () => {
+  console.log("test");
+  document.getElementById("addForm").reset();
+}
   const handleFieldChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
 
   return (
     <div className="AddFunction">
-      Joe's Add
-      <form onSubmit={handleAddCrane}>
-        <label htmlFor="craneCaption">
-          Caption:
+      Add your crane
+      <form id="addForm" onSubmit={handleAddCrane} >
+
           <input
             id="craneCaption"
             name="craneCaption"
+            placeholder="Caption"
             value={fields.craneCaption}
             onChange={handleFieldChange}
             required
+            autoComplete="off"
           />
-        </label>
-        <label htmlFor="craneRate">
-          Crane rate:
+
           <input
             id="craneRate"
             name="craneRate"
             type="Number"
+            placeholder="Crane rating"
             min={0}
             max={10}
             step={0.1}
@@ -47,13 +54,12 @@ const AddFunction = ({ fields, setFields }) => {
             onChange={handleFieldChange}
             required
           />
-        </label>
-        <label htmlFor="craneBackgroundRate">
-          Crane background rate:
+
           <input
             id="craneBackgroundRate"
             name="craneBackgroundRate"
             type="Number"
+            placeholder="Background rating"
             min={0}
             max={10}
             step={0.1}
@@ -61,9 +67,7 @@ const AddFunction = ({ fields, setFields }) => {
             onChange={handleFieldChange}
             required
           />
-        </label>
-        <label htmlFor="craneUser">
-          Username:
+
           <input
             id="craneUser"
             name="craneUser"
@@ -72,18 +76,22 @@ const AddFunction = ({ fields, setFields }) => {
             required
             disabled
           />
-        </label>
-        <label htmlFor="craneDescription">
-          Comment:
+
           <input
             id="craneDescription"
             name="craneDescription"
+            placeholder="Comment"
             value={fields.craneDescription}
             onChange={handleFieldChange}
             required
+            autoComplete="off"
           />
-        </label>
-        <input type="submit" value="Add" />
+        
+          <input 
+            id="submitButton"
+            type="submit"
+            value="Add"
+          />
       </form>
       <NavBar />
     </div>

@@ -1,0 +1,16 @@
+  #addForm {
+      
+      display: flex;
+      width: auto;
+  }
+
+  #craneUser {
+    background-color: lightgrey;
+  }
+
+  #submitButton {
+      background-color: #F9B101;
+  }
+  input {
+   text-align: center;   
+  }
