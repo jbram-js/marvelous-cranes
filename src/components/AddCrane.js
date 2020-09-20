@@ -26,7 +26,7 @@ const center = {
   lng: -2.242631,
 };
 
-const AddCrane = ({ user }) => {
+const AddCrane = ({ name }) => {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -36,7 +36,7 @@ const AddCrane = ({ user }) => {
       craneRate: "",
       craneBackgroundRate: "",
       craneDescription: "",
-      craneUser: "",
+      craneUser: name,
       markers: [{ lat: "", lng: "" }],
     },
   };
@@ -106,7 +106,7 @@ const AddCrane = ({ user }) => {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      <AddFunction user={user} fields={fields} setFields={setFields} />
+      <AddFunction fields={fields} setFields={setFields} />
     </div>
   );
 };

@@ -22,6 +22,7 @@ const LogIn = ({ setUser }) => {
         password: value.password,
       }).then((response) => {
         setUser(response.data);
+        localStorage.setItem("login", response.data.username);
         history.push("/cranes")
       }).catch((err) => {
         console.log(err);

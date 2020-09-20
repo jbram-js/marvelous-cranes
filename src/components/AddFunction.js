@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import axios from "axios";
 
-const AddFunction = ({ user, fields, setFields }) => {
+const AddFunction = ({ fields, setFields }) => {
   const handleAddCrane = (event) => {
     event.preventDefault();
     console.log(fields);
@@ -70,6 +70,7 @@ const AddFunction = ({ user, fields, setFields }) => {
             value={fields.craneUser}
             onChange={handleFieldChange}
             required
+            disabled
           />
         </label>
         <label htmlFor="craneDescription">

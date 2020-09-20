@@ -11,41 +11,37 @@ import "../styles/App.css";
 function App() {
   const [user, setUser] = useState();
   const [firstVisit, setFirstVisit] = useState(true);
-
+  const name = window.localStorage.getItem("login"); //temporary until cookies are implemented
+  console.log(user);
   return (
     <div className="App">
       <>
         <Switch>
           <Route
-            exact
-            path="/"
+            exact path="/"
             render={() => <LogIn setUser={setUser} />}
           ></Route>
           <Route exact path="/register">
             <Register />
           </Route>
           <Route
-            exact
-            path="/cranes"
-            render={() => (user ? <Cranes user={user} /> : <Redirect to="/" />)}
+            exact path="/cranes"
+            render={() => (name ? <Cranes name={name} /> : <Redirect to="/" />)}
           ></Route>
           <Route
-            exact
-            path="/add-crane"
+            exact path="/add-crane"
             render={() =>
-              user ? <AddCrane user={user} /> : <Redirect to="/" />
+              name ? <AddCrane name={name} /> : <Redirect to="/" />
             }
           ></Route>
           <Route
-            exact
-            path="/map"
-            render={() => (user ? <Map user={user} /> : <Redirect to="/" />)}
+            exact path="/map"
+            render={() => (name ? <Map name={name} /> : <Redirect to="/" />)}
           ></Route>
           <Route
-            exact
-            path="/profile"
+            exact path="/profile"
             render={() =>
-              user ? <Profile user={user} /> : <Redirect to="/" />
+              name ? <Profile name={name} /> : <Redirect to="/" />
             }
           ></Route>
         </Switch>
