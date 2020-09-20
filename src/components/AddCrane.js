@@ -85,7 +85,7 @@ const AddCrane = ({ user }) => {
               url: "crane-pin.svg",
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
+              anchor: new window.google.maps.Point(15, 30),
             }}
             onClick={() => {
               setSelected(marker);
