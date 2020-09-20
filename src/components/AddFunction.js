@@ -12,17 +12,13 @@ const AddFunction = ({ fields, setFields }) => {
       .then((response) => {
         console.log(response);
         alert(` ${response.data.craneCaption} succesfully added`)
-        {resetForm()}
       })
       .catch((err) => {
         alert(` ${fields.craneCaption} could not be added - check console`)
         console.log(err);
       });
   };
-const resetForm = () => {
-  console.log("test");
-  document.getElementById("addForm").reset();
-}
+
   const handleFieldChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };

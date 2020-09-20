@@ -12,7 +12,6 @@ function App() {
   const [user, setUser] = useState();
   const [firstVisit, setFirstVisit] = useState(true);
   const name = window.localStorage.getItem("login"); //temporary until cookies are implemented
-  console.log(user);
   return (
     <div className="App">
       <>
