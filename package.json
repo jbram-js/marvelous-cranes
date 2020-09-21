@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.35",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@reach/combobox": "^0.11.2",
     "@react-google-maps/api": "^1.10.1",
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
+    "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",

@@ -63,6 +63,16 @@ const AddFunction = ({ fields, setFields }) => {
         />
 
         <input
+          id="craneUser"
+          name="craneUser"
+          placeholder="User"
+          value={fields.craneUser}
+          onChange={handleFieldChange}
+          required
+          autoComplete="off"
+        />
+
+        <input
           id="craneDescription"
           name="craneDescription"
           placeholder="Comment"
