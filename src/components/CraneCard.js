@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import PopUpProfile from "./PopUpProfile";
+import ViewOnMap from "./ViewOnMap";
 
 import "../styles/CraneCard.css";
 
@@ -11,10 +12,13 @@ const CraneCard = ({
   craneRate,
   craneBackgroundRate,
   craneDescription,
+  markers,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [showMapButton, setShowMapButton] = useState(true);
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -32,6 +36,17 @@ const CraneCard = ({
   const handleHideProfile = () => {
     setShowProfile(false);
   };
+
+  const handleShowViewOnMap = () => {
+    setShowMap(true);
+    setShowMapButton(false);
+  };
+
+  const handleHideViewOnMap = () => {
+    setShowMap(false);
+    setShowMapButton(true);
+  };
+
   return (
     <div className="CraneCard">
       <img className="card-image" src={image} alt="crane"></img>
@@ -57,7 +72,12 @@ const CraneCard = ({
             BACKDROP RATE- {craneBackgroundRate}
           </div>
           <div className="extraInfo-items">COMMENT- {craneDescription}</div>
-          <button type="submit">VIEW ON MAP</button>
+          {showMapButton && (
+            <button type="submit" onClick={handleShowViewOnMap}>
+              VIEW ON MAP
+            </button>
+          )}
+          {showMap && <button onClick={handleHideViewOnMap}>HIDE MAP</button>}
           <button type="submit" className="likeButton">
             Like
           </button>
@@ -65,20 +85,9 @@ const CraneCard = ({
         </div>
       )}
 
-      <Modal
-        isOpen={showProfile}
-        portalClassName="modal"
-        style={{
-          content: {
-            top: "0%",
-            left: "0",
-            width: "60%",
-          },
-          overlay: {
-            background: "none",
-          },
-        }}
-      >
+      {showMap && <ViewOnMap markers={markers} />}
+
+      <Modal isOpen={showProfile}>
         <PopUpProfile
           user="ethanscranes"
           memberSince="01/01/01"

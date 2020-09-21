@@ -28,7 +28,7 @@ const Cranes = ({ craneUser }) => {
     <div className="Cranes">
       {allCranes.map((cranes) => (
         <div>
-          <CraneCard {...cranes} image={placeholder} />
+          <CraneCard {...cranes} image={placeholder} markers={cranes.markers} />
         </div>
       ))}
       <NavBar />

@@ -41,7 +41,6 @@ function App() {
         alert("Error Logging in!");
       });
   };
-  console.log(username);
 
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
