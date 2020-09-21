@@ -11,7 +11,7 @@ const PopUpProfile = ({
 }) => {
   return (
     <div className="PopUpProfile">
-      <div>{user}</div>
+      <div className="popup-username">{user}</div>
       <div>MEMBER SINCE- {memberSince}</div>
       <div>CRANES ADDED- {addedCranes}</div>
       <div>RESPECTS GIVEN- {respects}</div>

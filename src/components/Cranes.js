@@ -22,7 +22,7 @@ const Cranes = ({ craneUser }) => {
         });
     };
     fetchData();
-  });
+  }, []);
 
   return (
     <div className="Cranes">

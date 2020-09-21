@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
 import NavBar from "./NavBar";

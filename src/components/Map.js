@@ -1,124 +1,57 @@
-import React, { useCallback, useRef, useState } from "react";
-import { GoogleMap } from "@react-google-maps/api";
+import React, { useEffect, useState } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import axios from "axios";
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
 import NavBar from "./NavBar";
 
 import "../styles/Map.css";
 
 const mapContainerStyle = {
-  width: "100vw",
+  width: "70vw",
   height: "80vh",
 };
-const center = {
-  lat: 53.480759,
-  lng: -2.242631,
-};
+
+const center = { lat: 53.480759, lng: -2.242631 };
 
 const Map = () => {
-  const mapRef = useRef();
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map;
+  const [markers, setMarkers] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get("https://test-crane.herokuapp.com/cranes")
+        .then(({ data }) => {
+          const markerArray = data.map((e) => e.markers);
+          setMarkers(markerArray);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchData();
   }, []);
 
-  const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
+  console.log(markers);
 
   return (
-    <div className="Map">
-      <Search panTo={panTo} />
-      <Locate panTo={panTo} />
+    <div className="ViewOnMap">
       <NavBar />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={center}
-        onLoad={onMapLoad}
-      ></GoogleMap>
-    </div>
-  );
-};
-
-const Locate = ({ panTo }) => {
-  return (
-    <button
-      className="locate"
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          },
-          () => null
-        );
-      }}
-    >
-      <img src="compass.svg" alt="find users current location" />
-    </button>
-  );
-};
-
-const Search = ({ panTo }) => {
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-  } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 53.480759, lng: () => -2.242631 },
-      radius: 200 * 1000,
-    },
-  });
-
-  return (
-    <div className="search">
-      <Combobox
-        onSelect={async (address) => {
-          setValue(address, false);
-          clearSuggestions();
-          try {
-            const results = await getGeocode({ address });
-            const { lat, lng } = await getLatLng(results[0]);
-            panTo({ lat, lng });
-          } catch (error) {
-            console.log("Error!");
-          }
-        }}
       >
-        <ComboboxInput
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          disabled={!ready}
-          placeholder="Search a place"
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === "OK" &&
-              data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
+        {markers.map((marker) => (
+          <Marker
+            position={{ lat: marker[0].lat, lng: marker[0].lng }}
+            icon={{
+              url: "crane-pin.svg",
+              scaledSize: new window.google.maps.Size(35, 35),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 30),
+            }}
+          />
+        ))}
+      </GoogleMap>
     </div>
   );
 };
