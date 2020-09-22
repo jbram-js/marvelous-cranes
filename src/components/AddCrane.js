@@ -29,7 +29,6 @@ const center = {
 
 const AddCrane = ({ user }) => {
   const [markers, setMarkers] = useState([]);
-  const [dateCreated, setDateCreated] = useState([]);
 
   const initialState = {
     fields: {
@@ -39,26 +38,21 @@ const AddCrane = ({ user }) => {
       craneUser: "",
       craneDescription: "",
       markers: [{ lat: "", lng: "" }],
-      dateCreated: [{ dateCreated: "" }],
+      dateCreated: new Date(),
     },
   };
 
   const [fields, setFields] = useState(initialState.fields);
 
   useEffect(() => {
-    setFields({ ...fields, markers, dateCreated });
-  }, [markers, dateCreated]);
+    setFields({ ...fields, markers });
+  }, [markers]);
 
   const onMapClick = useCallback((event) => {
     setMarkers(() => [
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
-      },
-    ]);
-    setDateCreated(() => [
-      {
-        dateCreated: new Date(),
       },
     ]);
   }, []);
