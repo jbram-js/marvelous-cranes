@@ -67,8 +67,6 @@ const AddCrane = ({ user }) => {
     mapRef.current.setZoom(14);
   }, []);
 
-  console.log(markers);
-  console.log(fields);
   return (
     <div className="Map">
       <Search panTo={panTo} />
