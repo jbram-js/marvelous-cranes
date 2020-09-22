@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CraneCard from "./CraneCard";
-import NavBar from "../components/NavBar";
+import NavBar from "./NavBar";
+import Header from "./Header";
 
 import placeholder from "../images/cranesafety.jpg";
 
@@ -31,6 +32,7 @@ const Cranes = ({ craneUser }) => {
           <CraneCard {...cranes} image={placeholder} markers={cranes.markers} />
         </div>
       ))}
+      <Header />
       <NavBar />
     </div>
   );

@@ -15,6 +15,7 @@ import {
 import "@reach/combobox/styles.css";
 
 import NavBar from "./NavBar";
+import Header from "./Header";
 
 import "../styles/Map.css";
 
@@ -55,7 +56,6 @@ const Map = () => {
 
   return (
     <div className="ViewOnMap">
-      <NavBar />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
@@ -66,7 +66,7 @@ const Map = () => {
           <Marker
             position={{ lat: marker[0].lat, lng: marker[0].lng }}
             icon={{
-              url: "crane-pin.svg",
+              url: "crane-marker.svg",
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 30),
@@ -74,6 +74,8 @@ const Map = () => {
           />
         ))}
       </GoogleMap>
+      <Header />
+      <NavBar />
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import NavBar from "./NavBar";
+import Header from "./Header";
 import axios from "axios";
 import "../styles/AddFunction.css";
 
@@ -84,6 +85,7 @@ const AddFunction = ({ fields, setFields }) => {
 
         <input id="submitButton" type="submit" value="Add" />
       </form>
+      <Header />
       <NavBar />
     </div>
   );

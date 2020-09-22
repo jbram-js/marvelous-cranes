@@ -1,16 +1,21 @@
-.NavBarLinks {
+.Header {
+  margin-bottom: 100px;
+}
+
+.HeaderItems {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   list-style: none;
   position: fixed;
-  bottom: 0;
+  top: 0;
   width: 100vw;
   height: 45px;
-  padding-top: 15px;
-  margin-left: -40px;
-  margin-bottom: 0px;
+  padding-bottom: 11px;
+  padding-top: 8px;
+  margin-top: 0px;
+  margin-left: -35px;
   background-color: #f4f4f4;
-  border-top: 2px solid;
+  border-bottom: 2px solid;
   border-image-source: linear-gradient(
     45deg,
     rgba(248, 54, 0, 1),
@@ -19,7 +24,6 @@
   border-image-slice: 1;
 }
 
-.NavBarIcons {
-  width: 30px;
-  height: 30px;
+.HeaderIcon {
+  height: 48px;
 }
