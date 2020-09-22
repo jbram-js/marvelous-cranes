@@ -6,7 +6,7 @@ import NavBar from "./NavBar";
 import "../styles/Map.css";
 
 const mapContainerStyle = {
-  width: "70vw",
+  width: "90vw",
   height: "80vh",
 };
 
@@ -21,7 +21,6 @@ const ViewOnMap = ({ markers }) => {
 
   return (
     <div className="ViewOnMap">
-      <NavBar />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}

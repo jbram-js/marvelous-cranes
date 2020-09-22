@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -12,6 +13,7 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+
 import NavBar from "./NavBar";
 import AddFunction from "./AddFunction";
 import "../styles/Map.css";
@@ -27,15 +29,16 @@ const center = {
 
 const AddCrane = ({ user }) => {
   const [markers, setMarkers] = useState([]);
-  const [selected, setSelected] = useState(null);
 
   const initialState = {
     fields: {
       craneCaption: "",
       craneRate: "",
       craneBackgroundRate: "",
+      craneUser: "",
       craneDescription: "",
       markers: [{ lat: "", lng: "" }],
+      dateCreated: new Date(),
     },
   };
 
@@ -86,9 +89,6 @@ const AddCrane = ({ user }) => {
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 30),
-            }}
-            onClick={() => {
-              setSelected(marker);
             }}
           />
         ))}
