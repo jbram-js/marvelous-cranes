@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
+import Header from "./Header";
 
 import placeholder from "../images/cranesafety.jpg";
 
@@ -99,6 +100,7 @@ const Cranes = () => {
           <CraneCard {...cranes} image={placeholder} markers={cranes.markers} />
         </div>
       ))}
+      <Header />
       <NavBar />
     </div>
   );

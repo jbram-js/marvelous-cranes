@@ -14,8 +14,8 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
-import NavBar from "./NavBar";
 import AddFunction from "./AddFunction";
+
 import "../styles/Map.css";
 
 const mapContainerStyle = {
@@ -71,7 +71,6 @@ const AddCrane = ({ user }) => {
     <div className="Map">
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
-      <NavBar />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
@@ -83,7 +82,7 @@ const AddCrane = ({ user }) => {
           <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
-              url: "crane-pin.svg",
+              url: "crane-marker.svg",
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 30),

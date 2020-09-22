@@ -1,23 +1,39 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Crane from "../icons/crane.svg";
+import Add from "../icons/add.svg";
+import Map from "../icons/map.svg";
+import Profile from "../icons/profile.svg";
 
 import "../styles/NavBar.css";
 
 const NavBar = () => {
   return (
-    <div className="NavBar">
-      <ul className="navbar-links">
-        <li className="navbar-links-item">
-          <Link to="/cranes">All</Link>
+    <div>
+      <ul className="NavBarLinks">
+        <li>
+          <Link to="/cranes">
+            {" "}
+            <img src={Crane} className="NavBarIcons" alt="All cranes icon" />
+          </Link>
         </li>
-        <li className="navbar-links-item">
-          <Link to="/add-crane">Add</Link>
+        <li>
+          <Link to="/add-crane">
+            {" "}
+            <img src={Add} className="NavBarIcons" alt="Add crane icon" />
+          </Link>
         </li>
-        <li className="navbar-links-item">
-          <Link to="/map">Map</Link>
+        <li>
+          <Link to="/map">
+            {" "}
+            <img src={Map} className="NavBarIcons" alt="Map view icon" />
+          </Link>
         </li>
-        <li className="navbar-links-item">
-          <Link to="/profile">Profile</Link>
+        <li>
+          <Link to="/profile">
+            {" "}
+            <img src={Profile} className="NavBarIcons" alt="Profile icon" />
+          </Link>
         </li>
       </ul>
     </div>
