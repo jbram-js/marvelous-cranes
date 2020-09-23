@@ -15,10 +15,13 @@ const initialState = {
   };
 
   //pull crane by ID 
-axios
-    .get(`https://test-crane.herokuapp.com/${craneID}/cranes`, {
 
-    })
+
+  fields: {
+    id : ""
+  }
+axios
+    .get("https://test-crane.herokuapp.com/craneID", fields) 
     .then((response) => {
         console.log(response);
     })
@@ -27,10 +30,13 @@ axios
     });
 
 //get crane by username
-axios
-    .get(`https://test-crane.herokuapp.com/cranes/${craneUser}`, {
 
-    })
+fields: {
+    craneUser : ""
+  }
+
+axios
+    .get("https://test-crane.herokuapp.com/craneUser", fields)
     .then((response) => {
         console.log(response);
     })
@@ -39,10 +45,11 @@ axios
     });
 
 //get likes by crane id
+fields: {
+    id : ""
+  }
 axios
-    .get(`https://test-crane.herokuapp.com/${craneID}/craneLikes"`, {
-
-    })
+    .get("https://test-crane.herokuapp.com/craneLikes", fields)
     .then((response) => {
         console.log(response);
     })
@@ -51,8 +58,11 @@ axios
     });
     
 //update crane by ID
+fields: {
+    id : ""
+  }
 axios
-    .patch(`https://test-crane.herokuapp.com/${craneID}`, fields)
+    .patch("https://test-crane.herokuapp.com/Update", fields)
     .then((response) => {
         console.log(response);
     })
@@ -61,8 +71,11 @@ axios
     });
 
 //delete crane by ID
+fields: {
+    id : ""
+  }
 axios
-    .delete(`https://test-crane.herokuapp.com/${craneID}`, fields)
+    .delete("https://test-crane.herokuapp.com/Delete", fields)
     .then((response) => {
         console.log(response);
     })
@@ -70,3 +83,48 @@ axios
         console.log(err);
     });
 
+
+    //get/filter cranes by all ratings
+fields: {
+    bottomRate : ""
+    topRate : ""
+    bottomRateCrane : ""
+    topRateCrane : ""
+  }
+axios
+    .get("https://test-crane.herokuapp.com/AllRatings", fields)
+    .then((response) => {
+        console.log(response);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+//get/filter cranes by crane ratings
+fields: {
+    bottomRate : ""
+    topRate : ""
+    }
+axios
+    .get("https://test-crane.herokuapp.com/craneRatings", fields)
+    .then((response) => {
+        console.log(response);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+
+//get/filter cranes by crane ratings
+fields: {
+    bottomRate : ""
+    topRate : ""
+    }
+axios
+    .get("https://test-crane.herokuapp.com/bkGroundRatings", fields)
+    .then((response) => {
+        console.log(response);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
