@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Rules from "./Rules";
+import Header from "./Header";
+import spotify from "../icons/spotify.svg";
+import twitter from "../icons/twitter.svg";
+import instagram from "../icons/instagram.svg";
 import "../styles/Register.css";
 
 const initialState = {
@@ -50,48 +54,83 @@ const Register = ({ setUserLoggedIn }) => {
   };
 
   return (
-    <div className="App">
-      <h1>Register</h1>
-      <form action="submit" onSubmit={handleSubmit}>
+    <div className="register">
+      <p className="register-p">REGISTER</p>
+      <form action="submit" className="register-form" onSubmit={handleSubmit}>
         <input
           type="email"
-          placeholder="Email..."
+          placeholder="Email"
           required
           name="emailAddress"
           onChange={handleChange}
         />
         <input
           type="text"
-          placeholder="Username..."
+          placeholder="Username"
           required
           name="username"
           onChange={handleChange}
         />
         <input
           type="text"
-          placeholder="Phone Number..."
+          placeholder="Phone Number"
           required
           name="phoneNumber"
           onChange={handleChange}
         />
         <input
           type="password"
-          placeholder="Password..."
+          placeholder="Password"
           required
           name="password"
           onChange={handleChange}
         />
         <input
           type="password"
-          placeholder="Repeat Password..."
+          placeholder="Repeat Password"
           required
           name="confirmPassword"
           onChange={handleChange}
         />
 
-        <button type="submit">Register</button>
+        <button type="submit" className="register-button">
+          REGISTER
+        </button>
       </form>
-      <Link to="/">Already got an account?</Link>
+      <Link className="login-link" to="/">
+        Already got an account? <strong>Login!</strong>
+      </Link>
+      <Header />
+      <ul className="social-links-register">
+        <li>
+          <a href="https://twitter.com/MarvelousCrane" target="_blank">
+            {" "}
+            <img src={twitter} className="social-icons" alt="Twitter icon" />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/marvelouscrane/?hl=en"
+            target="_blank"
+          >
+            {" "}
+            <img
+              src={instagram}
+              className="social-icons"
+              alt="Instagram icon"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://open.spotify.com/artist/6kGMx9MqwnbKR2EYvZvvrG?si=_WTI0BvMRKewu8Zwod44cg"
+            target="_blank"
+          >
+            {" "}
+            <img src={spotify} className="social-icons" alt="Spotify icon" />
+          </a>
+        </li>
+      </ul>
     </div>
   );
 };
