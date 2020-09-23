@@ -6,6 +6,8 @@ const Profile = ({ username }) => {
   return (
     <div className="Profile">
       <h1>{username}</h1>
+      <Header />
+      <NavBar />
     </div>
   );
 };

@@ -4,13 +4,13 @@ import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
-import Header from "./Header";
-import { getDistance } from "geolib";
+// import Header from "./Header";
+// import { getDistance } from "geolib";
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 
 const initialState = {
   location: {
