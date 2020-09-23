@@ -16,7 +16,7 @@ import "@reach/combobox/styles.css";
 
 import NavBar from "./NavBar";
 import Header from "./Header";
-import logo from "../images/logo-alone.svg";
+import logo from "../icons/logo2.svg";
 
 import "../styles/Map.css";
 
@@ -56,7 +56,7 @@ const Map = () => {
   }, []);
 
   const windowStyle = {
-    width: "45px",
+    width: "100px",
   };
 
   return (
