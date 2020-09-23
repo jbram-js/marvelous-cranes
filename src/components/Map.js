@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import axios from "axios";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -16,6 +16,7 @@ import "@reach/combobox/styles.css";
 
 import NavBar from "./NavBar";
 import Header from "./Header";
+import logo from "../images/logo-alone.svg";
 
 import "../styles/Map.css";
 
@@ -28,14 +29,14 @@ const center = { lat: 53.480759, lng: -2.242631 };
 
 const Map = () => {
   const [markers, setMarkers] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       await axios
         .get("https://test-crane.herokuapp.com/cranes")
         .then(({ data }) => {
-          const markerArray = data.map((e) => e.markers);
-          setMarkers(markerArray);
+          setMarkers(data);
         })
         .catch((error) => {
           console.log(error);
@@ -54,6 +55,10 @@ const Map = () => {
     mapRef.current.setZoom(14);
   }, []);
 
+  const windowStyle = {
+    width: "45px",
+  };
+
   return (
     <div className="ViewOnMap">
       <GoogleMap
@@ -62,17 +67,41 @@ const Map = () => {
         center={center}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {markers.map((crane) => (
           <Marker
-            position={{ lat: marker[0].lat, lng: marker[0].lng }}
+            position={{
+              lat: crane.markers[0].lat,
+              lng: crane.markers[0].lng,
+            }}
             icon={{
               url: "crane-marker.svg",
               scaledSize: new window.google.maps.Size(35, 35),
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 30),
             }}
+            onClick={() => setSelectedMarker(crane)}
           />
         ))}
+
+        {selectedMarker && (
+          <InfoWindow
+            position={{
+              lat: selectedMarker.markers[0].lat,
+              lng: selectedMarker.markers[0].lng,
+            }}
+            onCloseClick={() => setSelectedMarker(null)}
+          >
+            <div>
+              <img src={logo} alt="logo" style={windowStyle}></img>
+              <h3 style={{ marginBottom: "-5px" }}>
+                {selectedMarker.craneUser}
+              </h3>
+              <p>{selectedMarker.craneCaption}</p>
+              <p>Crane rating- {selectedMarker.craneRate}</p>
+              <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
+            </div>
+          </InfoWindow>
+        )}
       </GoogleMap>
       <Header />
       <NavBar />

@@ -90,7 +90,11 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
-      <AddFunction user={user} fields={fields} setFields={setFields} />
+      {markers.length === 1 ? (
+        <AddFunction user={user} fields={fields} setFields={setFields} />
+      ) : (
+        console.log("hello")
+      )}
     </div>
   );
 };

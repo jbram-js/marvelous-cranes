@@ -1,6 +1,5 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import usePlacesAutocomplete from "use-places-autocomplete";
 
 import qs from "qs";
 

@@ -2,12 +2,10 @@ import React from "react";
 import NavBar from "./NavBar";
 import Header from "./Header";
 
-const Profile = () => {
+const Profile = ({ username }) => {
   return (
     <div className="Profile">
-      <h1>Profile</h1>
-      <Header />
-      <NavBar />
+      <h1>{username}</h1>
     </div>
   );
 };

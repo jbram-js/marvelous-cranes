@@ -5,10 +5,12 @@ import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
 import Header from "./Header";
+import { getDistance } from "geolib";
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
+import userEvent from "@testing-library/user-event";
 
 const initialState = {
   location: {
@@ -21,6 +23,8 @@ const Cranes = () => {
   const [allCranes, setAllCranes] = useState([]);
   const [userLocation, setUserLocation] = useState(initialState.location);
   const { search } = useLocation();
+
+  // main request when cranes page loads
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +40,38 @@ const Cranes = () => {
     fetchData();
   }, []);
 
+  // request that handles sort and filters
   useEffect(() => {
     axios
       .get(`https://test-crane.herokuapp.com/cranes${search}`)
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
   }, [search]);
+
+  // patch request to send a like
+
+  const handleSendLike = (craneID) => {
+    axios
+      .get("https://test-crane.herokuapp.com/craneID", {
+        params: { id: JSON.stringify(craneID) },
+      })
+      .then(({ data }) => {
+        const numberOfLikes = data[0].craneLikes;
+        const addedLike = numberOfLikes + 1;
+        console.log("hello");
+        axios
+          .patch("https://test-crane.herokuapp.com/Update", {
+            params: {
+              id: JSON.stringify(craneID),
+            },
+          })
+          .then(() => {
+            console.log("success");
+          });
+      });
+  };
+
+  // filter by crane rate
 
   const handleCraneRateFilter = (a, b) => {
     const fetchData = async () => {
@@ -53,6 +83,8 @@ const Cranes = () => {
     };
     fetchData();
   };
+
+  // filter by background rate
 
   const handleBackgroundRateFilter = (a, b) => {
     const fetchData = async () => {
@@ -69,7 +101,7 @@ const Cranes = () => {
     fetchData();
   };
 
-  console.log(allCranes);
+  // logic to get users location
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -97,10 +129,15 @@ const Cranes = () => {
       />
       {allCranes.map((cranes) => (
         <div>
-          <CraneCard {...cranes} image={placeholder} markers={cranes.markers} />
+          <CraneCard
+            {...cranes}
+            image={placeholder}
+            markers={cranes.markers}
+            userLocation={userLocation}
+            handleSendLike={handleSendLike}
+          />
         </div>
       ))}
-      <Header />
       <NavBar />
     </div>
   );

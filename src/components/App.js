@@ -86,7 +86,7 @@ function App() {
             exact
             path="/profile"
             render={() =>
-              user ? <Profile name={user} /> : <Redirect to="/" />
+              user ? <Profile username={username} /> : <Redirect to="/" />
             }
           ></Route>
         </Switch>
