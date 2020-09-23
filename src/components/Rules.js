@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Header from "./Header";
+import rulesImage from "../images/rules-image.jpg";
 
 import "../styles/Rules.css";
 
@@ -14,17 +16,22 @@ const Rules = ({ setFirstVisit }) => {
     isChecked ? setFirstVisit(false) : setFirstVisit(true);
   };
   return (
-    <div className="Rules">
-      <h1>Rules</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-        odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-        quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
-        mauris. Fusce nec tellus sed augue semper porta. Mauris massa.
-        Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Curabitur
-        sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor.
+    <div className="rules">
+      <img
+        src={rulesImage}
+        className="rules-image"
+        alt="Roy Molloy in front of cranes"
+      />
+      <p className="cranger-p">Welcome to the god damn Cranger Zone!</p>
+      <p className="rules-p">
+        Welcome to the world of Sydney's own mighty Marvelous Crane - Roy
+        Molloy. Only three requirements to be in the Roy Squad:
       </p>
+      <ul className="roy-squad-list">
+        <li>1) Respect yourself</li>
+        <li>2) respect others</li>
+        <li>3) Stick up for me in conversations</li>
+      </ul>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="checkbox">Agree to the Rules</label>
@@ -32,10 +39,14 @@ const Rules = ({ setFirstVisit }) => {
           type="checkbox"
           id="checkbox"
           name="checkbox"
+          className="checkbox"
           onChange={handleChange}
         ></input>
-        <button type="submit">Close</button>
+        <button type="submit" className="rules-button">
+          RESPECT
+        </button>
       </form>
+      <Header />
     </div>
   );
 };

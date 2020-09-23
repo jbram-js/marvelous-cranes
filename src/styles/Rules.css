@@ -1,5 +1,54 @@
-.Rules {
-  background-color: brown;
-  position: fixed;
-  height: auto;
+.rules-image {
+  margin-top: 66px;
+  width: 100vw;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.cranger-p {
+  font-size: 32px;
+  text-align: center;
+  position: relative;
+  margin-top: 5px;
+  padding: 0 10px 0 10px;
+}
+
+.rules-p {
+  font-size: 16px;
+  line-height: 25px;
+  text-align: justify;
+  padding: 0 28px 0 28px;
+}
+
+.roy-squad-list {
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  list-style: none;
+  padding: 0 15px 0 15px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25px;
+
+  text-align: center;
+  padding: 0 28px 0 28px;
+}
+
+.rules-button {
+  width: 85vw;
+  height: 50px;
+  border-radius: 30px;
+  border-style: none;
+  color: #fff;
+  font-size: 20px;
+  margin-top: 5px;
+  background: linear-gradient(
+    45deg,
+    rgba(248, 54, 0, 1),
+    rgba(249, 212, 35, 1)
+  );
 }
