@@ -121,6 +121,7 @@ const Cranes = ({ userLocation }) => {
   return (
     <div className="Cranes">
       <FilterAndSort
+        className="filter-sort"
         userLocation={userLocation}
         allCranes={allCranes}
         handleCraneRateFilter={handleCraneRateFilter}
