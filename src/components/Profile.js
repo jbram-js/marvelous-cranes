@@ -28,6 +28,7 @@ const Profile = ({ username, userLocation }) => {
   return (
     <div className="Profile">
       <h1>{username}</h1>
+<<<<<<< HEAD
       <h2>Posts {allUsersCranes.length}</h2>
       <button>Settings</button>
       <div className="all-user-results">
@@ -41,6 +42,10 @@ const Profile = ({ username, userLocation }) => {
           </div>
         ))}
       </div>
+=======
+      <Header />
+      <NavBar />
+>>>>>>> a7dd23bd7442613732d339d01cf834fdb529cef0
     </div>
   );
 };
