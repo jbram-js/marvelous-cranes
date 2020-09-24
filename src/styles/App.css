@@ -6,6 +6,8 @@
   font-size: 10px;
   text-align: center;
   line-height: 45px;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .logo-home {
