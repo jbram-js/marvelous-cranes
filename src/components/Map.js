@@ -13,6 +13,8 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import NavBar from "./NavBar";
+import Header from "./Header";
 
 import logo from "../icons/logo2.svg";
 
@@ -101,6 +103,8 @@ const Map = () => {
           </InfoWindow>
         )}
       </GoogleMap>
+      <Header />
+      <NavBar />
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
     </div>

@@ -9,8 +9,6 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import Rules from "./Rules";
-import NavBar from "./NavBar";
-import Header from "./Header";
 
 import "../styles/App.css";
 
@@ -128,8 +126,6 @@ function App() {
           ></Route>
         </Switch>
       </>
-      <Header />
-      <NavBar />
     </div>
   );
 }
