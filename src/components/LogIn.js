@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import loginImage from "../images/login-image.jpg";
+import loginImage from "../images/login-image-final.png";
 
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";

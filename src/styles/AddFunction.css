@@ -1,16 +1,35 @@
-  #addForm {
-      
-      display: flex;
-      width: auto;
-  }
+.add-crane-form {
+  position: relative;
+  margin-top: 8px;
+}
 
-  #craneUser {
-    background-color: lightgrey;
-  }
+.add-crane-form input {
+  width: 85vw;
+  padding: 10px 0;
+  font-size: 18px;
+  margin-bottom: 22px;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  background: transparent;
+  text-align: left;
+}
 
-  #submitButton {
-      background-color: #F9B101;
-  }
-  input {
-   text-align: center;   
-  }
+::placeholder {
+  color: #000;
+}
+
+.add-crane-button {
+  width: 85vw;
+  height: 50px;
+  border-radius: 30px;
+  border-style: none;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(
+    45deg,
+    rgba(248, 54, 0, 1),
+    rgba(249, 212, 35, 1)
+  );
+}
