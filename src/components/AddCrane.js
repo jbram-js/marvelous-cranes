@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
 import usePlacesAutocomplete, {
@@ -165,6 +166,10 @@ const Search = ({ panTo }) => {
       </Combobox>
     </div>
   );
+};
+
+AddCrane.propType = {
+  user: PropTypes.object.isRequired,
 };
 
 export default AddCrane;

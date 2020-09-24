@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Modal from "react-modal";
 import PopUpProfile from "./PopUpProfile";
 import ViewOnMap from "./ViewOnMap";
@@ -14,8 +15,12 @@ const CraneCard = ({
   craneBackgroundRate,
   craneDescription,
   markers,
+  craneLikes,
   userLocation,
   handleSendLike,
+  handleSendUnlike,
+  likeButton,
+  unlikeButton,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -91,6 +96,7 @@ const CraneCard = ({
         {craneUser}
       </div>
       <div>{craneCaption}</div>
+      <div>{craneLikes} Likes</div>
 
       {showMoreButton && (
         <button
@@ -120,13 +126,26 @@ const CraneCard = ({
             </button>
           )}
           {showMap && <button onClick={handleHideViewOnMap}>HIDE MAP</button>}
-          <button
-            type="submit"
-            className="likeButton"
-            onClick={() => handleSendLike(_id)}
-          >
-            Like
-          </button>
+
+          {likeButton && (
+            <button
+              type="submit"
+              className="likeButton"
+              onClick={() => handleSendLike(_id)}
+            >
+              Like
+            </button>
+          )}
+
+          {unlikeButton && (
+            <button
+              type="submit"
+              className="likeButton"
+              onClick={() => handleSendUnlike(_id)}
+            >
+              Unlike
+            </button>
+          )}
           <button onClick={handleHideInfo}>Show less</button>
         </div>
       )}
@@ -172,4 +191,16 @@ const CraneCard = ({
   );
 };
 
+CraneCard.propType = {
+  _id: PropTypes.string.isRequired,
+  craneUser: PropTypes.string.isRequired,
+  craneCaption: PropTypes.string.isRequired,
+  craneRate: PropTypes.number.isRequired,
+  craneBackgroundRate: PropTypes.number.isRequired,
+  craneDescription: PropTypes.string.isRequired,
+  markers: PropTypes.array.isRequired,
+  userLocation: PropTypes.object,
+  handleSendLike: PropTypes.func.isRequired,
+  handleSendUnlike: PropTypes.func.isRequired,
+};
 export default CraneCard;

@@ -22,7 +22,6 @@ const initialState = {
 
 function App() {
   const [user, setUser] = useState();
-  const [username, setUsername] = useState();
   const [firstVisit, setFirstVisit] = useState(true);
   const [value, setValue] = useState(initialState.fields);
   const [userLocation, setUserLocation] = useState(initialState.location);
@@ -39,7 +38,6 @@ function App() {
       })
       .then(({ data }) => {
         setUser(data);
-        setUsername(data.username);
         localStorage.setItem("login", data.username);
         history.push("/cranes");
       })
@@ -72,8 +70,6 @@ function App() {
 
     getLocation();
   }, []);
-
-  console.log(user);
 
   return (
     <div className="App">
@@ -122,7 +118,7 @@ function App() {
             path="/profile"
             render={() =>
               user ? (
-                <Profile username={username} userLocation={userLocation} />
+                <Profile username={user.username} userLocation={userLocation} />
               ) : (
                 <Redirect to="/" />
               )

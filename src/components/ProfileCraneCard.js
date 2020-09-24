@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ViewOnMap from "./ViewOnMap";
 
 import "../styles/ProfileCraneCard.css";
@@ -122,6 +123,18 @@ const ProfileCraneCard = ({
       {showMap && <ViewOnMap markers={markers} />}
     </div>
   );
+};
+
+ProfileCraneCard.propType = {
+  _id: PropTypes.string.isRequired,
+  craneUser: PropTypes.string.isRequired,
+  craneCaption: PropTypes.string.isRequired,
+  craneRate: PropTypes.number.isRequired,
+  craneBackgroundRate: PropTypes.number.isRequired,
+  craneDescription: PropTypes.string.isRequired,
+  markers: PropTypes.array.isRequired,
+  userLocation: PropTypes.object,
+  handleSendLike: PropTypes.func.isRequired,
 };
 
 export default ProfileCraneCard;

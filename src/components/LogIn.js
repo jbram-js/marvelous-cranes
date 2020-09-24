@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import loginImage from "../images/login-image.jpg";
 
@@ -8,7 +9,7 @@ import instagram from "../icons/instagram.svg";
 
 import "../styles/LogIn.css";
 
-const LogIn = ({ setUser, handleSubmit, handleInput, value }) => {
+const LogIn = ({ handleSubmit, handleInput, value }) => {
   return (
     <div className="login">
       <img src={loginImage} className="login-image" alt="Cranes over river" />
@@ -69,6 +70,12 @@ const LogIn = ({ setUser, handleSubmit, handleInput, value }) => {
       </ul>
     </div>
   );
+};
+
+LogIn.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleInput: PropTypes.func.isRequired,
+  value: PropTypes.object.isRequired,
 };
 
 export default LogIn;
