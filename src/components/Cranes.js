@@ -5,23 +5,13 @@ import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
 import Header from "./Header";
-import { getDistance } from "geolib";
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
-import userEvent from "@testing-library/user-event";
 
-const initialState = {
-  location: {
-    latitude: "",
-    longitude: "",
-  },
-};
-
-const Cranes = () => {
+const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
-  const [userLocation, setUserLocation] = useState(initialState.location);
   const { search } = useLocation();
 
   // main request when cranes page loads
@@ -100,26 +90,6 @@ const Cranes = () => {
     };
     fetchData();
   };
-
-  // logic to get users location
-
-  useEffect(() => {
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(getCoordinates);
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    };
-    const getCoordinates = (position) => {
-      setUserLocation({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      });
-    };
-
-    getLocation();
-  }, []);
 
   return (
     <div className="Cranes">

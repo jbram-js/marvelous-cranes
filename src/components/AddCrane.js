@@ -35,7 +35,7 @@ const AddCrane = ({ user }) => {
       craneCaption: "",
       craneRate: "",
       craneBackgroundRate: "",
-      craneUser: "",
+      craneUser: user.username,
       craneDescription: "",
       markers: [{ lat: "", lng: "" }],
       dateCreated: new Date(),
@@ -90,11 +90,8 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
-      {markers.length === 1 ? (
-        <AddFunction user={user} fields={fields} setFields={setFields} />
-      ) : (
-        console.log("hello")
-      )}
+
+      <AddFunction fields={fields} setFields={setFields} />
     </div>
   );
 };

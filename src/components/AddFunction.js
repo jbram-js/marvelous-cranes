@@ -11,7 +11,7 @@ const AddFunction = ({ fields, setFields }) => {
       .post("https://test-crane.herokuapp.com/addCrane", fields)
       .then((response) => {
         console.log(response);
-        alert(` ${response.data.craneCaption} succesfully added`);
+        alert(` ${response.data.craneCaption} successfully added`);
       })
       .catch((err) => {
         alert(` ${fields.craneCaption} could not be added - check console`);
@@ -61,16 +61,6 @@ const AddFunction = ({ fields, setFields }) => {
           value={fields.craneBackgroundRate}
           onChange={handleFieldChange}
           required
-        />
-
-        <input
-          id="craneUser"
-          name="craneUser"
-          placeholder="User"
-          value={fields.craneUser}
-          onChange={handleFieldChange}
-          required
-          autoComplete="off"
         />
 
         <input

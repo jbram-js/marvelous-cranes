@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -14,6 +14,10 @@ import "../styles/App.css";
 
 const initialState = {
   fields: { username: "", password: "" },
+  location: {
+    latitude: "",
+    longitude: "",
+  },
 };
 
 function App() {
@@ -21,6 +25,7 @@ function App() {
   const [username, setUsername] = useState();
   const [firstVisit, setFirstVisit] = useState(true);
   const [value, setValue] = useState(initialState.fields);
+  const [userLocation, setUserLocation] = useState(initialState.location);
 
   const history = useHistory();
   //const name = window.localStorage.getItem("login"); //temporary until cookies are implemented
@@ -48,6 +53,28 @@ function App() {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
 
+  // logic to get users location
+
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCoordinates);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    };
+    const getCoordinates = (position) => {
+      setUserLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    };
+
+    getLocation();
+  }, []);
+
+  console.log(user);
+
   return (
     <div className="App">
       <>
@@ -70,25 +97,35 @@ function App() {
           <Route
             exact
             path="/cranes"
-            render={() => (user ? <Cranes /> : <Redirect to="/" />)}
+            render={() =>
+              user ? (
+                <Cranes userLocation={userLocation} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           ></Route>
           <Route
             exact
             path="/add-crane"
             render={() =>
-              user ? <AddCrane name={user} /> : <Redirect to="/" />
+              user ? <AddCrane user={user} /> : <Redirect to="/" />
             }
           ></Route>
           <Route
             exact
             path="/map"
-            render={() => (user ? <Map name={user} /> : <Redirect to="/" />)}
+            render={() => (user ? <Map /> : <Redirect to="/" />)}
           ></Route>
           <Route
             exact
             path="/profile"
             render={() =>
-              user ? <Profile username={username} /> : <Redirect to="/" />
+              user ? (
+                <Profile username={username} userLocation={userLocation} />
+              ) : (
+                <Redirect to="/" />
+              )
             }
           ></Route>
         </Switch>
