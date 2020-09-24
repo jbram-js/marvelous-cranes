@@ -5,20 +5,11 @@ import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
-<<<<<<< HEAD
 import Header from "./Header";
-=======
-// import Header from "./Header";
-// import { getDistance } from "geolib";
->>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
-<<<<<<< HEAD
-=======
-// import userEvent from "@testing-library/user-event";
->>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
 
 const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
