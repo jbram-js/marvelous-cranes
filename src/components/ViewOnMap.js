@@ -29,7 +29,7 @@ const ViewOnMap = ({ markers }) => {
         <Marker
           position={{ lat: latitude, lng: longitude }}
           icon={{
-            url: "crane-pin.svg",
+            url: "crane-marker.svg",
             scaledSize: new window.google.maps.Size(35, 35),
             origin: new window.google.maps.Point(0, 0),
             anchor: new window.google.maps.Point(15, 30),

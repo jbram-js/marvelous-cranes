@@ -103,21 +103,23 @@ const Cranes = () => {
 
   // logic to get users location
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getCoordinates);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  };
-  const getCoordinates = (position) => {
-    setUserLocation({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    });
-  };
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getCoordinates);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    };
+    const getCoordinates = (position) => {
+      setUserLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    };
 
-  getLocation();
+    getLocation();
+  }, []);
 
   return (
     <div className="Cranes">

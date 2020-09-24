@@ -47,6 +47,7 @@ function App() {
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
+
   return (
     <div className="App">
       <>
