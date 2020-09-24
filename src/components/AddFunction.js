@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import axios from "axios";
@@ -81,6 +82,11 @@ const AddFunction = ({ fields, setFields }) => {
       <NavBar />
     </div>
   );
+};
+
+AddFunction.propType = {
+  fields: PropTypes.object.isRequired,
+  setFields: PropTypes.func.isRequired,
 };
 
 export default AddFunction;

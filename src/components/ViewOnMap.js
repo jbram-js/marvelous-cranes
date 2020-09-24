@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
 import "../styles/Map.css";
@@ -36,6 +37,10 @@ const ViewOnMap = ({ markers }) => {
       </GoogleMap>
     </div>
   );
+};
+
+ViewOnMap.propType = {
+  markers: PropTypes.array.isRequired,
 };
 
 export default ViewOnMap;

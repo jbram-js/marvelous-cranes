@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Header from "./Header";
 import rulesImage from "../images/rules-image.jpg";
 
@@ -49,6 +50,10 @@ const Rules = ({ setFirstVisit }) => {
       <Header />
     </div>
   );
+};
+
+Rules.propType = {
+  setFirstVisit: PropTypes.func.isRequired,
 };
 
 export default Rules;

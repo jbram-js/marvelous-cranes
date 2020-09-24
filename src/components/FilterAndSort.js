@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
 
 import qs from "qs";
 
 const FilterAndSort = ({
-  userLocation,
   allCranes,
   handleCraneRateFilter,
   handleBackgroundRateFilter,
@@ -170,6 +170,12 @@ const FilterAndSort = ({
       )}
     </div>
   );
+};
+
+FilterAndSort.propType = {
+  allCranes: PropTypes.array.isRequired,
+  handleCraneRateFilter: PropTypes.func.isRequired,
+  handleBackgroundRateFilter: PropTypes.func.isRequired,
 };
 
 export default FilterAndSort;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import Header from "./Header";
 import axios from "axios";
@@ -45,6 +46,11 @@ const Profile = ({ username, userLocation }) => {
       <NavBar />
     </div>
   );
+};
+
+Profile.propType = {
+  username: PropTypes.string.isRequired,
+  userLocation: PropTypes.object,
 };
 
 export default Profile;

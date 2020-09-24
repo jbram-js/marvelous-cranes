@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
+<<<<<<< HEAD
+import Header from "./Header";
+=======
 // import Header from "./Header";
 // import { getDistance } from "geolib";
+>>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
+<<<<<<< HEAD
+=======
 // import userEvent from "@testing-library/user-event";
+>>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
 
 const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
+  const [likeButton, setLikeButton] = useState(true);
+  const [unlikeButton, setUnlikeButton] = useState(false);
+
   const { search } = useLocation();
 
   // main request when cranes page loads
@@ -30,7 +41,7 @@ const Cranes = ({ userLocation }) => {
         });
     };
     fetchData();
-  }, []);
+  }, [allCranes]);
 
   // request that handles sort and filters
   useEffect(() => {
@@ -40,7 +51,7 @@ const Cranes = ({ userLocation }) => {
       .catch((err) => console.error(err));
   }, [search]);
 
-  // patch request to send a like
+  // patch request to send a like and unlike
 
   const handleSendLike = (craneID) => {
     axios
@@ -50,15 +61,38 @@ const Cranes = ({ userLocation }) => {
       .then(({ data }) => {
         const numberOfLikes = data[0].craneLikes;
         const addedLike = numberOfLikes + 1;
-        console.log("hello");
+        const newCraneID = JSON.stringify(craneID);
+
         axios
-          .patch("https://test-crane.herokuapp.com/Update", {
-            params: {
-              id: JSON.stringify(craneID),
-            },
-          })
+          .patch(
+            `https://test-crane.herokuapp.com/Increment?id=${newCraneID}`,
+            {
+              craneLikes: addedLike,
+            }
+          )
+          .then(() => setLikeButton(false), setUnlikeButton(true));
+      });
+  };
+
+  const handleSendUnlike = (craneID) => {
+    axios
+      .get("https://test-crane.herokuapp.com/craneID", {
+        params: { id: JSON.stringify(craneID) },
+      })
+      .then(({ data }) => {
+        const numberOfLikes = data[0].craneLikes;
+        const removedLike = numberOfLikes - 1;
+        const newCraneID = JSON.stringify(craneID);
+        axios
+          .patch(
+            `https://test-crane.herokuapp.com/Increment?id=${newCraneID}`,
+            {
+              craneLikes: removedLike,
+            }
+          )
           .then(() => {
-            console.log("success");
+            setLikeButton(true);
+            setUnlikeButton(false);
           });
       });
   };
@@ -109,12 +143,19 @@ const Cranes = ({ userLocation }) => {
             markers={cranes.markers}
             userLocation={userLocation}
             handleSendLike={handleSendLike}
+            handleSendUnlike={handleSendUnlike}
+            likeButton={likeButton}
+            unlikeButton={unlikeButton}
           />
         </div>
       ))}
       <NavBar />
     </div>
   );
+};
+
+Cranes.propType = {
+  userLocation: PropTypes.object,
 };
 
 export default Cranes;
