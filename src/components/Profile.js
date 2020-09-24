@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import NavBar from "./NavBar";
-import Header from "./Header";
 import axios from "axios";
 
 import placeholder from "../images/cranesafety.jpg";
@@ -42,8 +40,6 @@ const Profile = ({ username, userLocation }) => {
           </div>
         ))}
       </div>
-      <Header />
-      <NavBar />
     </div>
   );
 };
