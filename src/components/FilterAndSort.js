@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
+import { Slider } from "@material-ui/core";
 
 import qs from "qs";
 
@@ -8,8 +9,10 @@ const FilterAndSort = ({
   allCranes,
   handleCraneRateFilter,
   handleBackgroundRateFilter,
+  setSortFunction,
+  filterValue,
+  setFilterValue,
 }) => {
-  const [query, setQuery] = useState();
   const history = useHistory();
   const { search } = useLocation();
 
@@ -17,6 +20,8 @@ const FilterAndSort = ({
   const [filterCranes, setFilterCranes] = useState(false);
   const [showSortButton, setShowSortButton] = useState(true);
   const [showFilterButton, setShowFilterButton] = useState(true);
+  const [craneRateRange, setCraneRateRange] = useState([0, 10]);
+  const [backgroundRateRange, setBackgroundRateRange] = useState([0, 10]);
 
   //Sort functionality
   const buildQueryString = (operation, valueObj) => {
@@ -54,6 +59,15 @@ const FilterAndSort = ({
     setShowFilterButton(true);
   };
 
+  const handleRatesSlider = (data) => {
+    setFilterValue({
+      bottomRate: craneRateRange[0],
+      topRate: craneRateRange[1],
+      bottomRateCrane: backgroundRateRange[0],
+      topRateCrane: backgroundRateRange[1],
+    });
+  };
+
   return (
     <div className="FilterAndSort">
       {showSortButton && (
@@ -69,12 +83,23 @@ const FilterAndSort = ({
       {sortCranes && (
         <ul>
           <li>
-            <Link to={buildQueryString("sort", { dateCreated: -1 })}>
+            <Link
+              onClick={() =>
+                setSortFunction({
+                  sort: buildQueryString("dateCreated"),
+                  type: -1,
+                })
+              }
+            >
               Date- Newest-Oldest
             </Link>
           </li>
           <li>
-            <Link to={buildQueryString("sort", { dateCreated: 1 })}>
+            <Link
+              onClick={() =>
+                setSortFunction(buildQueryString("sort", { craneRate: -1 }))
+              }
+            >
               Date- Oldest-Newest
             </Link>
           </li>
@@ -101,6 +126,21 @@ const FilterAndSort = ({
         </ul>
       )}
 
+      <Slider
+        value={craneRateRange}
+        min={0}
+        max={10}
+        onChange={(e, value) => setCraneRateRange(value)}
+      />
+
+      <Slider
+        value={backgroundRateRange}
+        min={0}
+        max={10}
+        onChange={(e, value) => setBackgroundRateRange(value)}
+      />
+      <button onClick={() => handleRatesSlider()}>FILTER</button>
+
       {showFilterButton && (
         <button className="filtering" onClick={handleFilterCranes}>
           Filter
@@ -112,62 +152,6 @@ const FilterAndSort = ({
       )}
 
       <div>{allCranes.length} results</div>
-
-      {filterCranes && (
-        <ul>
-          <li>
-            <div onClick={() => handleCraneRateFilter(0, 3)}>
-              Crane Rate- 0-3
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleCraneRateFilter(3.5, 5)}>
-              Crane Rate- 3.5-5
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleCraneRateFilter(5.5, 7)}>
-              Crane Rate- 5.5-7
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleCraneRateFilter(7.5, 9)}>
-              Crane Rate- 7.5-9
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleCraneRateFilter(9, 10)}>
-              Crane Rate- 9-10
-            </div>
-          </li>
-
-          <li>
-            <div onClick={() => handleBackgroundRateFilter(0, 3)}>
-              Backdrop Rate- 0-3
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleBackgroundRateFilter(3.5, 5)}>
-              Backdrop Rate- 3.5-5
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleBackgroundRateFilter(5.5, 7)}>
-              Backdrop Rate- 5.5-7
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleBackgroundRateFilter(7.5, 9)}>
-              Backdrop Rate- 7.5-9
-            </div>
-          </li>
-          <li>
-            <div onClick={() => handleBackgroundRateFilter(9, 10)}>
-              Backdrop Rate- 9-10
-            </div>
-          </li>
-        </ul>
-      )}
     </div>
   );
 };

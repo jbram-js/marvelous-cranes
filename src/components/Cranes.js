@@ -5,25 +5,26 @@ import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
-<<<<<<< HEAD
-import Header from "./Header";
-=======
-// import Header from "./Header";
-// import { getDistance } from "geolib";
->>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
 
 import placeholder from "../images/cranesafety.jpg";
 
 import "../styles/Cranes.css";
-<<<<<<< HEAD
-=======
-// import userEvent from "@testing-library/user-event";
->>>>>>> 45dfd845e630fa323af40080ebf96f78c2ad42b1
+
+const initialState = {
+  fields: {
+    bottomRate: 0,
+    topRate: 10,
+    bottomRateCrane: 0,
+    topRateCrane: 10,
+  },
+};
 
 const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
   const [likeButton, setLikeButton] = useState(true);
   const [unlikeButton, setUnlikeButton] = useState(false);
+  const [sortFunction, setSortFunction] = useState({});
+  const [filterValue, setFilterValue] = useState(initialState.fields);
 
   const { search } = useLocation();
 
@@ -41,15 +42,15 @@ const Cranes = ({ userLocation }) => {
         });
     };
     fetchData();
-  }, [allCranes]);
+  }, []);
 
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/cranes${search}`)
+      .get(`https://test-crane.herokuapp.com/cranes?sort=${sortFunction}`)
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
-  }, [search]);
+  }, [sortFunction]);
 
   // patch request to send a like and unlike
 
@@ -99,41 +100,31 @@ const Cranes = ({ userLocation }) => {
 
   // filter by crane rate
 
-  const handleCraneRateFilter = (a, b) => {
+  useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(`https://test-crane.herokuapp.com/cranes`)
-        .then(({ data }) =>
-          setAllCranes(data.filter((e) => e.craneRate >= a && e.craneRate <= b))
-        );
+        .get("https://test-crane.herokuapp.com/AllRatings", {
+          params: filterValue,
+        })
+        .then(({ data }) => {
+          setAllCranes(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
     fetchData();
-  };
+  }, [filterValue]);
 
-  // filter by background rate
-
-  const handleBackgroundRateFilter = (a, b) => {
-    const fetchData = async () => {
-      await axios
-        .get(`https://test-crane.herokuapp.com/cranes`)
-        .then(({ data }) =>
-          setAllCranes(
-            data.filter(
-              (e) => e.craneBackgroundRate >= a && e.craneBackgroundRate <= b
-            )
-          )
-        );
-    };
-    fetchData();
-  };
-
+  console.log(filterValue);
   return (
     <div className="Cranes">
       <FilterAndSort
         userLocation={userLocation}
         allCranes={allCranes}
-        handleCraneRateFilter={handleCraneRateFilter}
-        handleBackgroundRateFilter={handleBackgroundRateFilter}
+        setSortFunction={setSortFunction}
+        filterValue={filterValue}
+        setFilterValue={setFilterValue}
       />
       {allCranes.map((cranes) => (
         <div>

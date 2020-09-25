@@ -93,36 +93,21 @@ function App() {
           <Route
             exact
             path="/cranes"
-            render={() =>
-              user ? (
-                <Cranes userLocation={userLocation} />
-              ) : (
-                <Redirect to="/" />
-              )
-            }
+            render={() => <Cranes userLocation={userLocation} />}
           ></Route>
           <Route
             exact
             path="/add-crane"
-            render={() =>
-              user ? <AddCrane user={user} /> : <Redirect to="/" />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/map"
-            render={() => (user ? <Map /> : <Redirect to="/" />)}
-          ></Route>
+            render={() => <AddCrane user={user} />}
+          />
+
+          <Route exact path="/map" render={() => <Map />}></Route>
           <Route
             exact
             path="/profile"
-            render={() =>
-              user ? (
-                <Profile username={user.username} userLocation={userLocation} />
-              ) : (
-                <Redirect to="/" />
-              )
-            }
+            render={() => (
+              <Profile username={user.username} userLocation={userLocation} />
+            )}
           ></Route>
         </Switch>
       </>
