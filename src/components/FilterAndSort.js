@@ -126,16 +126,28 @@ const FilterAndSort = ({
         <>
           {" "}
           <button onClick={handleHideFilterCranes}>Hide Filters</button>
+          <label htmlFor="cr-slider">Crane Rate</label>
           <Slider
+            name="cr-slider"
+            id="cr-slider"
             value={craneRateRange}
             min={0}
             max={10}
+            step={0.5}
+            marks={true}
+            valueLabelDisplay="auto"
             onChange={(e, value) => setCraneRateRange(value)}
           />
+          <label htmlFor="br-slider">Background Rate</label>
           <Slider
+            name="br-slider"
+            id="br-slider"
             value={backgroundRateRange}
             min={0}
             max={10}
+            step={0.5}
+            marks={true}
+            valueLabelDisplay="auto"
             onChange={(e, value) => setBackgroundRateRange(value)}
           />
           <button onClick={() => handleRatesSlider()}>FILTER</button>{" "}
