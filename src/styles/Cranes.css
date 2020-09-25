@@ -1,0 +1,16 @@
+.filter-sort button {
+  text-align: center;
+  width: 40vw;
+  padding-right: 10px;
+  height: 35px;
+  border-radius: 30px;
+  border-style: none;
+  color: #fff;
+  font-size: 20px;
+  margin: 85px 10px 0 10px;
+  background: linear-gradient(
+    45deg,
+    rgba(248, 54, 0, 1),
+    rgba(249, 212, 35, 1)
+  );
+}

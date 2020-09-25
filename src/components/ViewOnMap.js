@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 
-import NavBar from "./NavBar";
-
 import "../styles/Map.css";
 
 const mapContainerStyle = {

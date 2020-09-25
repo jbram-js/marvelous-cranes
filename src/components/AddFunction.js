@@ -25,9 +25,9 @@ const AddFunction = ({ fields, setFields }) => {
   };
 
   return (
-    <div className="AddFunction">
+    <div className="add-function">
       Add your crane
-      <form id="addForm" onSubmit={handleAddCrane}>
+      <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
         <input
           id="craneCaption"
           name="craneCaption"
@@ -74,7 +74,9 @@ const AddFunction = ({ fields, setFields }) => {
           autoComplete="off"
         />
 
-        <input id="submitButton" type="submit" value="Add" />
+        <button type="submit" className="add-crane-button">
+          ADD CRANE
+        </button>
       </form>
       <Header />
       <NavBar />

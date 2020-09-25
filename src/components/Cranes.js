@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
-import NavBar from "../components/NavBar";
 import FilterAndSort from "./FilterAndSort";
 
 import placeholder from "../images/cranesafety.jpg";
@@ -120,6 +119,7 @@ const Cranes = ({ userLocation }) => {
   return (
     <div className="Cranes">
       <FilterAndSort
+        className="filter-sort"
         userLocation={userLocation}
         allCranes={allCranes}
         setSortFunction={setSortFunction}
@@ -140,7 +140,6 @@ const Cranes = ({ userLocation }) => {
           />
         </div>
       ))}
-      <NavBar />
     </div>
   );
 };

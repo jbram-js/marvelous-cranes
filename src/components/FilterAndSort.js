@@ -69,16 +69,10 @@ const FilterAndSort = ({
   };
 
   return (
-    <div className="FilterAndSort">
-      {showSortButton && (
-        <button className="sorting" onClick={handleSortCranes}>
-          Sort By
-        </button>
-      )}
+    <div className="filter-sort">
+      {showSortButton && <button onClick={handleSortCranes}>SORT</button>}
 
-      {sortCranes && (
-        <button onClick={handleHideSortCranes}>Hide Sort By</button>
-      )}
+      {sortCranes && <button onClick={handleHideSortCranes}>CLOSE</button>}
 
       {sortCranes && (
         <ul>
@@ -126,11 +120,7 @@ const FilterAndSort = ({
         </ul>
       )}
 
-      {showFilterButton && (
-        <button className="filtering" onClick={handleFilterCranes}>
-          Filter
-        </button>
-      )}
+      {showFilterButton && <button onClick={handleFilterCranes}>FILTER</button>}
 
       {filterCranes && (
         <>
