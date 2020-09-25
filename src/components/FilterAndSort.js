@@ -12,6 +12,7 @@ const FilterAndSort = ({
   setSortFunction,
   filterValue,
   setFilterValue,
+  handleFiltering,
 }) => {
   const history = useHistory();
   const { search } = useLocation();
@@ -65,6 +66,15 @@ const FilterAndSort = ({
       topRate: craneRateRange[1],
       bottomRateCrane: backgroundRateRange[0],
       topRateCrane: backgroundRateRange[1],
+    });
+  };
+
+  const handleRemoveFilters = () => {
+    setFilterValue({
+      bottomRate: 0,
+      topRate: 10,
+      bottomRateCrane: 0,
+      topRateCrane: 10,
     });
   };
 
@@ -150,11 +160,12 @@ const FilterAndSort = ({
             valueLabelDisplay="auto"
             onChange={(e, value) => setBackgroundRateRange(value)}
           />
-          <button onClick={() => handleRatesSlider()}>FILTER</button>{" "}
+          <button onClick={() => handleRatesSlider()}>FILTER</button>
+          <button onClick={handleRemoveFilters}>REMOVE FILTERS</button>
         </>
       )}
 
-      <div>{allCranes.length} results</div>
+      <h2>{allCranes.length} results</h2>
     </div>
   );
 };

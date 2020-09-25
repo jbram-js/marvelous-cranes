@@ -98,7 +98,7 @@ function App() {
           <Route
             exact
             path="/add-crane"
-            render={() => <AddCrane user={user} />}
+            render={() => <AddCrane user={"Bram"} />}
           />
 
           <Route exact path="/map" render={() => <Map />}></Route>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "../styles/PopUpProfile.css";
 
 const PopUpProfile = ({
-  user,
+  craneUser,
   memberSince,
   addedCranes,
   respects,
@@ -12,7 +12,7 @@ const PopUpProfile = ({
 }) => {
   return (
     <div className="PopUpProfile">
-      <div className="popup-username">{user}</div>
+      <div className="popup-username">{craneUser}</div>
       <div>MEMBER SINCE- {memberSince}</div>
       <div>CRANES ADDED- {addedCranes}</div>
       <div>RESPECTS GIVEN- {respects}</div>

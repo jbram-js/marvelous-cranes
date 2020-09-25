@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import moment from "moment";
 import Modal from "react-modal";
 import PopUpProfile from "./PopUpProfile";
 import ViewOnMap from "./ViewOnMap";
@@ -15,19 +17,22 @@ const CraneCard = ({
   craneBackgroundRate,
   craneDescription,
   markers,
-  craneLikes,
   userLocation,
   handleSendLike,
   handleSendUnlike,
   likeButton,
   unlikeButton,
   numberOfLikes,
+  handleSetUserLike,
+  handleRemoveUserLike,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
   const [showProfile, setShowProfile] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [showMapButton, setShowMapButton] = useState(true);
+  const [usersCranes, setUsersCranes] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -39,9 +44,6 @@ const CraneCard = ({
     setShowMoreButton(true);
   };
 
-  const handleShowProfile = () => {
-    setShowProfile(true);
-  };
   const handleHideProfile = () => {
     setShowProfile(false);
   };
@@ -54,6 +56,34 @@ const CraneCard = ({
   const handleHideViewOnMap = () => {
     setShowMap(false);
     setShowMapButton(true);
+  };
+
+  const handleBothLikes = () => {
+    handleSendLike(_id);
+    handleSetUserLike(craneUser);
+  };
+
+  const handleRemoveBothLikes = () => {
+    handleSendUnlike(_id);
+    handleRemoveUserLike(craneUser);
+  };
+
+  const handleGetUserInfo = () => {
+    axios
+      .get("https://test-crane.herokuapp.com/craneUser", {
+        params: {
+          craneUser: JSON.stringify(craneUser),
+        },
+      })
+      .then(({ data }) => {
+        setUsersCranes(data);
+        return axios
+          .get(`https://test-crane.herokuapp.com/${craneUser}/user`)
+          .then(({ data }) => {
+            setUserInfo(data);
+            setShowProfile(true);
+          });
+      });
   };
 
   function distance(lat1, lon1, lat2, lon2, unit) {
@@ -76,7 +106,6 @@ const CraneCard = ({
     }
     return dist;
   }
-
   const distances = () => {
     const inMiles = distance(
       userLocation.latitude,
@@ -87,13 +116,12 @@ const CraneCard = ({
     );
     return Math.round(inMiles * 1000) / 1000;
   };
-
   distances();
 
   return (
     <div className="CraneCard">
       <img className="card-image" src={image} alt="crane"></img>
-      <div className="username" onClick={() => handleShowProfile()}>
+      <div className="username" onClick={handleGetUserInfo}>
         {craneUser}
       </div>
       <div>{craneCaption}</div>
@@ -132,7 +160,7 @@ const CraneCard = ({
             <button
               type="submit"
               className="likeButton"
-              onClick={() => handleSendLike(_id)}
+              onClick={handleBothLikes}
             >
               Like
             </button>
@@ -142,7 +170,7 @@ const CraneCard = ({
             <button
               type="submit"
               className="likeButton"
-              onClick={() => handleSendUnlike(_id)}
+              onClick={handleRemoveBothLikes}
             >
               Unlike
             </button>
@@ -180,13 +208,17 @@ const CraneCard = ({
           },
         }}
       >
-        <PopUpProfile
-          user="ethanscranes"
-          memberSince="01/01/01"
-          addedCranes="10"
-          respects="10"
-          handleHideProfile={handleHideProfile}
-        />
+        {userInfo.map((info) => (
+          <div>
+            <PopUpProfile
+              craneUser={craneUser}
+              memberSince={moment(info.MemberSince).format("Do MMM yy")}
+              addedCranes={usersCranes.length}
+              respects={info.LikesSent}
+              handleHideProfile={handleHideProfile}
+            />
+          </div>
+        ))}
       </Modal>
     </div>
   );
