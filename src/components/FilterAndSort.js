@@ -126,21 +126,6 @@ const FilterAndSort = ({
         </ul>
       )}
 
-      <Slider
-        value={craneRateRange}
-        min={0}
-        max={10}
-        onChange={(e, value) => setCraneRateRange(value)}
-      />
-
-      <Slider
-        value={backgroundRateRange}
-        min={0}
-        max={10}
-        onChange={(e, value) => setBackgroundRateRange(value)}
-      />
-      <button onClick={() => handleRatesSlider()}>FILTER</button>
-
       {showFilterButton && (
         <button className="filtering" onClick={handleFilterCranes}>
           Filter
@@ -148,7 +133,23 @@ const FilterAndSort = ({
       )}
 
       {filterCranes && (
-        <button onClick={handleHideFilterCranes}>Hide Filters</button>
+        <>
+          {" "}
+          <button onClick={handleHideFilterCranes}>Hide Filters</button>
+          <Slider
+            value={craneRateRange}
+            min={0}
+            max={10}
+            onChange={(e, value) => setCraneRateRange(value)}
+          />
+          <Slider
+            value={backgroundRateRange}
+            min={0}
+            max={10}
+            onChange={(e, value) => setBackgroundRateRange(value)}
+          />
+          <button onClick={() => handleRatesSlider()}>FILTER</button>{" "}
+        </>
       )}
 
       <div>{allCranes.length} results</div>
