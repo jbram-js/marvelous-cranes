@@ -21,6 +21,7 @@ const CraneCard = ({
   handleSendUnlike,
   likeButton,
   unlikeButton,
+  numberOfLikes,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -96,7 +97,7 @@ const CraneCard = ({
         {craneUser}
       </div>
       <div>{craneCaption}</div>
-      <div>{craneLikes} Likes</div>
+      <div>{numberOfLikes} Likes</div>
 
       {showMoreButton && (
         <button

@@ -24,6 +24,7 @@ const Cranes = ({ userLocation }) => {
   const [unlikeButton, setUnlikeButton] = useState(false);
   const [sortFunction, setSortFunction] = useState({});
   const [filterValue, setFilterValue] = useState(initialState.fields);
+  const [numberOfLikes, setNumberOfLikes] = useState();
 
   const { search } = useLocation();
 
@@ -41,7 +42,7 @@ const Cranes = ({ userLocation }) => {
         });
     };
     fetchData();
-  }, []);
+  }, [numberOfLikes]);
 
   // request that handles sort and filters
   useEffect(() => {
@@ -70,7 +71,11 @@ const Cranes = ({ userLocation }) => {
               craneLikes: addedLike,
             }
           )
-          .then(() => setLikeButton(false), setUnlikeButton(true));
+          .then(
+            ({ data }) => setNumberOfLikes(data.craneLikes),
+            setLikeButton(false),
+            setUnlikeButton(true)
+          );
       });
   };
 
@@ -90,7 +95,8 @@ const Cranes = ({ userLocation }) => {
               craneLikes: removedLike,
             }
           )
-          .then(() => {
+          .then(({ data }) => {
+            setNumberOfLikes(data.craneLikes);
             setLikeButton(true);
             setUnlikeButton(false);
           });
@@ -115,7 +121,6 @@ const Cranes = ({ userLocation }) => {
     fetchData();
   }, [filterValue]);
 
-  console.log(filterValue);
   return (
     <div className="Cranes">
       <FilterAndSort
@@ -137,6 +142,7 @@ const Cranes = ({ userLocation }) => {
             handleSendUnlike={handleSendUnlike}
             likeButton={likeButton}
             unlikeButton={unlikeButton}
+            numberOfLikes={cranes.craneLikes}
           />
         </div>
       ))}
