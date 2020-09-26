@@ -69,7 +69,7 @@ const AddCrane = ({ user }) => {
   }, []);
 
   return (
-    <div className="Map">
+    <div className="map-area">
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <GoogleMap

@@ -22,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "70vh",
+  height: "80vh",
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
@@ -60,7 +60,7 @@ const Map = () => {
   };
 
   return (
-    <div className="ViewOnMap">
+    <div className="map-view">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
