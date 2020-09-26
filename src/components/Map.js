@@ -22,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "80vh",
+  height: "84vh",
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
@@ -167,7 +167,7 @@ const Search = ({ panTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Search a place"
+          placeholder="Search..."
         />
         <ComboboxPopover>
           <ComboboxList>

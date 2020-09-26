@@ -30,7 +30,6 @@ const Profile = ({ username, userLocation }) => {
     <div className="Profile">
       <h1>{username}</h1>
       <h2>Posts {allUsersCranes.length}</h2>
-      <button>Settings</button>
       <div className="all-user-results">
         {allUsersCranes.map((crane) => (
           <div>

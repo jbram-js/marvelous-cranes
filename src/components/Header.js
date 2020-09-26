@@ -8,7 +8,7 @@ const Header = () => {
     <div className="Header">
       <ul className="HeaderItems">
         <li>
-          <img src={Logo} className="HeaderIcon" alt="All cranes icon" />
+          <img src={Logo} className="HeaderIcon" alt="All cranes icon" />{" "}
         </li>
       </ul>
     </div>
