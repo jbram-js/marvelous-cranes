@@ -1,5 +1,5 @@
 body {
-  margin-top: 67px;
+  margin-top: 167px;
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@ body {
 }
 
 .locate {
-  position: absolute;
+  position: fixed;
   top: 125px;
   right: 0.5rem;
   background: none;
