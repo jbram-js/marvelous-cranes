@@ -28,12 +28,6 @@
   color: black;
 }
 
-.showMoreButton {
-  width: 200px;
-
-  font-size: 1em;
-}
-
 .extraInfo {
   text-align: start;
   margin: -2vh;

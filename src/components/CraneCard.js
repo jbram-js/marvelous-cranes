@@ -5,7 +5,8 @@ import moment from "moment";
 import Modal from "react-modal";
 import PopUpProfile from "./PopUpProfile";
 import ViewOnMap from "./ViewOnMap";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import "../styles/CraneCard.css";
 
 const CraneCard = ({
@@ -123,20 +124,22 @@ const CraneCard = ({
     <div className="crane-card">
       <img className="card-image" src={image} alt="crane"></img>
       <div className="username" onClick={handleGetUserInfo}>
+        {showMoreButton && (
+          <button
+            type="submit"
+            className="showMoreButton"
+            onClick={() => handleImageClick()}
+          >
+            <FontAwesomeIcon icon={faAngleRight} className="building-icon" />
+          </button>
+        )}
+        <button onClick={handleHideInfo}>
+          <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
+        </button>
         {craneUser}
       </div>
       <p>{craneCaption}</p>
       <p>{numberOfLikes} Likes</p>
-
-      {showMoreButton && (
-        <button
-          type="submit"
-          className="showMoreButton"
-          onClick={() => handleImageClick()}
-        >
-          See more info
-        </button>
-      )}
 
       {showInfo && (
         <div className="extraInfo">
@@ -176,7 +179,6 @@ const CraneCard = ({
               Unlike
             </button>
           )}
-          <button onClick={handleHideInfo}>Show less</button>
         </div>
       )}
 

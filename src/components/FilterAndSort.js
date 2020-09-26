@@ -159,12 +159,12 @@ const FilterAndSort = ({
             valueLabelDisplay="auto"
             onChange={(e, value) => setBackgroundRateRange(value)}
           />
-          <button onClick={() => handleRatesSlider()}>FILTER</button>
+          <button onClick={() => handleRatesSlider()}>APPLY</button>
           <button onClick={handleRemoveFilters}>CLEAR</button>
         </>
       )}
 
-      <h2>{allCranes.length} results</h2>
+      <p>Number of cranes: {allCranes.length}</p>
     </div>
   );
 };
