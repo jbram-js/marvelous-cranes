@@ -22,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "84vh",
+  height: "70vh",
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
