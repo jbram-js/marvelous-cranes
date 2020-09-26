@@ -60,7 +60,7 @@ const Map = () => {
   };
 
   return (
-    <div className="map-view">
+    <div className="map">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}

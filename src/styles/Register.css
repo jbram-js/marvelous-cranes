@@ -1,7 +1,7 @@
 .register-p {
   font-size: 32px;
   position: relative;
-  margin-top: 75px;
+  margin-top: 15px;
 }
 
 .register-form {
@@ -62,5 +62,4 @@
   justify-content: space-evenly;
   list-style: none;
   margin-left: -42px;
-  margin-top: -83px;
 }
