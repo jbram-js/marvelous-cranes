@@ -42,6 +42,7 @@ const CraneCard = ({
   const handleHideInfo = () => {
     setShowInfo(false);
     setShowMoreButton(true);
+    setShowMap(false);
   };
 
   const handleHideProfile = () => {

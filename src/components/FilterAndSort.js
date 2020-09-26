@@ -76,6 +76,8 @@ const FilterAndSort = ({
       bottomRateCrane: 0,
       topRateCrane: 10,
     });
+    setCraneRateRange([0, 10]);
+    setBackgroundRateRange([0, 10]);
   };
 
   return (
