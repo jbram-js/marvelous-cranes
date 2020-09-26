@@ -2,6 +2,8 @@ import React from "react";
 import { Link, Route } from "react-router-dom";
 import Logo from "../icons/logo2.svg";
 import Settings from "./Settings";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/Header.css";
 
@@ -14,7 +16,9 @@ const Header = ({ user }) => {
         </li>
         <li>
           <button>
-            <Link to="/settings">SETTINGS</Link>
+            <Link to="/settings">
+              <FontAwesomeIcon icon={faSlidersH} className="building-icon" />
+            </Link>
           </button>
         </li>
       </ul>
