@@ -89,14 +89,7 @@ const FilterAndSort = ({
       {sortCranes && (
         <ul>
           <li>
-            <Link
-              onClick={() =>
-                setSortFunction({
-                  sort: buildQueryString("dateCreated"),
-                  type: -1,
-                })
-              }
-            >
+            <Link onClick={() => setSortFunction({ craneRate: 1 })}>
               Date- Newest-Oldest
             </Link>
           </li>
@@ -106,12 +99,16 @@ const FilterAndSort = ({
                 setSortFunction(buildQueryString("sort", { craneRate: -1 }))
               }
             >
-              Date- Oldest-Newest
+              Crane Rate- Highest-Lowest
             </Link>
           </li>
           <li>
-            <Link to={buildQueryString("sort", { craneRate: -1 })}>
-              Crane Rate- Highest-Lowest
+            <Link
+              onClick={() =>
+                setSortFunction(buildQueryString("sort", { craneRate: 1 }))
+              }
+            >
+              Crane Rate- Lowest-Highest
             </Link>
           </li>
           <li>

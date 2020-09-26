@@ -22,7 +22,7 @@ const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
   const [likeButton, setLikeButton] = useState(true);
   const [unlikeButton, setUnlikeButton] = useState(false);
-  const [sortFunction, setSortFunction] = useState({});
+  const [sortFunction, setSortFunction] = useState();
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
 
@@ -47,11 +47,12 @@ const Cranes = ({ userLocation }) => {
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/cranes?sort=${sortFunction}`)
+      .get(`https://test-crane.herokuapp.com/cranes${sortFunction}`)
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
   }, [sortFunction]);
 
+  console.log(sortFunction);
   // patch request to send a like and unlike
 
   const handleSendLike = async (craneID) => {
