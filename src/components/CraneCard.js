@@ -120,13 +120,13 @@ const CraneCard = ({
   distances();
 
   return (
-    <div className="CraneCard">
+    <div className="crane-card">
       <img className="card-image" src={image} alt="crane"></img>
       <div className="username" onClick={handleGetUserInfo}>
         {craneUser}
       </div>
-      <div>{craneCaption}</div>
-      <div>{numberOfLikes} Likes</div>
+      <p>{craneCaption}</p>
+      <p>{numberOfLikes} Likes</p>
 
       {showMoreButton && (
         <button

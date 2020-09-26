@@ -134,7 +134,7 @@ const FilterAndSort = ({
       {filterCranes && (
         <>
           {" "}
-          <button onClick={handleHideFilterCranes}>Hide Filters</button>
+          <button onClick={handleHideFilterCranes}>CLOSE</button>
           <label htmlFor="cr-slider">Crane Rate</label>
           <Slider
             name="cr-slider"
@@ -160,7 +160,7 @@ const FilterAndSort = ({
             onChange={(e, value) => setBackgroundRateRange(value)}
           />
           <button onClick={() => handleRatesSlider()}>FILTER</button>
-          <button onClick={handleRemoveFilters}>REMOVE FILTERS</button>
+          <button onClick={handleRemoveFilters}>CLEAR</button>
         </>
       )}
 

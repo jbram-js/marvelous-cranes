@@ -1,34 +1,28 @@
-.CraneCard {
+.crane-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 1.7em;
-  width: 90vw;
+  font-size: 18px;
 }
 
-.CraneCard button {
+.crane-card button {
   background: none;
   border: none;
-  text-decoration: underline;
   color: black;
 }
 
 .card-image {
-  margin-left: 23px;
   object-fit: cover;
-  width: 330px;
+  width: 100vw;
   height: 300px;
 }
 
-.CraneCard div {
-  margin-left: 22px;
+.crane-card p {
+  margin-left: 10px;
 }
 
 .username {
-  margin-top: -29px;
-  background-color: white;
-  padding: 0px;
-  width: 90px;
+  margin-top: -10px;
   height: 30px;
   text-align: center;
   color: black;
@@ -36,7 +30,7 @@
 
 .showMoreButton {
   width: 200px;
-  margin: -42px 0px 0px 250px;
+
   font-size: 1em;
 }
 
