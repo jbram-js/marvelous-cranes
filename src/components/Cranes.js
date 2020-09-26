@@ -4,6 +4,8 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import FilterAndSort from "./FilterAndSort";
+import NavBar from "./NavBar";
+import Header from "./Header";
 
 import placeholder from "../images/cranesafety.jpg";
 
@@ -134,6 +136,7 @@ const Cranes = ({ userLocation }) => {
       {allCranes.map((cranes) => (
         <div>
           <CraneCard
+            className="crane-card"
             {...cranes}
             image={placeholder}
             markers={cranes.markers}
@@ -146,6 +149,8 @@ const Cranes = ({ userLocation }) => {
           />
         </div>
       ))}
+      <NavBar />
+      <Header />
     </div>
   );
 };

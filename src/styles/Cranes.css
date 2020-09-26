@@ -14,3 +14,10 @@
     rgba(249, 212, 35, 1)
   );
 }
+
+.filter-sort ul {
+  display: flex;
+  justify-content: space-around;
+  line-height: 20px;
+  list-style: none;
+}
