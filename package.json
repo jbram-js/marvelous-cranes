@@ -15,6 +15,7 @@
     "bootstrap": "^4.5.2",
     "date-fns": "^2.16.1",
     "geolib": "^3.3.1",
+    "moment": "^2.29.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dual-range-slider": "^1.0.4",

@@ -24,7 +24,7 @@ const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
   const [likeButton, setLikeButton] = useState(true);
   const [unlikeButton, setUnlikeButton] = useState(false);
-  const [sortFunction, setSortFunction] = useState({});
+  const [sortFunction, setSortFunction] = useState();
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
 
@@ -49,15 +49,16 @@ const Cranes = ({ userLocation }) => {
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/cranes?sort=${sortFunction}`)
+      .get(`https://test-crane.herokuapp.com/cranes${sortFunction}`)
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
   }, [sortFunction]);
 
+  console.log(sortFunction);
   // patch request to send a like and unlike
 
-  const handleSendLike = (craneID) => {
-    axios
+  const handleSendLike = async (craneID) => {
+    await axios
       .get("https://test-crane.herokuapp.com/craneID", {
         params: { id: JSON.stringify(craneID) },
       })
@@ -81,8 +82,8 @@ const Cranes = ({ userLocation }) => {
       });
   };
 
-  const handleSendUnlike = (craneID) => {
-    axios
+  const handleSendUnlike = async (craneID) => {
+    await axios
       .get("https://test-crane.herokuapp.com/craneID", {
         params: { id: JSON.stringify(craneID) },
       })
@@ -90,18 +91,49 @@ const Cranes = ({ userLocation }) => {
         const numberOfLikes = data[0].craneLikes;
         const removedLike = numberOfLikes - 1;
         const newCraneID = JSON.stringify(craneID);
-        axios
-          .patch(
-            `https://test-crane.herokuapp.com/Increment?id=${newCraneID}`,
-            {
-              craneLikes: removedLike,
-            }
-          )
-          .then(({ data }) => {
-            setNumberOfLikes(data.craneLikes);
-            setLikeButton(true);
-            setUnlikeButton(false);
-          });
+        const patch = async () => {
+          await axios
+            .patch(
+              `https://test-crane.herokuapp.com/Increment?id=${newCraneID}`,
+              {
+                craneLikes: removedLike,
+              }
+            )
+            .then(({ data }) => {
+              setNumberOfLikes(data.craneLikes);
+              setLikeButton(true);
+              setUnlikeButton(false);
+            });
+        };
+        patch();
+      });
+  };
+
+  // patch to state how many likes have been sent by a user
+
+  const handleSetUserLike = async (username) => {
+    await axios
+      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .then(({ data }) => {
+        const likesSent = data[0].LikesSent;
+        const addedLike = likesSent + 1;
+        const userID = data[0]._id;
+        axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
+          LikesSent: addedLike,
+        });
+      });
+  };
+
+  const handleRemoveUserLike = async (username) => {
+    await axios
+      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .then(({ data }) => {
+        const likesSent = data[0].LikesSent;
+        const removedLike = likesSent - 1;
+        const userID = data[0]._id;
+        axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
+          LikesSent: removedLike,
+        });
       });
   };
 
@@ -146,6 +178,8 @@ const Cranes = ({ userLocation }) => {
             likeButton={likeButton}
             unlikeButton={unlikeButton}
             numberOfLikes={cranes.craneLikes}
+            handleSetUserLike={handleSetUserLike}
+            handleRemoveUserLike={handleRemoveUserLike}
           />
         </div>
       ))}

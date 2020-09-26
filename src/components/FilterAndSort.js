@@ -12,6 +12,7 @@ const FilterAndSort = ({
   setSortFunction,
   filterValue,
   setFilterValue,
+  handleFiltering,
 }) => {
   const history = useHistory();
   const { search } = useLocation();
@@ -68,6 +69,17 @@ const FilterAndSort = ({
     });
   };
 
+  const handleRemoveFilters = () => {
+    setFilterValue({
+      bottomRate: 0,
+      topRate: 10,
+      bottomRateCrane: 0,
+      topRateCrane: 10,
+    });
+    setCraneRateRange([0, 10]);
+    setBackgroundRateRange([0, 10]);
+  };
+
   return (
     <div className="filter-sort">
       {showSortButton && <button onClick={handleSortCranes}>SORT</button>}
@@ -77,14 +89,7 @@ const FilterAndSort = ({
       {sortCranes && (
         <ul>
           <li>
-            <Link
-              onClick={() =>
-                setSortFunction({
-                  sort: buildQueryString("dateCreated"),
-                  type: -1,
-                })
-              }
-            >
+            <Link onClick={() => setSortFunction({ craneRate: 1 })}>
               Date- Newest-Oldest
             </Link>
           </li>
@@ -94,12 +99,16 @@ const FilterAndSort = ({
                 setSortFunction(buildQueryString("sort", { craneRate: -1 }))
               }
             >
-              Date- Oldest-Newest
+              Crane Rate- Highest-Lowest
             </Link>
           </li>
           <li>
-            <Link to={buildQueryString("sort", { craneRate: -1 })}>
-              Crane Rate- Highest-Lowest
+            <Link
+              onClick={() =>
+                setSortFunction(buildQueryString("sort", { craneRate: 1 }))
+              }
+            >
+              Crane Rate- Lowest-Highest
             </Link>
           </li>
           <li>
@@ -150,13 +159,12 @@ const FilterAndSort = ({
             valueLabelDisplay="auto"
             onChange={(e, value) => setBackgroundRateRange(value)}
           />
-          <button className="apply-button" onClick={() => handleRatesSlider()}>
-            APPLY
-          </button>{" "}
+          <button onClick={() => handleRatesSlider()}>FILTER</button>
+          <button onClick={handleRemoveFilters}>CLEAR</button>
         </>
       )}
 
-      <div>{allCranes.length} results</div>
+      <h2>{allCranes.length} results</h2>
     </div>
   );
 };
