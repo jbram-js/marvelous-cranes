@@ -100,16 +100,14 @@ function App() {
           <Route
             exact
             path="/add-crane"
-            render={() => <AddCrane user={"Bram"} />}
+            render={() => <AddCrane user={"bram"} />}
           />
 
           <Route exact path="/map" render={() => <Map />}></Route>
           <Route
             exact
             path="/profile"
-            render={() => (
-              <Profile username={user.username} userLocation={userLocation} />
-            )}
+            render={() => <Profile user={"bram"} userLocation={userLocation} />}
           ></Route>
         </Switch>
       </>

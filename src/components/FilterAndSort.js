@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
 
 import qs from "qs";
@@ -89,41 +90,39 @@ const FilterAndSort = ({
       {sortCranes && (
         <ul>
           <li>
-            <Link onClick={() => setSortFunction({ craneRate: 1 })}>
-              Date- Newest-Oldest
-            </Link>
-          </li>
-          <li>
             <Link
+              className="links"
               onClick={() =>
                 setSortFunction(buildQueryString("sort", { craneRate: -1 }))
               }
             >
-              Crane Rate- Highest-Lowest
+              <strong>Crane Rate:</strong> Descending
             </Link>
           </li>
           <li>
             <Link
+              className="links"
               onClick={() =>
                 setSortFunction(buildQueryString("sort", { craneRate: 1 }))
               }
             >
-              Crane Rate- Lowest-Highest
+              <strong>Crane Rate:</strong> Ascending
             </Link>
           </li>
           <li>
-            <Link to={buildQueryString("sort", { craneRate: 1 })}>
-              Crane Rate- Lowest-Highest
+            <Link
+              className="links"
+              to={buildQueryString("sort", { craneBackgroundRate: -1 })}
+            >
+              <strong>Location Rate:</strong> Descending
             </Link>
           </li>
           <li>
-            <Link to={buildQueryString("sort", { craneBackgroundRate: -1 })}>
-              Backdrop Rate- Highest-Lowest
-            </Link>
-          </li>
-          <li>
-            <Link to={buildQueryString("sort", { craneBackgroundRate: 1 })}>
-              Backdrop Rate- Lowest-Highest
+            <Link
+              className="links"
+              to={buildQueryString("sort", { craneBackgroundRate: 1 })}
+            >
+              <strong>Location Rate:</strong> Ascending
             </Link>
           </li>
         </ul>
@@ -135,30 +134,32 @@ const FilterAndSort = ({
         <>
           {" "}
           <button onClick={handleHideFilterCranes}>CLOSE</button>
-          <label htmlFor="cr-slider">Crane Rate</label>
-          <Slider
-            name="cr-slider"
-            id="cr-slider"
-            value={craneRateRange}
-            min={0}
-            max={10}
-            step={0.5}
-            marks={true}
-            valueLabelDisplay="auto"
-            onChange={(e, value) => setCraneRateRange(value)}
-          />
-          <label htmlFor="br-slider">Background Rate</label>
-          <Slider
-            name="br-slider"
-            id="br-slider"
-            value={backgroundRateRange}
-            min={0}
-            max={10}
-            step={0.5}
-            marks={true}
-            valueLabelDisplay="auto"
-            onChange={(e, value) => setBackgroundRateRange(value)}
-          />
+          <div className="sliders">
+            <label htmlFor="cr-slider">Crane Rate</label>
+            <Slider
+              name="cr-slider"
+              id="cr-slider"
+              value={craneRateRange}
+              min={0}
+              max={10}
+              step={0.5}
+              marks={false}
+              valueLabelDisplay="auto"
+              onChange={(e, value) => setCraneRateRange(value)}
+            />
+            <label htmlFor="br-slider">Background Rate</label>
+            <Slider
+              name="br-slider"
+              id="br-slider"
+              value={backgroundRateRange}
+              min={0}
+              max={10}
+              step={0.5}
+              marks={false}
+              valueLabelDisplay="auto"
+              onChange={(e, value) => setBackgroundRateRange(value)}
+            />
+          </div>
           <button onClick={() => handleRatesSlider()}>APPLY</button>
           <button onClick={handleRemoveFilters}>CLEAR</button>
         </>
