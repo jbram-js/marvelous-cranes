@@ -107,7 +107,9 @@ function App() {
           <Route
             exact
             path="/profile"
-            render={() => <Profile user={"bram"} userLocation={userLocation} />}
+            render={() => (
+              <Profile username={user.username} userLocation={userLocation} />
+            )}
           ></Route>
         </Switch>
       </>

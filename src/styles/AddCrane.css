@@ -1,7 +1,7 @@
 .search {
   position: fixed;
   margin-left: 105px;
-  top: 120px;
+  top: 80px;
   transform: translateX(-50%);
   width: 100%;
   max-width: 250px;
@@ -15,8 +15,8 @@
 }
 
 .locate {
-  position: absolute;
-  top: 125px;
+  position: fixed;
+  top: 85px;
   right: 0.5rem;
   background: none;
   border: none;

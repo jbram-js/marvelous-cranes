@@ -21,8 +21,14 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "80vh",
+  height: "45vh",
 };
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+};
+
 const center = {
   lat: 53.480759,
   lng: -2.242631,
@@ -76,6 +82,7 @@ const AddCrane = ({ user }) => {
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={center}
+        options={options}
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
@@ -153,7 +160,7 @@ const Search = ({ panTo }) => {
             setValue(e.target.value);
           }}
           disabled={!ready}
-          placeholder="Search a place"
+          placeholder="Search..."
         />
         <ComboboxPopover>
           <ComboboxList>
