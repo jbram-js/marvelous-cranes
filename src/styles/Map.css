@@ -1,3 +1,7 @@
+.map {
+  overflow-y: hidden;
+}
+
 .search {
   position: fixed;
   margin-left: 105px;

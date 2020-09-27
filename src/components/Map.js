@@ -22,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "85vh",
+  height: "70vh",
 };
 
 const options = {
@@ -65,7 +65,12 @@ const Map = () => {
   };
 
   return (
-    <div className="map">
+    <div
+      className="map"
+      style={{
+        overflow: "hidden",
+      }}
+    >
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}

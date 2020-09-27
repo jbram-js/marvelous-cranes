@@ -125,6 +125,9 @@ const FilterAndSort = ({
               <strong>Location Rate:</strong> Ascending
             </Link>
           </li>
+          <li>
+            <strong>Number of cranes:</strong> {allCranes.length}
+          </li>
         </ul>
       )}
 
@@ -162,10 +165,11 @@ const FilterAndSort = ({
           </div>
           <button onClick={() => handleRatesSlider()}>APPLY</button>
           <button onClick={handleRemoveFilters}>CLEAR</button>
+          <p>
+            <strong>Number of cranes:</strong> {allCranes.length}
+          </p>
         </>
       )}
-
-      <p>Number of cranes: {allCranes.length}</p>
     </div>
   );
 };

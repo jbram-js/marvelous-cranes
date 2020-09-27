@@ -1,3 +1,9 @@
+.filter-sort {
+  position: sticky;
+  background-color: white;
+  width: 100vw;
+}
+
 .filter-sort button {
   text-align: center;
   width: 40vw;
@@ -24,7 +30,6 @@
 .filter-sort li {
   flex: 1 0 200px;
   box-sizing: border-box;
-  margin-top: 5px;
   font-size: 16px;
 }
 
@@ -34,7 +39,10 @@
 }
 
 .sliders {
-  margin-left: 36px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-left: 10%;
   width: 80vw;
 }
 .filter-sort p {
