@@ -84,7 +84,6 @@ const FilterAndSort = ({
   return (
     <div className="filter-sort">
       {showSortButton && <button onClick={handleSortCranes}>SORT</button>}
-
       {sortCranes && <button onClick={handleHideSortCranes}>CLOSE</button>}
 
       {sortCranes && (

@@ -5,8 +5,13 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import "../styles/Map.css";
 
 const mapContainerStyle = {
-  width: "90vw",
-  height: "80vh",
+  width: "100vw",
+  height: "40vh",
+};
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
 };
 
 const ViewOnMap = ({ markers }) => {
@@ -19,11 +24,12 @@ const ViewOnMap = ({ markers }) => {
   };
 
   return (
-    <div className="ViewOnMap">
+    <div className="view-on-map">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={13}
+        zoom={15}
         center={center}
+        options={options}
       >
         <Marker
           position={{ lat: latitude, lng: longitude }}
