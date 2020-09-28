@@ -26,7 +26,9 @@ const AddFunction = ({ fields, setFields }) => {
 
   return (
     <div className="add-function">
-      Add your crane
+      <p className="add-text">
+        First locate the crane on the map above then fill in the details below!
+      </p>
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
         <input
           id="craneCaption"
@@ -68,6 +70,7 @@ const AddFunction = ({ fields, setFields }) => {
           id="craneDescription"
           name="craneDescription"
           placeholder="Comment"
+          type="textarea"
           value={fields.craneDescription}
           onChange={handleFieldChange}
           required

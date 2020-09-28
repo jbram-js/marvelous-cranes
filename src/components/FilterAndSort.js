@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
 
 import qs from "qs";
