@@ -1,7 +1,7 @@
 .login-image {
   width: 100vw;
   position: relative;
-  top: 0;
+  top: -1px;
   left: 0;
 }
 

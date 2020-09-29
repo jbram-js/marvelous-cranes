@@ -9,7 +9,6 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import Rules from "./Rules";
-import Header from "./Header";
 
 import "../styles/App.css";
 
@@ -76,7 +75,6 @@ function App() {
   return (
     <div className="App">
       <>
-        <Header user={user} />
         <Switch>
           <Route
             exact

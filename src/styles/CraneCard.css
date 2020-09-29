@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   font-size: 18px;
+  line-height: 40px;
 }
 
 .crane-card button {
@@ -14,31 +15,56 @@
 .card-image {
   object-fit: cover;
   width: 100vw;
-  height: 300px;
 }
 
-.crane-card p {
-  margin-left: 10px;
+.likes {
+  background-color: white;
+  border-radius: 0 30px 0 0;
+  padding: 0 10px 0 8px;
+  position: relative;
+  margin: -9% 0 0 -1.5%;
 }
 
-.username {
-  margin-top: -10px;
-  height: 30px;
+.basic-info {
+  margin: 0 0 2% 0;
   text-align: center;
   color: black;
 }
 
-.extraInfo {
+.username {
+  margin-right: 10px;
+}
+
+.extra-info {
   text-align: start;
-  margin: -2vh;
   width: 100vw;
 }
 
-.extraInfo-items {
-  margin-bottom: -8px;
+.extra-info-items {
+  margin: -3% 0 -6% 5.5%;
 }
 
-.extraInfo button {
-  background-color: orange;
-  color: white;
+.crane-distance {
+  margin: 0 0 0 0;
+}
+
+.extra-info button {
+  margin: 10% 30% 7% 30%;
+  text-align: center;
+  width: 40vw;
+  height: 35px;
+  border-radius: 30px;
+  border-style: none;
+  color: #fff;
+  font-size: 16px;
+  background: linear-gradient(
+    45deg,
+    rgba(248, 54, 0, 1),
+    rgba(249, 212, 35, 1)
+  );
+}
+
+.like-icon {
+  font-size: 20px;
+  color: #f83600;
 }

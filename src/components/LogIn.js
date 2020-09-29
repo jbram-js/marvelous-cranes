@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import loginImage from "../images/login-image-final.png";
+import loginImage from "../images/login-image-final.jpg";
 
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";
 import instagram from "../icons/instagram.svg";
+
+import Header from "./Header";
 
 import "../styles/LogIn.css";
 
@@ -68,6 +70,7 @@ const LogIn = ({ handleSubmit, handleInput, value }) => {
           </a>
         </li>
       </ul>
+      <Header />
     </div>
   );
 };

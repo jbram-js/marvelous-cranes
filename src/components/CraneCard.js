@@ -6,7 +6,12 @@ import Modal from "react-modal";
 import PopUpProfile from "./PopUpProfile";
 import ViewOnMap from "./ViewOnMap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faAngleDown,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faOutlineHeart } from "@fortawesome/fontawesome-free-regular";
 import "../styles/CraneCard.css";
 
 const CraneCard = ({
@@ -29,6 +34,7 @@ const CraneCard = ({
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
+  const [showLessButton, setShowLessButton] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [showMapButton, setShowMapButton] = useState(true);
@@ -38,11 +44,13 @@ const CraneCard = ({
   const handleImageClick = () => {
     setShowInfo(true);
     setShowMoreButton(false);
+    setShowLessButton(true);
   };
 
   const handleHideInfo = () => {
     setShowInfo(false);
     setShowMoreButton(true);
+    setShowLessButton(false);
     setShowMap(false);
   };
 
@@ -123,62 +131,69 @@ const CraneCard = ({
   return (
     <div className="crane-card">
       <img className="card-image" src={image} alt="crane"></img>
-      <div className="username" onClick={handleGetUserInfo}>
+      <div className="likes">
+        {likeButton && (
+          <button
+            type="submit"
+            className="likeButton"
+            onClick={handleBothLikes}
+          >
+            <FontAwesomeIcon icon={faOutlineHeart} className="like-icon" />
+          </button>
+        )}
+        {unlikeButton && (
+          <button
+            type="submit"
+            className="like-button"
+            onClick={handleRemoveBothLikes}
+          >
+            <FontAwesomeIcon icon={faHeart} className="like-icon" />
+          </button>
+        )}
+        {numberOfLikes}
+      </div>
+      <div className="basic-info" onClick={handleGetUserInfo}>
         {showMoreButton && (
           <button
             type="submit"
-            className="showMoreButton"
+            className="show-more-button"
             onClick={() => handleImageClick()}
           >
             <FontAwesomeIcon icon={faAngleRight} className="building-icon" />
           </button>
         )}
-        <button onClick={handleHideInfo}>
-          <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
-        </button>
-        {craneUser}
+        {showLessButton && (
+          <button onClick={handleHideInfo}>
+            <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
+          </button>
+        )}
+        <strong className="username">{craneUser}</strong>
+        {craneCaption}
       </div>
-      <p>{craneCaption}</p>
-      <p>{numberOfLikes} Likes</p>
-
       {showInfo && (
-        <div className="extraInfo">
-          <div className="extraInfo-items">CRANE RATE- {craneRate}</div>
-          <div className="extraInfo-items">
-            BACKDROP RATE- {craneBackgroundRate}
+        <div className="extra-info">
+          <div className="extra-info-items">
+            <strong>Crane Rate:</strong> {craneRate}
+            <br />
+            <strong>Location Rate:</strong> {craneBackgroundRate}
+            <br />
+            <strong>Comment:</strong> {craneDescription}
+            {userLocation.latitude === "" && userLocation.longitude === "" ? (
+              <p className="crane-distance">
+                Turn on location settings to see distance from you
+              </p>
+            ) : (
+              <p className="crane-distance">
+                This crane is <strong>{distances()} miles</strong> from you
+              </p>
+            )}
           </div>
-          <div className="extraInfo-items">COMMENT- {craneDescription}</div>
-          {userLocation.latitude === "" && userLocation.longitude === "" ? (
-            <div>Turn on location settings to see distance from you</div>
-          ) : (
-            <div>This crane is {distances()} miles from you</div>
-          )}
           {showMapButton && (
             <button type="submit" onClick={handleShowViewOnMap}>
               VIEW ON MAP
             </button>
           )}
           {showMap && <button onClick={handleHideViewOnMap}>HIDE MAP</button>}
-
-          {likeButton && (
-            <button
-              type="submit"
-              className="likeButton"
-              onClick={handleBothLikes}
-            >
-              Like
-            </button>
-          )}
-
-          {unlikeButton && (
-            <button
-              type="submit"
-              className="likeButton"
-              onClick={handleRemoveBothLikes}
-            >
-              Unlike
-            </button>
-          )}
         </div>
       )}
 
@@ -197,17 +212,14 @@ const CraneCard = ({
           },
           content: {
             position: "absolute",
-            top: "60px",
-            left: "0px",
+            top: "15%",
+            left: "5%",
             right: "0px",
             bottom: "0px",
-            border: "1px solid #ccc",
             background: "none",
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
-            borderRadius: "4px",
             outline: "none",
-            padding: "20px",
           },
         }}
       >

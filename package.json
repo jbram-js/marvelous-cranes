@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
@@ -24,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-dual-range-slider": "^1.0.4",
     "react-input-range": "^1.3.0",
+    "react-input-slider": "^6.0.0",
     "react-modal": "^3.11.2",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-portal-overlay": "^1.0.1",

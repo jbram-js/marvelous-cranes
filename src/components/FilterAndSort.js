@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
 import { Slider } from "@material-ui/core";
 
 import qs from "qs";
@@ -84,7 +83,6 @@ const FilterAndSort = ({
   return (
     <div className="filter-sort">
       {showSortButton && <button onClick={handleSortCranes}>SORT</button>}
-
       {sortCranes && <button onClick={handleHideSortCranes}>CLOSE</button>}
 
       {sortCranes && (
@@ -125,6 +123,9 @@ const FilterAndSort = ({
               <strong>Location Rate:</strong> Ascending
             </Link>
           </li>
+          <li>
+            <strong>Number of cranes:</strong> {allCranes.length}
+          </li>
         </ul>
       )}
 
@@ -162,10 +163,11 @@ const FilterAndSort = ({
           </div>
           <button onClick={() => handleRatesSlider()}>APPLY</button>
           <button onClick={handleRemoveFilters}>CLEAR</button>
+          <p>
+            <strong>Number of cranes:</strong> {allCranes.length}
+          </p>
         </>
       )}
-
-      <p>Number of cranes: {allCranes.length}</p>
     </div>
   );
 };

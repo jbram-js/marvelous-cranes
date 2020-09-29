@@ -22,7 +22,12 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "80vh",
+  height: "70vh",
+};
+
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
@@ -60,11 +65,17 @@ const Map = () => {
   };
 
   return (
-    <div className="map">
+    <div
+      className="map"
+      style={{
+        overflow: "hidden",
+      }}
+    >
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={center}
+        options={options}
         onLoad={onMapLoad}
       >
         {markers.map((crane) => (
@@ -103,10 +114,10 @@ const Map = () => {
           </InfoWindow>
         )}
       </GoogleMap>
-      <Header />
-      <NavBar />
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
+      <Header />
+      <NavBar />
     </div>
   );
 };

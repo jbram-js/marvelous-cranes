@@ -156,19 +156,19 @@ const Cranes = ({ userLocation }) => {
   }, [filterValue]);
 
   return (
-    <div className="Cranes">
-      <FilterAndSort
-        className="filter-sort"
-        userLocation={userLocation}
-        allCranes={allCranes}
-        setSortFunction={setSortFunction}
-        filterValue={filterValue}
-        setFilterValue={setFilterValue}
-      />
+    <div className="all-cranes">
+      <div className="filter-sort">
+        <FilterAndSort
+          userLocation={userLocation}
+          allCranes={allCranes}
+          setSortFunction={setSortFunction}
+          filterValue={filterValue}
+          setFilterValue={setFilterValue}
+        />
+      </div>
       {allCranes.map((cranes) => (
-        <div>
+        <div className="crane-card">
           <CraneCard
-            className="crane-card"
             {...cranes}
             image={placeholder}
             markers={cranes.markers}
