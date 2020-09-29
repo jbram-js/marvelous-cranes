@@ -168,7 +168,7 @@ const CraneCard = ({
           </button>
         )}
         <strong className="username">{craneUser}</strong>
-        {craneCaption}
+        <p>{craneCaption}</p>
       </div>
       {showInfo && (
         <div className="extra-info">
