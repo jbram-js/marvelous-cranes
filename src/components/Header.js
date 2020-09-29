@@ -6,10 +6,10 @@ import "../styles/Header.css";
 
 const Header = () => {
   return (
-    <div className="Header">
-      <ul className="HeaderItems">
+    <div className="header">
+      <ul className="header-items">
         <li>
-          <img src={Logo} className="HeaderIcon" alt="All cranes icon" />{" "}
+          <img src={Logo} className="header-icon" alt="All cranes icon" />{" "}
         </li>
       </ul>
     </div>

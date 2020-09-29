@@ -1,4 +1,4 @@
-.HeaderItems {
+.header-items {
   display: flex;
   justify-content: center;
   list-style: none;
@@ -20,6 +20,7 @@
   border-image-slice: 1;
 }
 
-.HeaderIcon {
+.header-icon {
+  padding-right: 10px;
   height: 48px;
 }
