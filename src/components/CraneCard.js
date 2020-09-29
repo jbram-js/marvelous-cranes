@@ -26,8 +26,6 @@ const CraneCard = ({
   userLocation,
   handleSendLike,
   handleSendUnlike,
-  likeButton,
-  unlikeButton,
   numberOfLikes,
   handleSetUserLike,
   handleRemoveUserLike,
@@ -40,6 +38,8 @@ const CraneCard = ({
   const [showMapButton, setShowMapButton] = useState(true);
   const [usersCranes, setUsersCranes] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [likeButton, setLikeButton] = useState(true);
+  const [unlikeButton, setUnlikeButton] = useState(false);
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -71,11 +71,15 @@ const CraneCard = ({
   const handleBothLikes = () => {
     handleSendLike(_id);
     handleSetUserLike(craneUser);
+    setLikeButton(false);
+    setUnlikeButton(true);
   };
 
   const handleRemoveBothLikes = () => {
     handleSendUnlike(_id);
     handleRemoveUserLike(craneUser);
+    setLikeButton(true);
+    setUnlikeButton(false);
   };
 
   const handleGetUserInfo = () => {
