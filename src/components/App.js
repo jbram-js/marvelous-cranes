@@ -50,7 +50,6 @@ function App() {
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
-  console.log(user);
 
   // logic to get users location
 
@@ -95,21 +94,29 @@ function App() {
             exact
             path="/cranes"
             render={() => <Cranes userLocation={userLocation} />}
-          ></Route>
+          >
+            {!user && <Redirect to="/" />}
+          </Route>
           <Route
             exact
             path="/add-crane"
-            render={() => <AddCrane user={"bram"} />}
-          />
+            render={() => <AddCrane user={user} />}
+          >
+            {!user && <Redirect to="/" />}
+          </Route>
 
-          <Route exact path="/map" render={() => <Map />}></Route>
+          <Route exact path="/map" render={() => <Map />}>
+            {!user && <Redirect to="/" />}
+          </Route>
           <Route
             exact
             path="/profile"
             render={() => (
               <Profile username={user.username} userLocation={userLocation} />
             )}
-          ></Route>
+          >
+            {!user && <Redirect to="/" />}
+          </Route>
         </Switch>
       </>
     </div>
