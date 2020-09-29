@@ -1,11 +1,9 @@
 .search {
-  position: fixed;
+  position: sticky;
   margin-left: 105px;
-  top: 80px;
   transform: translateX(-50%);
   width: 100%;
   max-width: 250px;
-  z-index: 10;
 }
 
 .search input {
