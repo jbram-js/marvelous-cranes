@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-
+import NavBar from "./NavBar";
+import Header from "./Header";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -21,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "45vh",
+  height: "60vh",
 };
 
 const options = {
@@ -99,14 +100,32 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
+      {markers.length !== 1 ? (
+        <p>Locate the crane through the map above.</p>
+      ) : (
+        console.log(markers)
+      )}
 
       {markers.length === 1 ? (
-        <button onClick={() => setShowAddFunction(true)}>CONTINUE</button>
+        <p>Click 'continue' to enter the cranes details.</p>
+      ) : (
+        console.log(markers)
+      )}
+
+      {markers.length === 1 ? (
+        <button
+          className="continue-button"
+          onClick={() => setShowAddFunction(true)}
+        >
+          CONTINUE
+        </button>
       ) : (
         console.log(markers)
       )}
 
       {showAddFunction && <AddFunction fields={fields} setFields={setFields} />}
+      <Header />
+      <NavBar />
     </div>
   );
 };

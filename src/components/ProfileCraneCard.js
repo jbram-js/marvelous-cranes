@@ -76,7 +76,7 @@ const ProfileCraneCard = ({
   distances();
 
   return (
-    <div className="CraneCard">
+    <div className="crane-card">
       <img className="card-image" src={image} alt="crane"></img>
       <div className="username">{craneUser}</div>
       <div>{craneCaption}</div>
@@ -84,7 +84,7 @@ const ProfileCraneCard = ({
       {showMoreButton && (
         <button
           type="submit"
-          className="showMoreButton"
+          className="show-more-button"
           onClick={() => handleImageClick()}
         >
           See more info
@@ -92,12 +92,12 @@ const ProfileCraneCard = ({
       )}
 
       {showInfo && (
-        <div className="extraInfo">
-          <div className="extraInfo-items">CRANE RATE- {craneRate}</div>
-          <div className="extraInfo-items">
+        <div className="extra-info">
+          <div className="extra-info-items">CRANE RATE- {craneRate}</div>
+          <div className="extra-info-items">
             BACKDROP RATE- {craneBackgroundRate}
           </div>
-          <div className="extraInfo-items">COMMENT- {craneDescription}</div>
+          <div className="extra-info-items">COMMENT- {craneDescription}</div>
           {userLocation.latitude === "" && userLocation.longitude === "" ? (
             <div>Turn on location settings to see distance from you</div>
           ) : (
@@ -111,7 +111,7 @@ const ProfileCraneCard = ({
           {showMap && <button onClick={handleHideViewOnMap}>HIDE MAP</button>}
           <button
             type="submit"
-            className="likeButton"
+            className="like-button"
             onClick={() => handleSendLike(_id)}
           >
             Like
