@@ -36,6 +36,7 @@ const center = {
 
 const AddCrane = ({ user }) => {
   const [markers, setMarkers] = useState([]);
+  const [showAddFunction, setShowAddFunction] = useState(false);
 
   const initialState = {
     fields: {
@@ -99,7 +100,13 @@ const AddCrane = ({ user }) => {
         ))}
       </GoogleMap>
 
-      <AddFunction fields={fields} setFields={setFields} />
+      {markers.length === 1 ? (
+        <button onClick={() => setShowAddFunction(true)}>CONTINUE</button>
+      ) : (
+        console.log(markers)
+      )}
+
+      {showAddFunction && <AddFunction fields={fields} setFields={setFields} />}
     </div>
   );
 };
