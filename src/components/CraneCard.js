@@ -162,12 +162,12 @@ const CraneCard = ({
             className="show-more-button"
             onClick={() => handleImageClick()}
           >
-            <FontAwesomeIcon icon={faAngleRight} className="building-icon" />
+            <FontAwesomeIcon icon={faAngleRight} className="show-more-button" />
           </button>
         )}
         {showLessButton && (
           <button className="show-more-button" onClick={handleHideInfo}>
-            <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
+            <FontAwesomeIcon icon={faAngleDown} className="show-more-button" />
           </button>
         )}
         <strong className="username">{craneUser}</strong>
