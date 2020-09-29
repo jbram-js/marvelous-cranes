@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-
 import axios from "axios";
+import NavBar from "./NavBar";
+import Header from "./Header";
 
 import "../styles/Settings.css";
 
 const Settings = ({ user }) => {
   const initialState = {
-    fields: {},
+    fields: {
+      username: user.username,
+      phoneNumber: user.phoneNumber,
+      emailAddress: user.emailAddress,
+    },
   };
   const [value, setValue] = useState(initialState.fields);
   const [showUsernameInput, setShowUsernameInput] = useState(false);
@@ -16,18 +21,35 @@ const Settings = ({ user }) => {
 
   const handleUpdateUserInfo = (e) => {
     e.preventDefault();
-    if (value.password === value.confirmPassword) {
+    if (
+      value.username === "" ||
+      value.phoneNumber === "" ||
+      value.emailAddress === ""
+    ) {
+      setValue({
+        ...value,
+        username: user.username,
+        phoneNumber: user.phoneNumber,
+        emailAddress: user.emailAddress,
+      });
+    } else if (
+      value.password === value.confirmPassword &&
+      value.username.length > 6 &&
+      value.username.length < 15
+    ) {
       const sendData = async () => {
         await axios
           .patch(
             `https://test-crane.herokuapp.com/updateUsers/${user._id}`,
             value
           )
-          .then((response) => {
-            console.log(response);
+          .then(({ data }) => {
+            console.log(data);
           });
       };
       sendData();
+    } else {
+      console.log("error");
     }
   };
 
@@ -39,7 +61,7 @@ const Settings = ({ user }) => {
   return (
     <div className="Settings">
       <h1>Settings</h1>
-      <form onSubmit={handleUpdateUserInfo}>
+      <form>
         <label htmlFor="username" onClick={() => setShowUsernameInput(true)}>
           USERNAME
         </label>
@@ -48,8 +70,8 @@ const Settings = ({ user }) => {
             name="username"
             id="username"
             type="text"
-            placeholder={user.username}
-            onChange={(e) => setValue({ ...value, username: e.target.value })}
+            value={value.username}
+            onChange={handleChange}
           ></input>
         )}
         <label
@@ -63,10 +85,8 @@ const Settings = ({ user }) => {
             name="phoneNumber"
             id="phoneNumber"
             type="tel"
-            placeholder={user.phoneNumber}
-            onChange={(e) =>
-              setValue({ ...value, phoneNumber: e.target.value })
-            }
+            value={value.phoneNumber}
+            onChange={handleChange}
           ></input>
         )}
         <label htmlFor="emailAddress" onClick={() => setShowEmailInput(true)}>
@@ -77,10 +97,8 @@ const Settings = ({ user }) => {
             name="emailAddress"
             id="emailAddress"
             type="email"
-            placeholder={user.emailAddress}
-            onChange={(e) =>
-              setValue({ ...value, emailAddress: e.target.value })
-            }
+            value={value.emailAddress}
+            onChange={handleChange}
           ></input>
         )}
         <label htmlFor="password" onClick={() => setShowPasswordInput(true)}>
@@ -91,7 +109,7 @@ const Settings = ({ user }) => {
             name="password"
             id="password"
             type="password"
-            onChange={(e) => setValue({ ...value, password: e.target.value })}
+            onChange={handleChange}
           ></input>
         )}
         <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
@@ -100,13 +118,13 @@ const Settings = ({ user }) => {
             name="confirmPassword"
             id="confirmPassword"
             type="password"
-            onChange={(e) =>
-              setValue({ ...value, confirmPassword: e.target.value })
-            }
+            onChange={handleChange}
           ></input>
         )}
-        <button type="submit">UPDATE</button>
+        <button onClick={handleUpdateUserInfo}>UPDATE</button>
       </form>
+      <NavBar />
+      <Header />
     </div>
   );
 };

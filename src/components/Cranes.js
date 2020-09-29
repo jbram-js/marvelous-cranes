@@ -25,6 +25,7 @@ const Cranes = ({ userLocation }) => {
   const [sortFunction, setSortFunction] = useState();
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
+  const [sortType, setSortType] = useState();
 
   // main request when cranes page loads
 
@@ -45,10 +46,12 @@ const Cranes = ({ userLocation }) => {
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/all?sort={${sortFunction}}`)
+      .get(
+        `https://test-crane.herokuapp.com/cranes?${sortFunction}=${sortType}`
+      )
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
-  }, [sortFunction]);
+  }, [sortFunction, sortType]);
 
   // patch request to send a like and unlike
 
@@ -153,6 +156,7 @@ const Cranes = ({ userLocation }) => {
           setSortFunction={setSortFunction}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
+          setSortType={setSortType}
         />
       </div>
       {allCranes.map((cranes) => (
