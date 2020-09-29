@@ -51,6 +51,7 @@ function App() {
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
+  console.log(user);
 
   // logic to get users location
 
@@ -107,7 +108,9 @@ function App() {
           <Route
             exact
             path="/profile"
-            render={() => <Profile user={"bram"} userLocation={userLocation} />}
+            render={() => (
+              <Profile username={user.username} userLocation={userLocation} />
+            )}
           ></Route>
         </Switch>
       </>

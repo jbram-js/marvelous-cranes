@@ -15,21 +15,20 @@ import "../styles/Profile.css";
 
 const Profile = ({ username, userLocation }) => {
   const [allUsersCranes, setAllUsersCranes] = useState([]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("https://test-crane.herokuapp.com/craneUser", {
-          params: { craneUser: JSON.stringify(username) },
-        })
-        .then(({ data }) => {
-          setAllUsersCranes(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fetchData();
-  });
+    axios
+      .get("https://test-crane.herokuapp.com/craneUser", {
+        params: { craneUser: username },
+      })
+      .then(({ data }) => {
+        setAllUsersCranes(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="Profile">
       <h1>{username}</h1>
@@ -52,7 +51,7 @@ const Profile = ({ username, userLocation }) => {
       <Header />
       <NavBar />
       <Route exact path="/settings">
-        <Settings user={"bram"} />
+        <Settings user={username} />
       </Route>
     </div>
   );

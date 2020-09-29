@@ -35,7 +35,7 @@ const Cranes = ({ userLocation }) => {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("https://test-crane.herokuapp.com/cranes")
+        .get("https://test-crane.herokuapp.com/all")
         .then(({ data }) => {
           setAllCranes(data);
         })
@@ -49,7 +49,7 @@ const Cranes = ({ userLocation }) => {
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/cranes${sortFunction}`)
+      .get(`https://test-crane.herokuapp.com/all?sort={${sortFunction}}`)
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
   }, [sortFunction]);
@@ -60,12 +60,12 @@ const Cranes = ({ userLocation }) => {
   const handleSendLike = async (craneID) => {
     await axios
       .get("https://test-crane.herokuapp.com/craneID", {
-        params: { id: JSON.stringify(craneID) },
+        params: { id: craneID },
       })
       .then(({ data }) => {
         const numberOfLikes = data[0].craneLikes;
         const addedLike = numberOfLikes + 1;
-        const newCraneID = JSON.stringify(craneID);
+        const newCraneID = craneID;
 
         axios
           .patch(
@@ -85,12 +85,12 @@ const Cranes = ({ userLocation }) => {
   const handleSendUnlike = async (craneID) => {
     await axios
       .get("https://test-crane.herokuapp.com/craneID", {
-        params: { id: JSON.stringify(craneID) },
+        params: { id: craneID },
       })
       .then(({ data }) => {
         const numberOfLikes = data[0].craneLikes;
         const removedLike = numberOfLikes - 1;
-        const newCraneID = JSON.stringify(craneID);
+        const newCraneID = craneID;
         const patch = async () => {
           await axios
             .patch(

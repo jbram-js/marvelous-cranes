@@ -120,7 +120,7 @@ const FilterAndSort = ({
           <li>
             <Link
               className="links"
-              to={buildQueryString("sort", { craneBackgroundRate: 1 })}
+              onClick={() => setSortFunction({ craneBackgroundRate: 1 })}
             >
               <strong>Location Rate:</strong> Ascending
             </Link>
