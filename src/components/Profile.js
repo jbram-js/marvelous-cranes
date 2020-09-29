@@ -33,6 +33,13 @@ const Profile = ({ username, userLocation }) => {
     <div className="Profile">
       <h1>{username}</h1>
       <h2>Posts {allUsersCranes.length}</h2>
+
+      <Link to="/settings">
+        <button>
+          <FontAwesomeIcon icon={faSlidersH} className="building-icon" />
+        </button>
+      </Link>
+
       <div className="all-user-results">
         {allUsersCranes.map((crane) => (
           <div>
@@ -44,15 +51,9 @@ const Profile = ({ username, userLocation }) => {
           </div>
         ))}
       </div>
-      <button>
-        <FontAwesomeIcon icon={faSlidersH} className="building-icon" />
-        <Link to="/settings"></Link>
-      </button>
+
       <Header />
       <NavBar />
-      <Route exact path="/settings">
-        <Settings user={username} />
-      </Route>
     </div>
   );
 };

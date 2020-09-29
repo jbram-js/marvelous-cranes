@@ -11,6 +11,7 @@ import Map from "./Map";
 import Rules from "./Rules";
 
 import "../styles/App.css";
+import Settings from "./Settings";
 
 const initialState = {
   fields: { username: "", password: "" },
@@ -90,6 +91,7 @@ function App() {
           <Route exact path="/register">
             <Register />
           </Route>
+
           <Route
             exact
             path="/cranes"
@@ -115,6 +117,9 @@ function App() {
               <Profile username={user.username} userLocation={userLocation} />
             )}
           >
+            {!user && <Redirect to="/" />}
+          </Route>
+          <Route exact path="/settings" render={() => <Settings user={user} />}>
             {!user && <Redirect to="/" />}
           </Route>
         </Switch>

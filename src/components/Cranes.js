@@ -54,7 +54,6 @@ const Cranes = ({ userLocation }) => {
       .catch((err) => console.error(err));
   }, [sortFunction]);
 
-  console.log(sortFunction);
   // patch request to send a like and unlike
 
   const handleSendLike = async (craneID) => {
