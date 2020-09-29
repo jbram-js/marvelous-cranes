@@ -22,7 +22,7 @@ import "../styles/Map.css";
 
 const mapContainerStyle = {
   width: "100vw",
-  height: "60vh",
+  height: "45vh",
 };
 
 const options = {
@@ -37,7 +37,6 @@ const center = {
 
 const AddCrane = ({ user }) => {
   const [markers, setMarkers] = useState([]);
-  const [showAddFunction, setShowAddFunction] = useState(false);
 
   const initialState = {
     fields: {
@@ -100,30 +99,8 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
-      {markers.length !== 1 ? (
-        <p>Locate the crane through the map above.</p>
-      ) : (
-        console.log(markers)
-      )}
 
-      {markers.length === 1 ? (
-        <p>Click 'continue' to enter the cranes details.</p>
-      ) : (
-        console.log(markers)
-      )}
-
-      {markers.length === 1 ? (
-        <button
-          className="continue-button"
-          onClick={() => setShowAddFunction(true)}
-        >
-          CONTINUE
-        </button>
-      ) : (
-        console.log(markers)
-      )}
-
-      {showAddFunction && <AddFunction fields={fields} setFields={setFields} />}
+      {<AddFunction fields={fields} setFields={setFields} />}
       <Header />
       <NavBar />
     </div>

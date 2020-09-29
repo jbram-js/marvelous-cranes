@@ -73,7 +73,11 @@ const AddFunction = ({ fields, setFields }) => {
           autoComplete="off"
         />
 
-        <button type="submit" className="add-crane-button">
+        <button
+          type="submit"
+          disabled={fields.markers.length !== 1}
+          className="add-crane-button"
+        >
           ADD CRANE
         </button>
       </form>

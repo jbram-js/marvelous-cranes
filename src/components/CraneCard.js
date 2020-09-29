@@ -159,7 +159,6 @@ const CraneCard = ({
       <div className="basic-info" onClick={handleGetUserInfo}>
         {showMoreButton && (
           <button
-            type="submit"
             className="show-more-button"
             onClick={() => handleImageClick()}
           >
@@ -167,7 +166,7 @@ const CraneCard = ({
           </button>
         )}
         {showLessButton && (
-          <button onClick={handleHideInfo}>
+          <button className="show-more-button" onClick={handleHideInfo}>
             <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
           </button>
         )}

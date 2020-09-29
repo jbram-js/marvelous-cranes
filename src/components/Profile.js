@@ -29,23 +29,16 @@ const Profile = ({ username, userLocation }) => {
 
   return (
     <div className="Profile">
-      <p>{username}</p>
-      <p>
+      <p className="cranes-added">
         <strong>Cranes added: </strong>
         {allUsersCranes.length}
       </p>
-      <Link to="/settings">
-        <button>
-          {" "}
-          <img src={settings} className="NavBarIcons" alt="All cranes icon" />
-        </button>
-      </Link>
-
       <div className="all-user-results">
-        {allUsersCranes.map((crane) => (
+        {allUsersCranes.map((cranes) => (
           <div>
             <ProfileCraneCard
-              {...crane}
+              {...cranes}
+              numberOfLikes={cranes.craneLikes}
               userLocation={userLocation}
               image={placeholder}
             />
