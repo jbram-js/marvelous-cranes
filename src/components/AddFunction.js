@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import NavBar from "./NavBar";
-import Header from "./Header";
+
 import axios from "axios";
 import "../styles/AddFunction.css";
 
@@ -26,9 +25,6 @@ const AddFunction = ({ fields, setFields }) => {
 
   return (
     <div className="add-function">
-      <p className="add-text">
-        First locate the crane on the map above then fill in the details below!
-      </p>
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
         <input
           id="craneCaption"
@@ -81,8 +77,6 @@ const AddFunction = ({ fields, setFields }) => {
           ADD CRANE
         </button>
       </form>
-      <Header />
-      <NavBar />
     </div>
   );
 };

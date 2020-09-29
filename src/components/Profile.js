@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
-import Settings from "./Settings";
+import settings from "../icons/settings.svg";
 
 import placeholder from "../images/cranesafety.jpg";
 import ProfileCraneCard from "./ProfileCraneCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/Profile.css";
 
@@ -31,12 +29,15 @@ const Profile = ({ username, userLocation }) => {
 
   return (
     <div className="Profile">
-      <h1>{username}</h1>
-      <h2>Posts {allUsersCranes.length}</h2>
-
+      <p>{username}</p>
+      <p>
+        <strong>Cranes added: </strong>
+        {allUsersCranes.length}
+      </p>
       <Link to="/settings">
         <button>
-          <FontAwesomeIcon icon={faSlidersH} className="building-icon" />
+          {" "}
+          <img src={settings} className="NavBarIcons" alt="All cranes icon" />
         </button>
       </Link>
 

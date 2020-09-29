@@ -1,4 +1,4 @@
-.NavBarLinks {
+.navbar-links {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -20,7 +20,7 @@
   border-image-slice: 1;
 }
 
-.NavBarIcons {
+.navbar-icons {
   width: 30px;
   height: 30px;
 }

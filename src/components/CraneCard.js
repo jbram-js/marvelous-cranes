@@ -139,7 +139,7 @@ const CraneCard = ({
         {likeButton && (
           <button
             type="submit"
-            className="likeButton"
+            className="like-button"
             onClick={handleBothLikes}
           >
             <FontAwesomeIcon icon={faOutlineHeart} className="like-icon" />
@@ -172,7 +172,7 @@ const CraneCard = ({
           </button>
         )}
         <strong className="username">{craneUser}</strong>
-        {craneCaption}
+        <p>{craneCaption}</p>
       </div>
       {showInfo && (
         <div className="extra-info">
