@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 import CraneCard from "./CraneCard";
 import FilterAndSort from "./FilterAndSort";
 import NavBar from "./NavBar";
