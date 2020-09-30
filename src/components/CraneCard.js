@@ -29,7 +29,6 @@ const CraneCard = ({
   numberOfLikes,
   handleSetUserLike,
   handleRemoveUserLike,
-  username,
   userId,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
@@ -42,6 +41,7 @@ const CraneCard = ({
   const [userInfo, setUserInfo] = useState([]);
   const [likeButton, setLikeButton] = useState(true);
   const [unlikeButton, setUnlikeButton] = useState(false);
+  const [username, setUsername] = useState();
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -83,6 +83,15 @@ const CraneCard = ({
     setLikeButton(true);
     setUnlikeButton(false);
   };
+
+  useEffect(() => {
+    axios
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
+      .then(({ data }) => {
+        console.log(data);
+        setUsername(data.username);
+      });
+  });
 
   const handleGetUserInfo = () => {
     axios

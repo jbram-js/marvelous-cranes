@@ -9,7 +9,7 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import Rules from "./Rules";
-import ImageUpload from "./uploadImage"
+import ImageUpload2 from "./ImageUpload2";
 
 import "../styles/App.css";
 import Settings from "./Settings";
@@ -136,7 +136,7 @@ function App() {
           </Route>
 
           <Route exact path="/img">
-            <ImageUpload />
+            <ImageUpload2 />
           </Route>
         </Switch>
       </>

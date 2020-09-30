@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Slider } from "@material-ui/core";
 
 import axios from "axios";
 import "../styles/AddFunction.css";
 
 const AddFunction = ({ fields, setFields }) => {
+  const [craneSlider, setCraneSlider] = useState(0);
+  const [backgroundSlider, setBackgroundSlider] = useState(0);
+
   const handleAddCrane = (event) => {
     event.preventDefault();
     axios
@@ -23,6 +27,22 @@ const AddFunction = ({ fields, setFields }) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
 
+  const handleCRSlider = (e, value) => {
+    setCraneSlider(value);
+    setFields({
+      ...fields,
+      craneRate: craneSlider,
+    });
+  };
+
+  const handleBRSlider = (e, value) => {
+    setBackgroundSlider(value);
+    setFields({
+      ...fields,
+      craneBackgroundRate: backgroundSlider,
+    });
+  };
+
   return (
     <div className="add-function">
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
@@ -35,31 +55,32 @@ const AddFunction = ({ fields, setFields }) => {
           required
           autoComplete="off"
         />
+        <label htmlFor="craneRate">Crane Rate</label>
 
-        <input
+        <Slider
           id="craneRate"
           name="craneRate"
-          type="Number"
-          placeholder="Crane rating"
+          value={craneSlider}
           min={0}
           max={10}
           step={0.1}
-          value={fields.craneRate}
-          onChange={handleFieldChange}
-          required
+          marks={false}
+          valueLabelDisplay="auto"
+          onChange={handleCRSlider}
         />
 
-        <input
+        <label htmlFor="craneBackgroundRate">Background Rate</label>
+
+        <Slider
           id="craneBackgroundRate"
           name="craneBackgroundRate"
-          type="Number"
-          placeholder="Background rating"
+          value={backgroundSlider}
           min={0}
           max={10}
           step={0.1}
-          value={fields.craneBackgroundRate}
-          onChange={handleFieldChange}
-          required
+          marks={false}
+          valueLabelDisplay="auto"
+          onChange={handleBRSlider}
         />
 
         <input

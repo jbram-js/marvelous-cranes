@@ -26,7 +26,6 @@ const Cranes = ({ userLocation }) => {
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
   const [sortType, setSortType] = useState();
-  const [username, setUsername] = useState();
 
   // main request when cranes page loads
 
@@ -36,12 +35,6 @@ const Cranes = ({ userLocation }) => {
         .get("https://test-crane.herokuapp.com/all")
         .then(({ data }) => {
           setAllCranes(data);
-          axios
-            .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
-            .then(({ data }) => {
-              console.log(data);
-              setUsername(data.username);
-            });
         })
         .catch((error) => {
           console.log(error);
@@ -182,7 +175,6 @@ const Cranes = ({ userLocation }) => {
             numberOfLikes={cranes.craneLikes}
             handleSetUserLike={handleSetUserLike}
             handleRemoveUserLike={handleRemoveUserLike}
-            username={username}
             userId={cranes.userID}
           />
         </div>
