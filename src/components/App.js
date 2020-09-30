@@ -9,6 +9,7 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import Rules from "./Rules";
+import ImageUpload from "./uploadImage"
 
 import "../styles/App.css";
 import Settings from "./Settings";
@@ -132,6 +133,10 @@ function App() {
           </Route>
           <Route exact path="/settings" render={() => <Settings user={user} />}>
             {!user && <Redirect to="/" />}
+          </Route>
+
+          <Route exact path="/img">
+            <ImageUpload />
           </Route>
         </Switch>
       </>
