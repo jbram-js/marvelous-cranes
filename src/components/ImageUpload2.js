@@ -29,7 +29,7 @@ const ImageUpload2 = () => {
   const handleUpload = (ev) => {
     const file = fields.selectedFile;
     // Split the filename to get the name and type
-    const fileParts = this.uploadInput.files[0].name.split(".");
+    const fileParts = file.name.split(".");
     const fileName = fileParts[0];
     const fileType = fileParts[1];
     console.log(fileParts);
@@ -71,13 +71,7 @@ const ImageUpload2 = () => {
     <div className="imageUpload">
       <center>
         <h1>UPLOAD A FILE</h1>
-        <input
-          onChange={singleFileChangedHandler}
-          ref={(ref) => {
-            this.uploadInput = ref;
-          }}
-          type="file"
-        />
+        <input type="file" onChange={singleFileChangedHandler}/>
         <br />
         <button onClick={handleUpload}>UPLOAD</button>
       </center>
