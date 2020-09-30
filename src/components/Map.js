@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+
 import axios from "axios";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -22,12 +23,9 @@ import "../styles/Map.css";
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
-
-const mapHeight = window.innerHeight;
 
 const Map = () => {
   const [markers, setMarkers] = useState([]);
@@ -58,7 +56,7 @@ const Map = () => {
   }, []);
 
   const windowStyle = {
-    width: "100px",
+    width: "200px",
   };
 
   return (
@@ -109,8 +107,8 @@ const Map = () => {
                   {selectedMarker.craneUser}
                 </h3>
                 <p>{selectedMarker.craneCaption}</p>
-                <p>Crane rating- {selectedMarker.craneRate}</p>
-                <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
+                <p>Crane rating: {selectedMarker.craneRate}</p>
+                <p>Location rating: {selectedMarker.craneBackgroundRate}</p>
               </div>
             </InfoWindow>
           )}
