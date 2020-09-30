@@ -72,14 +72,14 @@ const CraneCard = ({
 
   const handleBothLikes = () => {
     handleSendLike(_id);
-    handleSetUserLike(craneUser);
+    handleSetUserLike(userId);
     setLikeButton(false);
     setUnlikeButton(true);
   };
 
   const handleRemoveBothLikes = () => {
     handleSendUnlike(_id);
-    handleRemoveUserLike(craneUser);
+    handleRemoveUserLike(userId);
     setLikeButton(true);
     setUnlikeButton(false);
   };

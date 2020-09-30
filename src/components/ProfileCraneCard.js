@@ -102,12 +102,18 @@ const ProfileCraneCard = ({
             className="show-more-button-profile"
             onClick={() => handleImageClick()}
           >
-            <FontAwesomeIcon icon={faAngleRight} />
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="show-more-button-profile"
+            />
           </button>
         )}
         {showLessButton && (
           <button className="show-more-button-profile" onClick={handleHideInfo}>
-            <FontAwesomeIcon icon={faAngleDown} />
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              className="show-more-button-profile"
+            />
           </button>
         )}
         <strong className="username">{username}</strong>

@@ -27,7 +27,6 @@ const mapContainerStyle = {
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const center = {
