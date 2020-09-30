@@ -42,7 +42,7 @@ const AddCrane = ({ user }) => {
       craneCaption: "",
       craneRate: "",
       craneBackgroundRate: "",
-      craneUser: user._id,
+      userID: user._id,
       craneDescription: "",
       markers: [{ lat: "", lng: "" }],
       dateCreated: new Date(),

@@ -37,8 +37,9 @@ const Cranes = ({ userLocation }) => {
         .then(({ data }) => {
           setAllCranes(data);
           axios
-            .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+            .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
             .then(({ data }) => {
+              console.log(data);
               setUsername(data.username);
             });
         })
@@ -182,7 +183,7 @@ const Cranes = ({ userLocation }) => {
             handleSetUserLike={handleSetUserLike}
             handleRemoveUserLike={handleRemoveUserLike}
             username={username}
-            userId={cranes.craneUser}
+            userId={cranes.userID}
           />
         </div>
       ))}

@@ -18,12 +18,12 @@ const Profile = ({ userId, userLocation }) => {
   useEffect(() => {
     axios
       .get("https://test-crane.herokuapp.com/craneUser", {
-        params: { craneUser: userId },
+        params: { userID: userId },
       })
       .then(({ data }) => {
         setAllUsersCranes(data);
         axios
-          .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+          .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
           .then(({ data }) => {
             setUsername(data.username);
           });
