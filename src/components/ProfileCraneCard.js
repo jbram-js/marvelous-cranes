@@ -21,6 +21,7 @@ const ProfileCraneCard = ({
   markers,
   numberOfLikes,
   userLocation,
+  username,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -115,7 +116,7 @@ const ProfileCraneCard = ({
             />
           </button>
         )}
-        <strong className="username">{craneUser}</strong>
+        <strong className="username">{username}</strong>
         <p>{craneCaption}</p>
       </div>
 

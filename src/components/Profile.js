@@ -11,16 +11,22 @@ import ProfileCraneCard from "./ProfileCraneCard";
 
 import "../styles/Profile.css";
 
-const Profile = ({ username, userLocation }) => {
+const Profile = ({ userId, userLocation }) => {
   const [allUsersCranes, setAllUsersCranes] = useState([]);
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     axios
       .get("https://test-crane.herokuapp.com/craneUser", {
-        params: { craneUser: username },
+        params: { craneUser: userId },
       })
       .then(({ data }) => {
         setAllUsersCranes(data);
+        axios
+          .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+          .then(({ data }) => {
+            setUsername(data.username);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -38,6 +44,7 @@ const Profile = ({ username, userLocation }) => {
           <div>
             <ProfileCraneCard
               {...cranes}
+              username={username}
               numberOfLikes={cranes.craneLikes}
               userLocation={userLocation}
               image={placeholder}

@@ -26,6 +26,7 @@ const Cranes = ({ userLocation }) => {
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
   const [sortType, setSortType] = useState();
+  const [username, setUsername] = useState();
 
   // main request when cranes page loads
 
@@ -35,6 +36,11 @@ const Cranes = ({ userLocation }) => {
         .get("https://test-crane.herokuapp.com/all")
         .then(({ data }) => {
           setAllCranes(data);
+          axios
+            .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+            .then(({ data }) => {
+              setUsername(data.username);
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -103,28 +109,32 @@ const Cranes = ({ userLocation }) => {
 
   // patch to state how many likes have been sent by a user
 
-  const handleSetUserLike = async (username) => {
+  const handleSetUserLike = async (userId) => {
     await axios
-      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
       .then(({ data }) => {
-        const likesSent = data[0].LikesSent;
+        const likesSent = data.LikesSent;
         const addedLike = likesSent + 1;
-        const userID = data[0]._id;
+        const userID = data._id;
         axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
-          LikesSent: addedLike,
+          params: {
+            LikesSent: addedLike,
+          },
         });
       });
   };
 
-  const handleRemoveUserLike = async (username) => {
+  const handleRemoveUserLike = async (userId) => {
     await axios
-      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
       .then(({ data }) => {
-        const likesSent = data[0].LikesSent;
+        const likesSent = data.LikesSent;
         const removedLike = likesSent - 1;
-        const userID = data[0]._id;
+        const userID = data._id;
         axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
-          LikesSent: removedLike,
+          params: {
+            LikesSent: removedLike,
+          },
         });
       });
   };
@@ -171,6 +181,8 @@ const Cranes = ({ userLocation }) => {
             numberOfLikes={cranes.craneLikes}
             handleSetUserLike={handleSetUserLike}
             handleRemoveUserLike={handleRemoveUserLike}
+            username={username}
+            userId={cranes.craneUser}
           />
         </div>
       ))}
