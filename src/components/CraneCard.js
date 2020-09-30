@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import moment from "moment";
@@ -29,6 +29,8 @@ const CraneCard = ({
   numberOfLikes,
   handleSetUserLike,
   handleRemoveUserLike,
+  username,
+  userId,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -86,13 +88,13 @@ const CraneCard = ({
     axios
       .get("https://test-crane.herokuapp.com/craneUser", {
         params: {
-          craneUser: JSON.stringify(craneUser),
+          craneUser: craneUser,
         },
       })
       .then(({ data }) => {
         setUsersCranes(data);
         return axios
-          .get(`https://test-crane.herokuapp.com/${craneUser}/user`)
+          .get(`https://test-crane.herokuapp.com/${userId}/users`)
           .then(({ data }) => {
             setUserInfo(data);
             setShowProfile(true);
@@ -170,7 +172,7 @@ const CraneCard = ({
             <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
           </button>
         )}
-        <strong className="username">{craneUser}</strong>
+        <strong className="username">{username}</strong>
         <p>{craneCaption}</p>
       </div>
       {showInfo && (
@@ -226,17 +228,13 @@ const CraneCard = ({
           },
         }}
       >
-        {userInfo.map((info) => (
-          <div>
-            <PopUpProfile
-              craneUser={craneUser}
-              memberSince={moment(info.MemberSince).format("Do MMM yy")}
-              addedCranes={usersCranes.length}
-              respects={info.LikesSent}
-              handleHideProfile={handleHideProfile}
-            />
-          </div>
-        ))}
+        <PopUpProfile
+          username={username}
+          memberSince={moment(userInfo.MemberSince).format("Do MMM yy")}
+          addedCranes={usersCranes.length}
+          respects={userInfo.LikesSent}
+          handleHideProfile={handleHideProfile}
+        />
       </Modal>
     </div>
   );

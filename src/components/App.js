@@ -114,7 +114,7 @@ function App() {
             exact
             path="/profile"
             render={() => (
-              <Profile username={user.username} userLocation={userLocation} />
+              <Profile userId={user._id} userLocation={userLocation} />
             )}
           >
             {!user && <Redirect to="/" />}

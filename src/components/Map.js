@@ -35,6 +35,7 @@ const center = { lat: 53.480759, lng: -2.242631 };
 const Map = () => {
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,11 @@ const Map = () => {
         .get("https://test-crane.herokuapp.com/cranes")
         .then(({ data }) => {
           setMarkers(data);
+          axios
+            .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+            .then(({ data }) => {
+              setUsername(data.username);
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -104,9 +110,7 @@ const Map = () => {
           >
             <div>
               <img src={logo} alt="logo" style={windowStyle}></img>
-              <h3 style={{ marginBottom: "-5px" }}>
-                {selectedMarker.craneUser}
-              </h3>
+              <h3 style={{ marginBottom: "-5px" }}>{username}</h3>
               <p>{selectedMarker.craneCaption}</p>
               <p>Crane rating- {selectedMarker.craneRate}</p>
               <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
