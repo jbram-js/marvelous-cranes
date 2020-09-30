@@ -20,17 +20,13 @@ import logo from "../icons/logo2.svg";
 
 import "../styles/Map.css";
 
-const mapContainerStyle = {
-  width: "100vw",
-  height: "70vh",
-};
-
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
+
+const mapHeight = window.innerHeight;
 
 const Map = () => {
   const [markers, setMarkers] = useState([]);
@@ -71,49 +67,54 @@ const Map = () => {
         overflow: "hidden",
       }}
     >
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={13}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        {markers.map((crane) => (
-          <Marker
-            position={{
-              lat: crane.markers[0].lat,
-              lng: crane.markers[0].lng,
-            }}
-            icon={{
-              url: "crane-marker.svg",
-              scaledSize: new window.google.maps.Size(35, 35),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 30),
-            }}
-            onClick={() => setSelectedMarker(crane)}
-          />
-        ))}
+      <div className="google-maps">
+        <GoogleMap
+          mapContainerStyle={{
+            height: "95vh",
+            width: "100vw",
+          }}
+          zoom={13}
+          center={center}
+          options={options}
+          onLoad={onMapLoad}
+        >
+          {markers.map((crane) => (
+            <Marker
+              position={{
+                lat: crane.markers[0].lat,
+                lng: crane.markers[0].lng,
+              }}
+              icon={{
+                url: "crane-marker.svg",
+                scaledSize: new window.google.maps.Size(35, 35),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 30),
+              }}
+              onClick={() => setSelectedMarker(crane)}
+            />
+          ))}
 
-        {selectedMarker && (
-          <InfoWindow
-            position={{
-              lat: selectedMarker.markers[0].lat,
-              lng: selectedMarker.markers[0].lng,
-            }}
-            onCloseClick={() => setSelectedMarker(null)}
-          >
-            <div>
-              <img src={logo} alt="logo" style={windowStyle}></img>
-              <h3 style={{ marginBottom: "-5px" }}>
-                {selectedMarker.craneUser}
-              </h3>
-              <p>{selectedMarker.craneCaption}</p>
-              <p>Crane rating- {selectedMarker.craneRate}</p>
-              <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
-            </div>
-          </InfoWindow>
-        )}
-      </GoogleMap>
+          {selectedMarker && (
+            <InfoWindow
+              position={{
+                lat: selectedMarker.markers[0].lat,
+                lng: selectedMarker.markers[0].lng,
+              }}
+              onCloseClick={() => setSelectedMarker(null)}
+            >
+              <div>
+                <img src={logo} alt="logo" style={windowStyle}></img>
+                <h3 style={{ marginBottom: "-5px" }}>
+                  {selectedMarker.craneUser}
+                </h3>
+                <p>{selectedMarker.craneCaption}</p>
+                <p>Crane rating- {selectedMarker.craneRate}</p>
+                <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      </div>
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <Header />
