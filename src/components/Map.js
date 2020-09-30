@@ -22,6 +22,7 @@ import "../styles/Map.css";
 
 const options = {
   disableDefaultUI: true,
+  zoomControl: true,
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
