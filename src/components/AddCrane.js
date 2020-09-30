@@ -98,7 +98,16 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
-
+      {markers.length !== 1 ? (
+        <p>Locate the crane using the map above.</p>
+      ) : (
+        console.log(markers)
+      )}
+      {markers.length === 1 ? (
+        <p>Now enter the cranes details below.</p>
+      ) : (
+        console.log(markers)
+      )}
       {<AddFunction fields={fields} setFields={setFields} />}
       <Header />
       <NavBar />

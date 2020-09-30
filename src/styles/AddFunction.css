@@ -44,14 +44,14 @@
   margin-top: 10px;
   color: #fff;
   font-size: 20px;
-  background: #666666;
 }
 
 .map-area p {
   text-align: center;
   font-style: italic;
   font-size: 18px;
+  color: #f83600;
   width: 90vw;
   line-height: 35px;
-  margin: 2% 0 4% 5%;
+  margin: 4% 0 4% 5%;
 }

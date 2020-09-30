@@ -116,7 +116,7 @@ const ProfileCraneCard = ({
             />
           </button>
         )}
-        <strong className="username">{username}</strong>
+        <strong className="username-profile">{username}</strong>
         <p>{craneCaption}</p>
       </div>
 

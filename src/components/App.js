@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import LogIn from "./LogIn";
@@ -29,6 +29,16 @@ function App() {
 
   const history = useHistory();
   //const name = window.localStorage.getItem("login"); //temporary until cookies are implemented
+
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,6 +84,7 @@ function App() {
 
   return (
     <div className="App">
+      <ScrollToTop />
       <>
         <Switch>
           <Route

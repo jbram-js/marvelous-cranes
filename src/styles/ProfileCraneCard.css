@@ -6,12 +6,6 @@
   line-height: 40px;
 }
 
-.crane-card-profile button {
-  background: none;
-  border: none;
-  color: black;
-}
-
 .card-image-profile {
   object-fit: cover;
   width: 100vw;
@@ -29,11 +23,12 @@
   margin: 0 0 2% 0;
   text-align: start;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .basic-info-profile p {
   margin: 0 0 2% 0;
-  padding-left: 10px;
+  padding-left: 20px;
   display: flex;
   text-align: start;
   color: black;
@@ -41,8 +36,8 @@
 
 .show-more-button-profile {
   font-size: 18px;
+  position: relative;
 }
-
 .extra-info-profile {
   text-align: start;
   width: 100vw;

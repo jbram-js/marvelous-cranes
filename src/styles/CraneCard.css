@@ -6,12 +6,6 @@
   line-height: 40px;
 }
 
-.crane-card button {
-  background: none;
-  border: none;
-  color: black;
-}
-
 .card-image {
   object-fit: cover;
   width: 100vw;
@@ -29,16 +23,20 @@
   margin: 0 0 2% 0;
   text-align: start;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .basic-info p {
-  margin: 0 0 0 0;
-  padding-left: 10px;
+  margin: 0 0 2% 0;
+  padding-left: 20px;
+  display: flex;
+  text-align: start;
   color: black;
 }
 
 .show-more-button {
   font-size: 18px;
+  position: relative;
 }
 
 .extra-info {
