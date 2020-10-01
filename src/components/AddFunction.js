@@ -168,6 +168,7 @@ const AddFunction = ({ fields, setFields }) => {
         />
 
         <button
+          style={{ outline: "none" }}
           type="submit"
           disabled={fields.markers.length !== 1}
           className="add-crane-button"

@@ -93,7 +93,11 @@ const Register = ({ setUserLoggedIn }) => {
           onChange={handleChange}
         />
 
-        <button type="submit" className="register-button">
+        <button
+          style={{ outline: "none" }}
+          type="submit"
+          className="register-button"
+        >
           REGISTER
         </button>
       </form>

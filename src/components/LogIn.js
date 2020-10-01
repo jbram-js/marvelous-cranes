@@ -33,7 +33,11 @@ const LogIn = ({ handleSubmit, handleInput, value }) => {
           onChange={handleInput}
           value={value.password}
         />
-        <button type="submit" className="login-button">
+        <button
+          style={{ outline: "none" }}
+          type="submit"
+          className="login-button"
+        >
           LOGIN
         </button>
       </form>

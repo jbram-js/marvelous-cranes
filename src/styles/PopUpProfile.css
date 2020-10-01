@@ -8,9 +8,9 @@
     rgba(249, 212, 35, 1)
   );
   border-image-slice: 1;
-  height: 30%;
-  width: 270px;
-  margin: 20px 0px 0px 0px;
+  height: 40%;
+  width: 80%;
+  margin: 0 0 0 0;
   padding: 10px;
   text-align: center;
   font-size: 18px;
@@ -22,7 +22,7 @@
 }
 
 .popup-username {
-  font-size: 36px;
+  font-size: 30px;
   background: -webkit-linear-gradient(
     45deg,
     rgba(248, 54, 0, 1),
@@ -35,7 +35,7 @@
 }
 
 .popup-profile button {
-  margin: 5% 0 0 0;
+  margin: 5% 0 5% 0;
   text-align: center;
   font-size: 16px;
   width: 40vw;
