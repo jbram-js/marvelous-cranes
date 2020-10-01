@@ -213,6 +213,7 @@ const CraneCard = ({
       {showMap && <ViewOnMap markers={markers} />}
 
       <Modal
+        className="modal"
         isOpen={showProfile}
         style={{
           overlay: {
@@ -231,8 +232,6 @@ const CraneCard = ({
             bottom: "0px",
             background: "none",
             overflow: "auto",
-            WebkitOverflowScrolling: "touch",
-            outline: "none",
           },
         }}
       >
