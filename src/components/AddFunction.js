@@ -18,21 +18,10 @@ const AddFunction = ({ fields, setFields }) => {
   const [url, setUrl] = useState("");
   const [value, setValue] = useState(initialState.fields);
 
-  const handleAddCrane = async (event) => {
+  /*const handleAddCrane = async (event) => {
     event.preventDefault();
     handleUpload();
-    await axios
-      .post("https://test-crane.herokuapp.com/addCrane", fields)
-      .then((response) => {
-        console.log(response);
-
-        alert(` ${response.data.craneCaption} successfully added`);
-      })
-      .catch((err) => {
-        alert(` ${fields.craneCaption} could not be added - check console`);
-        console.log(err);
-      });
-  };
+  };*/
 
   const handleFieldChange = (event) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
@@ -69,16 +58,18 @@ const AddFunction = ({ fields, setFields }) => {
 
   // Perform the upload
 
-  const handleUpload = (ev) => {
+  const handleUpload = async (ev) => {
+    ev.preventDefault();
     const file = value.selectedFile;
     // Split the filename to get the name and type
     const fileParts = file.name.split(".");
-    const fileName = fileParts[0];
     const fileType = fileParts[1];
-    console.log(fileParts);
-    axios
+    const fileName = fileParts[0]+ Date.now() + "." + fileType;
+    const url = `https://cranebucket.s3.eu-west-2.amazonaws.com/${fileName}`
+
+    await axios
       .post("https://test-crane.herokuapp.com/sign_s3", {
-        fileName: fileName + Date.now() + "." + fileType,
+        fileName: fileName,
         fileType: fileType,
       })
       .then((response) => {
@@ -87,6 +78,18 @@ const AddFunction = ({ fields, setFields }) => {
         const url = returnData.url;
         setUrl(url);
         console.log("Recieved a signed request " + signedRequest);
+
+          axios
+          .post("https://test-crane.herokuapp.com/addCrane",  {...fields, image: url})
+          .then((response) => {
+            console.log(response);
+    
+            alert(` ${response.data.craneCaption} successfully added`);
+          })
+          .catch((err) => {
+            alert(` ${fields.craneCaption} could not be added - check console`);
+            console.log(err);
+          });
 
         // Put the fileType in the headers for the upload
         const options = {
@@ -112,7 +115,7 @@ const AddFunction = ({ fields, setFields }) => {
 
   return (
     <div className="add-function">
-      <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
+      <form id="addForm" className="add-crane-form" onSubmit={handleUpload}>
         <input type="file" onChange={singleFileChangedHandler} />
         <input
           id="craneCaption"

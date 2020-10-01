@@ -166,7 +166,7 @@ const Cranes = ({ userLocation }) => {
         <div className="crane-card">
           <CraneCard
             {...cranes}
-            image={placeholder}
+            image={cranes.image}
             markers={cranes.markers}
             userLocation={userLocation}
             handleSendLike={handleSendLike}
