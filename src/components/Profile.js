@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
-import Settings from "./Settings";
+import settings from "../icons/settings.svg";
 
 import placeholder from "../images/cranesafety.jpg";
 import ProfileCraneCard from "./ProfileCraneCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSlidersH } from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/Profile.css";
 
-const Profile = ({ username, userLocation }) => {
+const Profile = ({ userId, userLocation }) => {
   const [allUsersCranes, setAllUsersCranes] = useState([]);
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     axios
       .get("https://test-crane.herokuapp.com/craneUser", {
-        params: { craneUser: username },
+        params: { userID: userId },
       })
       .then(({ data }) => {
         setAllUsersCranes(data);
+        axios
+          .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
+          .then(({ data }) => {
+            setUsername(data.username);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -31,20 +35,17 @@ const Profile = ({ username, userLocation }) => {
 
   return (
     <div className="Profile">
-      <h1>{username}</h1>
-      <h2>Posts {allUsersCranes.length}</h2>
-
-      <Link to="/settings">
-        <button>
-          <FontAwesomeIcon icon={faSlidersH} className="building-icon" />
-        </button>
-      </Link>
-
+      <p className="cranes-added">
+        <strong>Cranes added: </strong>
+        {allUsersCranes.length}
+      </p>
       <div className="all-user-results">
-        {allUsersCranes.map((crane) => (
+        {allUsersCranes.map((cranes) => (
           <div>
             <ProfileCraneCard
-              {...crane}
+              {...cranes}
+              username={username}
+              numberOfLikes={cranes.craneLikes}
               userLocation={userLocation}
               image={placeholder}
             />

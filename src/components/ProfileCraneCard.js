@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import ViewOnMap from "./ViewOnMap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleRight,
+  faAngleDown,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
 
 import "../styles/ProfileCraneCard.css";
 
@@ -13,22 +19,27 @@ const ProfileCraneCard = ({
   craneBackgroundRate,
   craneDescription,
   markers,
+  numberOfLikes,
   userLocation,
-  handleSendLike,
+  username,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
+  const [showLessButton, setShowLessButton] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [showMapButton, setShowMapButton] = useState(true);
 
   const handleImageClick = () => {
     setShowInfo(true);
     setShowMoreButton(false);
+    setShowLessButton(true);
   };
 
   const handleHideInfo = () => {
     setShowInfo(false);
     setShowMoreButton(true);
+    setShowLessButton(false);
+    setShowMap(false);
   };
 
   const handleShowViewOnMap = () => {
@@ -76,47 +87,63 @@ const ProfileCraneCard = ({
   distances();
 
   return (
-    <div className="CraneCard">
-      <img className="card-image" src={image} alt="crane"></img>
-      <div className="username">{craneUser}</div>
-      <div>{craneCaption}</div>
+    <div className="crane-card-profile">
+      <img className="card-image-profile" src={image} alt="crane"></img>
 
-      {showMoreButton && (
-        <button
-          type="submit"
-          className="showMoreButton"
-          onClick={() => handleImageClick()}
-        >
-          See more info
-        </button>
-      )}
+      <div className="likes-profile">
+        <FontAwesomeIcon icon={faHeart} className="like-icon-profile" />
+
+        {numberOfLikes}
+      </div>
+
+      <div className="basic-info-profile">
+        {showMoreButton && (
+          <button
+            className="show-more-button-profile"
+            onClick={() => handleImageClick()}
+          >
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="show-more-button-profile"
+            />
+          </button>
+        )}
+        {showLessButton && (
+          <button className="show-more-button-profile" onClick={handleHideInfo}>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              className="show-more-button-profile"
+            />
+          </button>
+        )}
+        <strong className="username-profile">{username}</strong>
+        <p>{craneCaption}</p>
+      </div>
 
       {showInfo && (
-        <div className="extraInfo">
-          <div className="extraInfo-items">CRANE RATE- {craneRate}</div>
-          <div className="extraInfo-items">
-            BACKDROP RATE- {craneBackgroundRate}
+        <div className="extra-info-profile">
+          <div className="extra-info-items-profile">
+            <strong>Crane Rate:</strong> {craneRate}
+            <br />
+            <strong>Location Rate:</strong> {craneBackgroundRate}
+            <br />
+            <strong>Comment:</strong> {craneDescription}
+            {userLocation.latitude === "" && userLocation.longitude === "" ? (
+              <p className="crane-distance-profile">
+                Turn on location settings to see distance from you
+              </p>
+            ) : (
+              <p className="crane-distance-profile">
+                This crane is <strong>{distances()} miles</strong> from you
+              </p>
+            )}
           </div>
-          <div className="extraInfo-items">COMMENT- {craneDescription}</div>
-          {userLocation.latitude === "" && userLocation.longitude === "" ? (
-            <div>Turn on location settings to see distance from you</div>
-          ) : (
-            <div>This crane is {distances()} miles from you</div>
-          )}
           {showMapButton && (
             <button type="submit" onClick={handleShowViewOnMap}>
               VIEW ON MAP
             </button>
           )}
           {showMap && <button onClick={handleHideViewOnMap}>HIDE MAP</button>}
-          <button
-            type="submit"
-            className="likeButton"
-            onClick={() => handleSendLike(_id)}
-          >
-            Like
-          </button>
-          <button onClick={handleHideInfo}>Show less</button>
         </div>
       )}
 

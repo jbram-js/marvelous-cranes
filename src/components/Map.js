@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+
 import axios from "axios";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -20,14 +21,8 @@ import logo from "../icons/logo2.svg";
 
 import "../styles/Map.css";
 
-const mapContainerStyle = {
-  width: "100vw",
-  height: "70vh",
-};
-
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const center = { lat: 53.480759, lng: -2.242631 };
@@ -35,6 +30,7 @@ const center = { lat: 53.480759, lng: -2.242631 };
 const Map = () => {
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [username, setUsername] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +38,11 @@ const Map = () => {
         .get("https://test-crane.herokuapp.com/cranes")
         .then(({ data }) => {
           setMarkers(data);
+          axios
+            .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+            .then(({ data }) => {
+              setUsername(data.username);
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -61,7 +62,7 @@ const Map = () => {
   }, []);
 
   const windowStyle = {
-    width: "100px",
+    width: "200px",
   };
 
   return (
@@ -71,49 +72,52 @@ const Map = () => {
         overflow: "hidden",
       }}
     >
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={13}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        {markers.map((crane) => (
-          <Marker
-            position={{
-              lat: crane.markers[0].lat,
-              lng: crane.markers[0].lng,
-            }}
-            icon={{
-              url: "crane-marker.svg",
-              scaledSize: new window.google.maps.Size(35, 35),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 30),
-            }}
-            onClick={() => setSelectedMarker(crane)}
-          />
-        ))}
+      <div className="google-maps">
+        <GoogleMap
+          mapContainerStyle={{
+            height: "95vh",
+            width: "100vw",
+          }}
+          zoom={13}
+          center={center}
+          options={options}
+          onLoad={onMapLoad}
+        >
+          {markers.map((crane) => (
+            <Marker
+              position={{
+                lat: crane.markers[0].lat,
+                lng: crane.markers[0].lng,
+              }}
+              icon={{
+                url: "crane-marker.svg",
+                scaledSize: new window.google.maps.Size(35, 35),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 30),
+              }}
+              onClick={() => setSelectedMarker(crane)}
+            />
+          ))}
 
-        {selectedMarker && (
-          <InfoWindow
-            position={{
-              lat: selectedMarker.markers[0].lat,
-              lng: selectedMarker.markers[0].lng,
-            }}
-            onCloseClick={() => setSelectedMarker(null)}
-          >
-            <div>
-              <img src={logo} alt="logo" style={windowStyle}></img>
-              <h3 style={{ marginBottom: "-5px" }}>
-                {selectedMarker.craneUser}
-              </h3>
-              <p>{selectedMarker.craneCaption}</p>
-              <p>Crane rating- {selectedMarker.craneRate}</p>
-              <p>Backdrop rating- {selectedMarker.craneBackgroundRate}</p>
-            </div>
-          </InfoWindow>
-        )}
-      </GoogleMap>
+          {selectedMarker && (
+            <InfoWindow
+              position={{
+                lat: selectedMarker.markers[0].lat,
+                lng: selectedMarker.markers[0].lng,
+              }}
+              onCloseClick={() => setSelectedMarker(null)}
+            >
+              <div>
+                <img src={logo} alt="logo" style={windowStyle}></img>
+                <h3 style={{ marginBottom: "-5px" }}>{username}</h3>
+                <p>{selectedMarker.craneCaption}</p>
+                <p>Crane rating: {selectedMarker.craneRate}</p>
+                <p>Location rating: {selectedMarker.craneBackgroundRate}</p>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      </div>
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
       <Header />

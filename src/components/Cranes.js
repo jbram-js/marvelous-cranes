@@ -24,6 +24,7 @@ const Cranes = ({ userLocation }) => {
   const [sortFunction, setSortFunction] = useState();
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
+  const [sortType, setSortType] = useState();
 
   // main request when cranes page loads
 
@@ -44,10 +45,12 @@ const Cranes = ({ userLocation }) => {
   // request that handles sort and filters
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/all?sort={${sortFunction}}`)
+      .get(
+        `https://test-crane.herokuapp.com/cranes?${sortFunction}=${sortType}`
+      )
       .then(({ data }) => setAllCranes(data))
       .catch((err) => console.error(err));
-  }, [sortFunction]);
+  }, [sortFunction, sortType]);
 
   // patch request to send a like and unlike
 
@@ -99,28 +102,32 @@ const Cranes = ({ userLocation }) => {
 
   // patch to state how many likes have been sent by a user
 
-  const handleSetUserLike = async (username) => {
+  const handleSetUserLike = async (userId) => {
     await axios
-      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
       .then(({ data }) => {
-        const likesSent = data[0].LikesSent;
+        const likesSent = data.LikesSent;
         const addedLike = likesSent + 1;
-        const userID = data[0]._id;
+        const userID = data._id;
         axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
-          LikesSent: addedLike,
+          params: {
+            LikesSent: addedLike,
+          },
         });
       });
   };
 
-  const handleRemoveUserLike = async (username) => {
+  const handleRemoveUserLike = async (userId) => {
     await axios
-      .get(`https://test-crane.herokuapp.com/${username}/user`)
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
       .then(({ data }) => {
-        const likesSent = data[0].LikesSent;
+        const likesSent = data.LikesSent;
         const removedLike = likesSent - 1;
-        const userID = data[0]._id;
+        const userID = data._id;
         axios.patch(`https://test-crane.herokuapp.com/updateUsers/${userID}`, {
-          LikesSent: removedLike,
+          params: {
+            LikesSent: removedLike,
+          },
         });
       });
   };
@@ -152,6 +159,7 @@ const Cranes = ({ userLocation }) => {
           setSortFunction={setSortFunction}
           filterValue={filterValue}
           setFilterValue={setFilterValue}
+          setSortType={setSortType}
         />
       </div>
       {allCranes.map((cranes) => (
@@ -166,6 +174,7 @@ const Cranes = ({ userLocation }) => {
             numberOfLikes={cranes.craneLikes}
             handleSetUserLike={handleSetUserLike}
             handleRemoveUserLike={handleRemoveUserLike}
+            userId={cranes.userID}
           />
         </div>
       ))}

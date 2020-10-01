@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import NavBar from "./NavBar";
-import Header from "./Header";
+import { Slider } from "@material-ui/core";
+
 import axios from "axios";
 import "../styles/AddFunction.css";
 
+const initialState = {
+  fields: {
+    selectedFile: null,
+  },
+};
+
 const AddFunction = ({ fields, setFields }) => {
-  const handleAddCrane = (event) => {
+  const [craneSlider, setCraneSlider] = useState(0);
+  const [backgroundSlider, setBackgroundSlider] = useState(0);
+  const [success, setSuccess] = useState(false);
+  const [url, setUrl] = useState("");
+  const [value, setValue] = useState(initialState.fields);
+
+  const handleAddCrane = async (event) => {
     event.preventDefault();
-    axios
+    handleUpload();
+    await axios
       .post("https://test-crane.herokuapp.com/addCrane", fields)
       .then((response) => {
         console.log(response);
+
         alert(` ${response.data.craneCaption} successfully added`);
       })
       .catch((err) => {
@@ -24,12 +38,82 @@ const AddFunction = ({ fields, setFields }) => {
     setFields({ ...fields, [event.target.name]: event.target.value });
   };
 
+  const handleCRSlider = (e, value) => {
+    setCraneSlider(value);
+    setFields({
+      ...fields,
+      craneRate: craneSlider,
+    });
+  };
+
+  const handleBRSlider = (e, value) => {
+    setBackgroundSlider(value);
+    setFields({
+      ...fields,
+      craneBackgroundRate: backgroundSlider,
+    });
+  };
+
+  // ImageUpload logic
+
+  const handleChange = (ev) => {
+    setSuccess(false);
+    setUrl("");
+  };
+
+  const singleFileChangedHandler = (event) => {
+    setValue({
+      selectedFile: event.target.files[0],
+    });
+  };
+
+  // Perform the upload
+
+  const handleUpload = (ev) => {
+    const file = value.selectedFile;
+    // Split the filename to get the name and type
+    const fileParts = file.name.split(".");
+    const fileName = fileParts[0];
+    const fileType = fileParts[1];
+    console.log(fileParts);
+    axios
+      .post("https://test-crane.herokuapp.com/sign_s3", {
+        fileName: fileName + Date.now() + "." + fileType,
+        fileType: fileType,
+      })
+      .then((response) => {
+        const returnData = response.data.data.returnData;
+        const signedRequest = returnData.signedRequest;
+        const url = returnData.url;
+        setUrl(url);
+        console.log("Recieved a signed request " + signedRequest);
+
+        // Put the fileType in the headers for the upload
+        const options = {
+          headers: {
+            "Content-Type": fileType,
+          },
+        };
+
+        axios
+          .put(signedRequest, file, options)
+          .then((result) => {
+            console.log("Response from s3");
+            setSuccess(true);
+          })
+          .catch((error) => {
+            console.log("ERROR " + JSON.stringify(error));
+          });
+      })
+      .catch((error) => {
+        console.log(JSON.stringify(error));
+      });
+  };
+
   return (
     <div className="add-function">
-      <p className="add-text">
-        First locate the crane on the map above then fill in the details below!
-      </p>
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
+        <input type="file" onChange={singleFileChangedHandler} />
         <input
           id="craneCaption"
           name="craneCaption"
@@ -39,31 +123,32 @@ const AddFunction = ({ fields, setFields }) => {
           required
           autoComplete="off"
         />
+        <label htmlFor="craneRate">Crane Rate</label>
 
-        <input
+        <Slider
           id="craneRate"
           name="craneRate"
-          type="Number"
-          placeholder="Crane rating"
+          value={craneSlider}
           min={0}
           max={10}
           step={0.1}
-          value={fields.craneRate}
-          onChange={handleFieldChange}
-          required
+          marks={false}
+          valueLabelDisplay="auto"
+          onChange={handleCRSlider}
         />
 
-        <input
+        <label htmlFor="craneBackgroundRate">Background Rate</label>
+
+        <Slider
           id="craneBackgroundRate"
           name="craneBackgroundRate"
-          type="Number"
-          placeholder="Background rating"
+          value={backgroundSlider}
           min={0}
           max={10}
           step={0.1}
-          value={fields.craneBackgroundRate}
-          onChange={handleFieldChange}
-          required
+          marks={false}
+          valueLabelDisplay="auto"
+          onChange={handleBRSlider}
         />
 
         <input
@@ -77,12 +162,14 @@ const AddFunction = ({ fields, setFields }) => {
           autoComplete="off"
         />
 
-        <button type="submit" className="add-crane-button">
+        <button
+          type="submit"
+          disabled={fields.markers.length !== 1}
+          className="add-crane-button"
+        >
           ADD CRANE
         </button>
       </form>
-      <Header />
-      <NavBar />
     </div>
   );
 };

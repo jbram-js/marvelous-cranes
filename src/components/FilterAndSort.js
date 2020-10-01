@@ -1,22 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Slider } from "@material-ui/core";
-
-import qs from "qs";
 
 const FilterAndSort = ({
   allCranes,
-  handleCraneRateFilter,
-  handleBackgroundRateFilter,
   setSortFunction,
-  filterValue,
   setFilterValue,
-  handleFiltering,
+  setSortType,
 }) => {
-  const history = useHistory();
-  const { search } = useLocation();
-
   const [sortCranes, setSortCranes] = useState(false);
   const [filterCranes, setFilterCranes] = useState(false);
   const [showSortButton, setShowSortButton] = useState(true);
@@ -25,20 +17,6 @@ const FilterAndSort = ({
   const [backgroundRateRange, setBackgroundRateRange] = useState([0, 10]);
 
   //Sort functionality
-  const buildQueryString = (operation, valueObj) => {
-    const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
-    const newQueryParams = {
-      ...currentQueryParams,
-      [operation]: JSON.stringify({
-        ...JSON.parse(currentQueryParams[operation] || "{}"),
-        ...valueObj,
-      }),
-    };
-    return qs.stringify(newQueryParams, {
-      addQueryPrefix: true,
-      encode: false,
-    });
-  };
 
   const handleSortCranes = () => {
     setSortCranes(true);
@@ -90,9 +68,7 @@ const FilterAndSort = ({
           <li>
             <Link
               className="links"
-              onClick={() =>
-                setSortFunction(buildQueryString("sort", { craneRate: -1 }))
-              }
+              onClick={() => (setSortFunction("craneRate"), setSortType(-1))}
             >
               <strong>Crane Rate:</strong> Descending
             </Link>
@@ -100,9 +76,7 @@ const FilterAndSort = ({
           <li>
             <Link
               className="links"
-              onClick={() =>
-                setSortFunction(buildQueryString("sort", { craneRate: 1 }))
-              }
+              onClick={() => (setSortFunction("craneRate"), setSortType(1))}
             >
               <strong>Crane Rate:</strong> Ascending
             </Link>
@@ -110,7 +84,9 @@ const FilterAndSort = ({
           <li>
             <Link
               className="links"
-              to={buildQueryString("sort", { craneBackgroundRate: -1 })}
+              onClick={() => (
+                setSortFunction("craneBackgroundRate"), setSortType(-1)
+              )}
             >
               <strong>Location Rate:</strong> Descending
             </Link>
@@ -118,13 +94,12 @@ const FilterAndSort = ({
           <li>
             <Link
               className="links"
-              onClick={() => setSortFunction({ craneBackgroundRate: 1 })}
+              onClick={() => (
+                setSortFunction("craneBackgroundRate"), setSortType(1)
+              )}
             >
               <strong>Location Rate:</strong> Ascending
             </Link>
-          </li>
-          <li>
-            <strong>Number of cranes:</strong> {allCranes.length}
           </li>
         </ul>
       )}

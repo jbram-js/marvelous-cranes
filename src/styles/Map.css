@@ -1,7 +1,11 @@
-.map {
-  overflow-y: hidden;
+.google-maps {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: fixed;
 }
-
 .search {
   position: fixed;
   margin-left: 105px;

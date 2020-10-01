@@ -1,3 +1,9 @@
-.all-user-results {
-  margin-top: 60px;
+.cranes-added {
+  margin: 5px 0 5px 0;
+  font-size: 18px;
+}
+
+button {
+  background: none;
+  border: none;
 }

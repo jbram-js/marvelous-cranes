@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-
+import NavBar from "./NavBar";
+import Header from "./Header";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -26,7 +27,6 @@ const mapContainerStyle = {
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true,
 };
 
 const center = {
@@ -36,14 +36,13 @@ const center = {
 
 const AddCrane = ({ user }) => {
   const [markers, setMarkers] = useState([]);
-  const [showAddFunction, setShowAddFunction] = useState(false);
 
   const initialState = {
     fields: {
       craneCaption: "",
       craneRate: "",
       craneBackgroundRate: "",
-      craneUser: user._id,
+      userID: user._id,
       craneDescription: "",
       markers: [{ lat: "", lng: "" }],
       dateCreated: new Date(),
@@ -99,14 +98,19 @@ const AddCrane = ({ user }) => {
           />
         ))}
       </GoogleMap>
-
-      {markers.length === 1 ? (
-        <button onClick={() => setShowAddFunction(true)}>CONTINUE</button>
+      {markers.length !== 1 ? (
+        <p>Locate the crane using the map above.</p>
       ) : (
         console.log(markers)
       )}
-
-      {showAddFunction && <AddFunction fields={fields} setFields={setFields} />}
+      {markers.length === 1 ? (
+        <p>Now enter the cranes details below.</p>
+      ) : (
+        console.log(markers)
+      )}
+      {<AddFunction fields={fields} setFields={setFields} />}
+      <Header />
+      <NavBar />
     </div>
   );
 };

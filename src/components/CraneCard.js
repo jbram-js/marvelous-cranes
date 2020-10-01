@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import moment from "moment";
@@ -29,6 +29,7 @@ const CraneCard = ({
   numberOfLikes,
   handleSetUserLike,
   handleRemoveUserLike,
+  userId,
 }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(true);
@@ -40,6 +41,7 @@ const CraneCard = ({
   const [userInfo, setUserInfo] = useState([]);
   const [likeButton, setLikeButton] = useState(true);
   const [unlikeButton, setUnlikeButton] = useState(false);
+  const [username, setUsername] = useState();
 
   const handleImageClick = () => {
     setShowInfo(true);
@@ -70,29 +72,37 @@ const CraneCard = ({
 
   const handleBothLikes = () => {
     handleSendLike(_id);
-    handleSetUserLike(craneUser);
+    handleSetUserLike(userId);
     setLikeButton(false);
     setUnlikeButton(true);
   };
 
   const handleRemoveBothLikes = () => {
     handleSendUnlike(_id);
-    handleRemoveUserLike(craneUser);
+    handleRemoveUserLike(userId);
     setLikeButton(true);
     setUnlikeButton(false);
   };
+
+  useEffect(() => {
+    axios
+      .get(`https://test-crane.herokuapp.com/${userId}/users`)
+      .then(({ data }) => {
+        setUsername(data.username);
+      });
+  });
 
   const handleGetUserInfo = () => {
     axios
       .get("https://test-crane.herokuapp.com/craneUser", {
         params: {
-          craneUser: JSON.stringify(craneUser),
+          userID: userId,
         },
       })
       .then(({ data }) => {
         setUsersCranes(data);
         return axios
-          .get(`https://test-crane.herokuapp.com/${craneUser}/user`)
+          .get(`https://test-crane.herokuapp.com/${userId}/users`)
           .then(({ data }) => {
             setUserInfo(data);
             setShowProfile(true);
@@ -139,7 +149,7 @@ const CraneCard = ({
         {likeButton && (
           <button
             type="submit"
-            className="likeButton"
+            className="like-button"
             onClick={handleBothLikes}
           >
             <FontAwesomeIcon icon={faOutlineHeart} className="like-icon" />
@@ -159,20 +169,19 @@ const CraneCard = ({
       <div className="basic-info" onClick={handleGetUserInfo}>
         {showMoreButton && (
           <button
-            type="submit"
             className="show-more-button"
             onClick={() => handleImageClick()}
           >
-            <FontAwesomeIcon icon={faAngleRight} className="building-icon" />
+            <FontAwesomeIcon icon={faAngleRight} className="show-more-button" />
           </button>
         )}
         {showLessButton && (
-          <button onClick={handleHideInfo}>
-            <FontAwesomeIcon icon={faAngleDown} className="building-icon" />
+          <button className="show-more-button" onClick={handleHideInfo}>
+            <FontAwesomeIcon icon={faAngleDown} className="show-more-button" />
           </button>
         )}
-        <strong className="username">{craneUser}</strong>
-        {craneCaption}
+        <strong className="username">{username}</strong>
+        <p>{craneCaption}</p>
       </div>
       {showInfo && (
         <div className="extra-info">
@@ -227,17 +236,13 @@ const CraneCard = ({
           },
         }}
       >
-        {userInfo.map((info) => (
-          <div>
-            <PopUpProfile
-              craneUser={craneUser}
-              memberSince={moment(info.MemberSince).format("Do MMM yy")}
-              addedCranes={usersCranes.length}
-              respects={info.LikesSent}
-              handleHideProfile={handleHideProfile}
-            />
-          </div>
-        ))}
+        <PopUpProfile
+          username={username}
+          memberSince={moment(userInfo.MemberSince).format("Do MMM yy")}
+          addedCranes={usersCranes.length}
+          respects={userInfo.LikesSent}
+          handleHideProfile={handleHideProfile}
+        />
       </Modal>
     </div>
   );
