@@ -88,7 +88,6 @@ const CraneCard = ({
     axios
       .get(`https://test-crane.herokuapp.com/${userId}/users`)
       .then(({ data }) => {
-        console.log(data);
         setUsername(data.username);
       });
   });
