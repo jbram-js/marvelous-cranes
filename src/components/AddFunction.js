@@ -12,13 +12,14 @@ const AddFunction = ({ fields, setFields }) => {
   const [backgroundSlider, setBackgroundSlider] = useState(0);
   const [sendImage, setSendImage] = useState(false);
 
-  const handleAddCrane = (event) => {
+  const handleAddCrane = async (event) => {
     event.preventDefault();
     setSendImage(true);
-    axios
+    await axios
       .post("https://test-crane.herokuapp.com/addCrane", fields)
       .then((response) => {
         console.log(response);
+
         alert(` ${response.data.craneCaption} successfully added`);
       })
       .catch((err) => {
@@ -49,8 +50,8 @@ const AddFunction = ({ fields, setFields }) => {
 
   return (
     <div className="add-function">
+      <ImageUpload sendImage={sendImage} setSendImage={setSendImage} />
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
-        <ImageUpload sendImage={sendImage} setSendImage={setSendImage} />
         <input
           id="craneCaption"
           name="craneCaption"
