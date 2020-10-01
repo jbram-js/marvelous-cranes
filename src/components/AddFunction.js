@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider } from "@material-ui/core";
 
+import ImageUpload from "./ImageUpload";
+
 import axios from "axios";
 import "../styles/AddFunction.css";
 
 const AddFunction = ({ fields, setFields }) => {
   const [craneSlider, setCraneSlider] = useState(0);
   const [backgroundSlider, setBackgroundSlider] = useState(0);
+  const [sendImage, setSendImage] = useState(false);
 
   const handleAddCrane = (event) => {
     event.preventDefault();
+    setSendImage(true);
     axios
       .post("https://test-crane.herokuapp.com/addCrane", fields)
       .then((response) => {
@@ -46,6 +50,7 @@ const AddFunction = ({ fields, setFields }) => {
   return (
     <div className="add-function">
       <form id="addForm" className="add-crane-form" onSubmit={handleAddCrane}>
+        <ImageUpload sendImage={sendImage} setSendImage={setSendImage} />
         <input
           id="craneCaption"
           name="craneCaption"

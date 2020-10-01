@@ -1,39 +1,52 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
+
 import axios from "axios";
 
-class ImageUpload extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      success: false,
-      url: "",
-    };
-  }
+const initialState = {
+  fields: {
+    selectedFile: null,
+  },
+};
 
-  handleChange = (ev) => {
-    this.setState({ success: false, url: "" });
+const ImageUpload = ({ sendImage, setSendImage }) => {
+  const [success, setSuccess] = useState(false);
+  const [url, setUrl] = useState("");
+  const [fields, setFields] = useState(initialState.fields);
+
+  const handleChange = (ev) => {
+    setSuccess(false);
+    setUrl("");
   };
+
+  const singleFileChangedHandler = (event) => {
+    setFields({
+      selectedFile: event.target.files[0],
+    });
+  };
+
   // Perform the upload
-  handleUpload = (ev) => {
-    let file = this.uploadInput.files[0];
+
+  const handleUpload = (ev) => {
+    const file = fields.selectedFile;
     // Split the filename to get the name and type
-    let fileParts = this.uploadInput.files[0].name.split(".");
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
+    const fileParts = file.name.split(".");
+    const fileName = fileParts[0];
+    const fileType = fileParts[1];
+    console.log(fileParts);
     axios
       .post("https://test-crane.herokuapp.com/sign_s3", {
         fileName: fileName + Date.now() + "." + fileType,
         fileType: fileType,
       })
       .then((response) => {
-        var returnData = response.data.data.returnData;
-        var signedRequest = returnData.signedRequest;
-        var url = returnData.url;
-        this.setState({ url: url });
+        const returnData = response.data.data.returnData;
+        const signedRequest = returnData.signedRequest;
+        const url = returnData.url;
+        setUrl(url);
         console.log("Recieved a signed request " + signedRequest);
 
         // Put the fileType in the headers for the upload
-        var options = {
+        const options = {
           headers: {
             "Content-Type": fileType,
           },
@@ -43,7 +56,7 @@ class ImageUpload extends Component {
           .put(signedRequest, file, options)
           .then((result) => {
             console.log("Response from s3");
-            this.setState({ success: true });
+            setSuccess(true);
           })
           .catch((error) => {
             console.log("ERROR " + JSON.stringify(error));
@@ -54,31 +67,20 @@ class ImageUpload extends Component {
       });
   };
 
-  render() {
-    const Success_message = () => (
-      <div style={{ padding: 50 }}>
-        <h3 style={{ color: "green" }}>SUCCESSFUL UPLOAD</h3>
-        <a href={this.state.url}>Access the file here</a>
-        <br />
-      </div>
-    );
-    return (
-      <div className="imageUpload">
-        <center>
-          <h1>UPLOAD A FILE</h1>
-          {this.state.success ? <Success_message /> : null}
-          <input
-            onChange={this.handleChange}
-            ref={(ref) => {
-              this.uploadInput = ref;
-            }}
-            type="file"
-          />
-          <br />
-          <button onClick={this.handleUpload}>UPLOAD</button>
-        </center>
-      </div>
-    );
+  if (sendImage) {
+    setSendImage(false);
+    handleUpload();
   }
-}
+
+  return (
+    <div className="imageUpload">
+      <center>
+        <h1>UPLOAD A FILE</h1>
+        <input type="file" onChange={singleFileChangedHandler} />
+        <br />
+      </center>
+    </div>
+  );
+};
+
 export default ImageUpload;
