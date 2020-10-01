@@ -60,34 +60,39 @@ const AddFunction = ({ fields, setFields }) => {
           required
           autoComplete="off"
         />
-        <label htmlFor="craneRate">Crane Rate</label>
+        <label htmlFor="craneRate">
+          <div className="label-div">Crane Rate</div>
+        </label>
 
-        <Slider
-          id="craneRate"
-          name="craneRate"
-          value={craneSlider}
-          min={0}
-          max={10}
-          step={0.1}
-          marks={false}
-          valueLabelDisplay="auto"
-          onChange={handleCRSlider}
-        />
-
-        <label htmlFor="craneBackgroundRate">Background Rate</label>
-
-        <Slider
-          id="craneBackgroundRate"
-          name="craneBackgroundRate"
-          value={backgroundSlider}
-          min={0}
-          max={10}
-          step={0.1}
-          marks={false}
-          valueLabelDisplay="auto"
-          onChange={handleBRSlider}
-        />
-
+        <div className="slider-add-crane">
+          <Slider
+            id="craneRate"
+            name="craneRate"
+            value={craneSlider}
+            min={0}
+            max={10}
+            step={0.5}
+            marks={false}
+            valueLabelDisplay="auto"
+            onChange={handleCRSlider}
+          />
+        </div>
+        <label htmlFor="craneBackgroundRate">
+          <div className="label-div">Location Rate</div>
+        </label>
+        <div className="slider-add-crane">
+          <Slider
+            id="craneBackgroundRate"
+            name="craneBackgroundRate"
+            value={backgroundSlider}
+            min={0}
+            max={10}
+            step={0.5}
+            marks={false}
+            valueLabelDisplay="auto"
+            onChange={handleBRSlider}
+          />
+        </div>
         <input
           id="craneDescription"
           name="craneDescription"
