@@ -3,11 +3,23 @@
   margin-top: 8px;
 }
 
-.add-crane-form input {
+.form-input-image {
+  width: 85vw;
+  padding: 10px 0;
+  font-size: 16px;
+  margin: 0 0 7% 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  background: transparent;
+  text-align: start;
+}
+
+.form-input {
   width: 85vw;
   padding: 10px 0;
   font-size: 18px;
-  margin-bottom: 22px;
+  margin: 0 0 7% 0;
   border: none;
   border-bottom: 1px solid #000;
   outline: none;
@@ -25,8 +37,8 @@ label {
 }
 
 .slider-add-crane {
-  width: 83vw;
-  margin: 0 8.5% 0 8.5%;
+  width: 85vw;
+  margin: 0 7.5% -1% 7.5%;
 }
 
 ::placeholder {

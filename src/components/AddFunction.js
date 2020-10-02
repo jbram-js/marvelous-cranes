@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider } from "@material-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
 import "../styles/AddFunction.css";
@@ -12,8 +14,8 @@ const initialState = {
 };
 
 const AddFunction = ({ fields, setFields }) => {
-  const [craneSlider, setCraneSlider] = useState(0);
-  const [backgroundSlider, setBackgroundSlider] = useState(0);
+  const [craneSlider, setCraneSlider] = useState(5);
+  const [backgroundSlider, setBackgroundSlider] = useState(5);
   const [success, setSuccess] = useState(false);
   const [url, setUrl] = useState("");
   const [value, setValue] = useState(initialState.fields);
@@ -64,8 +66,8 @@ const AddFunction = ({ fields, setFields }) => {
     // Split the filename to get the name and type
     const fileParts = file.name.split(".");
     const fileType = fileParts[1];
-    const fileName = fileParts[0]+ Date.now() + "." + fileType;
-    const url = `https://cranebucket.s3.eu-west-2.amazonaws.com/${fileName}`
+    const fileName = fileParts[0] + Date.now() + "." + fileType;
+    const url = `https://cranebucket.s3.eu-west-2.amazonaws.com/${fileName}`;
 
     await axios
       .post("https://test-crane.herokuapp.com/sign_s3", {
@@ -79,11 +81,14 @@ const AddFunction = ({ fields, setFields }) => {
         setUrl(url);
         console.log("Recieved a signed request " + signedRequest);
 
-          axios
-          .post("https://test-crane.herokuapp.com/addCrane",  {...fields, image: url})
+        axios
+          .post("https://test-crane.herokuapp.com/addCrane", {
+            ...fields,
+            image: url,
+          })
           .then((response) => {
             console.log(response);
-    
+
             alert(` ${response.data.craneCaption} successfully added`);
           })
           .catch((err) => {
@@ -116,8 +121,13 @@ const AddFunction = ({ fields, setFields }) => {
   return (
     <div className="add-function">
       <form id="addForm" className="add-crane-form" onSubmit={handleUpload}>
-        <input type="file" onChange={singleFileChangedHandler} />
         <input
+          type="file"
+          className="form-input-image"
+          onChange={singleFileChangedHandler}
+        />
+        <input
+          className="form-input"
           id="craneCaption"
           name="craneCaption"
           placeholder="Caption"
@@ -160,6 +170,7 @@ const AddFunction = ({ fields, setFields }) => {
           />
         </div>
         <input
+          className="form-input"
           id="craneDescription"
           name="craneDescription"
           placeholder="Comment"
