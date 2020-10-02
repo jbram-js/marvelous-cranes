@@ -67,12 +67,8 @@ const ImageUpload = ({ sendImage, setSendImage }) => {
   }
 
   return (
-    <div className="imageUpload">
-      <center>
-        <h1>UPLOAD A FILE</h1>
-        <input type="file" onChange={singleFileChangedHandler} />
-        <br />
-      </center>
+    <div className="image-upload">
+      <input type="file" onChange={singleFileChangedHandler} /> <br />
     </div>
   );
 };

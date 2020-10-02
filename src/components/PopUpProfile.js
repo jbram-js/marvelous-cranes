@@ -11,13 +11,19 @@ const PopUpProfile = ({
   handleHideProfile,
 }) => {
   return (
-    <div className="PopUpProfile">
+    <div className="popup-profile">
       <div className="popup-username">{username}</div>
-      <div>MEMBER SINCE- {memberSince}</div>
-      <div>CRANES ADDED- {addedCranes}</div>
-      <div>RESPECTS GIVEN- {respects}</div>
+      <div>
+        <strong>Member since:</strong> {memberSince}
+      </div>
+      <div>
+        <strong>Cranes added:</strong> {addedCranes}
+      </div>
+      <div>
+        <strong>Respects gained:</strong> {respects}
+      </div>
       <button type="submit" onClick={() => handleHideProfile()}>
-        Close
+        CLOSE
       </button>
     </div>
   );

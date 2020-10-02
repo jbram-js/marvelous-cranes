@@ -6,8 +6,12 @@
   line-height: 40px;
 }
 
+.username {
+  margin: 0 0 0 -2%;
+  font-size: 18px;
+}
+
 .card-image {
-  object-fit: cover;
   width: 100vw;
 }
 
@@ -27,8 +31,8 @@
 }
 
 .basic-info p {
-  margin: 0 0 2% 0;
-  padding-left: 20px;
+  margin: 0 0 1% 0;
+  padding-left: 15px;
   display: flex;
   text-align: start;
   color: black;

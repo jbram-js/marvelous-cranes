@@ -166,7 +166,7 @@ const CraneCard = ({
         )}
         {numberOfLikes}
       </div>
-      <div className="basic-info" onClick={handleGetUserInfo}>
+      <div className="basic-info">
         {showMoreButton && (
           <button
             className="show-more-button"
@@ -180,7 +180,13 @@ const CraneCard = ({
             <FontAwesomeIcon icon={faAngleDown} className="show-more-button" />
           </button>
         )}
-        <strong className="username">{username}</strong>
+        <button
+          style={{ outline: "none" }}
+          className="username"
+          onClick={handleGetUserInfo}
+        >
+          <strong>{username}</strong>
+        </button>
         <p>{craneCaption}</p>
       </div>
       {showInfo && (
@@ -213,6 +219,7 @@ const CraneCard = ({
       {showMap && <ViewOnMap markers={markers} />}
 
       <Modal
+        className="modal"
         isOpen={showProfile}
         style={{
           overlay: {
@@ -231,8 +238,6 @@ const CraneCard = ({
             bottom: "0px",
             background: "none",
             overflow: "auto",
-            WebkitOverflowScrolling: "touch",
-            outline: "none",
           },
         }}
       >
