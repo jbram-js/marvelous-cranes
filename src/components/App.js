@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
 import AddCrane from "./AddCrane";
 import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
-import Rules from "./Rules";
+import LandingPage from "./LandingPage";
 
 import "../styles/App.css";
 import Settings from "./Settings";
@@ -23,7 +24,6 @@ const initialState = {
 
 function App() {
   const [user, setUser] = useState();
-  const [firstVisit, setFirstVisit] = useState(true);
   const [value, setValue] = useState(initialState.fields);
   const [userLocation, setUserLocation] = useState(initialState.location);
 
@@ -87,9 +87,12 @@ function App() {
       <ScrollToTop />
       <>
         <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
           <Route
             exact
-            path="/"
+            path="/login"
             render={() => (
               <LogIn
                 setUser={setUser}
@@ -140,6 +143,3 @@ function App() {
 }
 
 export default App;
-
-//<NavBar />
-//<Route exact path="/"/>

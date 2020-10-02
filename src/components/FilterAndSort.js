@@ -62,6 +62,8 @@ const FilterAndSort = ({
     <div className="filter-sort">
       {showSortButton && <button onClick={handleSortCranes}>SORT</button>}
       {sortCranes && <button onClick={handleHideSortCranes}>CLOSE</button>}
+      {showFilterButton && <button onClick={handleFilterCranes}>FILTER</button>}
+      {filterCranes && <button onClick={handleHideFilterCranes}>CLOSE</button>}
 
       {sortCranes && (
         <ul>
@@ -101,15 +103,14 @@ const FilterAndSort = ({
               <strong>Location Rate:</strong> Ascending
             </Link>
           </li>
+          <li>
+            <strong>Number of cranes:</strong> {allCranes.length}
+          </li>
         </ul>
       )}
 
-      {showFilterButton && <button onClick={handleFilterCranes}>FILTER</button>}
-
       {filterCranes && (
         <>
-          {" "}
-          <button onClick={handleHideFilterCranes}>CLOSE</button>
           <div className="sliders">
             <label htmlFor="cr-slider">Crane Rate</label>
             <Slider
