@@ -6,7 +6,6 @@
 
 .register-form {
   position: relative;
-  margin-top: 10px;
 }
 
 .register-form input {
@@ -32,6 +31,7 @@
   border-style: none;
   color: #fff;
   font-size: 20px;
+  font-weight: 500;
   margin-top: -10px;
   background: linear-gradient(
     45deg,
@@ -42,6 +42,7 @@
 
 .login-link {
   font-size: 16px;
+  font-weight: 500;
   color: #000;
   text-decoration: none;
 }

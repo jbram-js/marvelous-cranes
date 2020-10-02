@@ -101,7 +101,7 @@ const Register = ({ setUserLoggedIn }) => {
           REGISTER
         </button>
       </form>
-      <Link className="login-link" to="/">
+      <Link className="login-link" to="/login">
         Already got an account? <strong>Login!</strong>
       </Link>
       <Header />

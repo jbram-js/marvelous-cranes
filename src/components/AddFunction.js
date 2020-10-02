@@ -135,9 +135,15 @@ const AddFunction = ({ fields, setFields }) => {
 
   return (
     <div className="add-function">
+      <AddedAlert message={alert.message} success={alert.success} />
       <form id="addForm" className="add-crane-form" onSubmit={handleUpload}>
-        <input type="file" onChange={singleFileChangedHandler} />
         <input
+          type="file"
+          className="form-input"
+          onChange={singleFileChangedHandler}
+        />
+        <input
+          className="form-input"
           id="craneCaption"
           name="craneCaption"
           placeholder="Caption"
@@ -180,6 +186,7 @@ const AddFunction = ({ fields, setFields }) => {
           />
         </div>
         <input
+          className="form-input"
           id="craneDescription"
           name="craneDescription"
           placeholder="Comment"
@@ -198,7 +205,6 @@ const AddFunction = ({ fields, setFields }) => {
         >
           ADD CRANE
         </button>
-        <AddedAlert message={alert.message} success={alert.success} />
       </form>
     </div>
   );

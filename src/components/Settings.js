@@ -59,14 +59,20 @@ const Settings = ({ user }) => {
   console.log(value);
 
   return (
-    <div className="Settings">
-      <h1>Settings</h1>
+    <div className="settings">
+      <p className="heading">SETTINGS</p>
+      <p className="settings-p">Update your user details here.</p>
       <form>
-        <label htmlFor="username" onClick={() => setShowUsernameInput(true)}>
+        <label
+          htmlFor="username"
+          className="settings-label"
+          onClick={() => setShowUsernameInput(true)}
+        >
           USERNAME
         </label>
         {showUsernameInput && (
           <input
+            className="settings-form"
             name="username"
             id="username"
             type="text"
@@ -76,12 +82,14 @@ const Settings = ({ user }) => {
         )}
         <label
           htmlFor="phoneNumber"
+          className="settings-label"
           onClick={() => setShowPhoneNumberInput(true)}
         >
           PHONE NUMBER
         </label>
         {showPhoneNumberInput && (
           <input
+            className="settings-form"
             name="phoneNumber"
             id="phoneNumber"
             type="tel"
@@ -89,11 +97,16 @@ const Settings = ({ user }) => {
             onChange={handleChange}
           ></input>
         )}
-        <label htmlFor="emailAddress" onClick={() => setShowEmailInput(true)}>
+        <label
+          htmlFor="emailAddress"
+          className="settings-label"
+          onClick={() => setShowEmailInput(true)}
+        >
           EMAIL ADDRESS
         </label>
         {showEmailInput && (
           <input
+            className="settings-form"
             name="emailAddress"
             id="emailAddress"
             type="email"
@@ -101,27 +114,37 @@ const Settings = ({ user }) => {
             onChange={handleChange}
           ></input>
         )}
-        <label htmlFor="password" onClick={() => setShowPasswordInput(true)}>
+        <label
+          htmlFor="password"
+          className="settings-label"
+          onClick={() => setShowPasswordInput(true)}
+        >
           PASSWORD
         </label>
         {showPasswordInput && (
           <input
+            className="settings-form"
             name="password"
             id="password"
             type="password"
             onChange={handleChange}
           ></input>
         )}
-        <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
+        <label htmlFor="confirmPassword" className="settings-label">
+          CONFIRM PASSWORD
+        </label>
         {showPasswordInput && (
           <input
+            className="settings-form"
             name="confirmPassword"
             id="confirmPassword"
             type="password"
             onChange={handleChange}
           ></input>
         )}
-        <button onClick={handleUpdateUserInfo}>UPDATE</button>
+        <button className="settings-button" onClick={handleUpdateUserInfo}>
+          UPDATE
+        </button>
       </form>
       <NavBar />
       <Header />

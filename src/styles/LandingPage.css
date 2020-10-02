@@ -13,25 +13,26 @@
 }
 
 .rules-p {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 25px;
   text-align: justify;
   margin: 0 2% 0 2%;
 }
 
 .roy-squad-list {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 30px;
   text-align: justify;
   list-style: none;
-  padding: 0 15% 0 15%;
+  padding: 0 10% 0 10%;
 }
 
 label {
   font-size: 16px;
   font-weight: 500;
   line-height: 25px;
-
   text-align: center;
   padding: 0 28px 0 28px;
 }
@@ -43,6 +44,7 @@ label {
   border-style: none;
   color: #fff;
   font-size: 20px;
+  font-weight: 500;
   margin-top: 5px;
   background: linear-gradient(
     45deg,

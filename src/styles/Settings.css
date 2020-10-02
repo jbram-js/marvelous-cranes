@@ -1,6 +1,54 @@
-.Settings form {
-  margin-top: 100px;
+.heading {
+  font-size: 32px;
+  position: relative;
+  margin: 2% 0 0 0;
+}
+
+.settings-p {
+  margin: 2% 0 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  color: #f83600;
+}
+
+.settings form {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.settings-label {
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 2% 0 0 0;
+}
+
+.settings-form {
+  width: 85vw;
+  padding: 10px 0;
+  font-size: 18px;
+  margin: 0 0 7% 7.5%;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  background: transparent;
+  text-align: start;
+}
+
+.settings-button {
+  width: 85vw;
+  height: 50px;
+  border-radius: 30px;
+  border-style: none;
+  margin: 5% 0 0 7.5%;
+
+  color: #fff;
+  font-size: 20px;
+  background: linear-gradient(
+    45deg,
+    rgba(248, 54, 0, 1),
+    rgba(249, 212, 35, 1)
+  );
 }
