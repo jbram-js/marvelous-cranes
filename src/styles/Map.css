@@ -8,9 +8,8 @@
 }
 .search {
   position: fixed;
-  margin-left: 105px;
+  margin: 0 0 0 -3%;
   top: 80px;
-  transform: translateX(-50%);
   width: 100%;
   max-width: 250px;
   z-index: 10;
