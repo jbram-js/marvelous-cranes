@@ -40,17 +40,17 @@ const Cranes = ({ userLocation }) => {
         });
     };
     fetchData();
-  }, [numberOfLikes]);
+  }, [numberOfLikes, sortFunction, sortType]);
 
   // request that handles sort and filters
-  useEffect(() => {
-    axios
-      .get(
-        `https://test-crane.herokuapp.com/cranes?${sortFunction}=${sortType}`
-      )
-      .then(({ data }) => setAllCranes(data))
-      .catch((err) => console.error(err));
-  }, [sortFunction, sortType]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://test-crane.herokuapp.com/cranes?${sortFunction}=${sortType}`
+  //     )
+  //     .then(({ data }) => setAllCranes(data))
+  //     .catch((err) => console.error(err));
+  // }, [sortFunction, sortType]);
 
   // patch request to send a like and unlike
 
@@ -134,28 +134,13 @@ const Cranes = ({ userLocation }) => {
 
   // filter by crane rate
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("https://test-crane.herokuapp.com/AllRatings", {
-          params: filterValue,
-        })
-        .then(({ data }) => {
-          setAllCranes(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    fetchData();
-  }, [filterValue]);
-
   return (
     <div className="all-cranes">
       <div className="filter-sort">
         <FilterAndSort
           userLocation={userLocation}
           allCranes={allCranes}
+          setAllCranes={setAllCranes}
           setSortFunction={setSortFunction}
           filterValue={filterValue}
           setFilterValue={setFilterValue}

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Slider } from "@material-ui/core";
 
 const FilterAndSort = ({
   allCranes,
+  setAllCranes,
   setSortFunction,
   setFilterValue,
   setSortType,
@@ -38,8 +40,8 @@ const FilterAndSort = ({
     setShowFilterButton(true);
   };
 
-  const handleRatesSlider = async (data) => {
-    await setFilterValue({
+  const handleRatesSlider = () => {
+    handleFilter({
       bottomRate: craneRateRange[0],
       topRate: craneRateRange[1],
       bottomRateCrane: backgroundRateRange[0],
@@ -48,7 +50,7 @@ const FilterAndSort = ({
   };
 
   const handleRemoveFilters = () => {
-    setFilterValue({
+    handleFilter({
       bottomRate: 0,
       topRate: 10,
       bottomRateCrane: 0,
@@ -56,6 +58,22 @@ const FilterAndSort = ({
     });
     setCraneRateRange([0, 10]);
     setBackgroundRateRange([0, 10]);
+  };
+
+  const handleFilter = (filterValue) => {
+    const fetchData = async () => {
+      await axios
+        .get("https://test-crane.herokuapp.com/AllRatings", {
+          params: filterValue,
+        })
+        .then(({ data }) => {
+          setAllCranes(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
   };
 
   return (
