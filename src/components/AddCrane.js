@@ -18,7 +18,7 @@ import "@reach/combobox/styles.css";
 
 import AddFunction from "./AddFunction";
 
-import "../styles/Map.css";
+import "../styles/AddCrane.css";
 
 const mapContainerStyle = {
   width: "100vw",
