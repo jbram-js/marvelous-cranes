@@ -15,12 +15,9 @@ const Profile = ({ userId, userLocation }) => {
 
   useEffect(() => {
     axios
-      .get("https://test-crane.herokuapp.com/craneUser", {
-        params: { userID: userId },
-      })
+      .get(`https://test-crane.herokuapp.com/craneUser?userID=${userId}`)
       .then(({ data }) => {
         setAllUsersCranes(data);
-        console.log(data);
         axios
           .get(`https://test-crane.herokuapp.com/${data.userID}/users`)
           .then(({ data }) => {
@@ -46,7 +43,7 @@ const Profile = ({ userId, userLocation }) => {
               username={username}
               numberOfLikes={cranes.craneLikes}
               userLocation={userLocation}
-              image={placeholder}
+              image={cranes.image}
             />
           </div>
         ))}

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Slider } from "@material-ui/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import AddedAlert from "./AddedAlert";
 
 import axios from "axios";
 import "../styles/AddFunction.css";
@@ -11,14 +10,19 @@ const initialState = {
   fields: {
     selectedFile: null,
   },
+  alert: {
+    message: "",
+    success: false,
+  },
 };
 
 const AddFunction = ({ fields, setFields }) => {
-  const [craneSlider, setCraneSlider] = useState(5);
-  const [backgroundSlider, setBackgroundSlider] = useState(5);
+  const [craneSlider, setCraneSlider] = useState(0);
+  const [backgroundSlider, setBackgroundSlider] = useState(0);
   const [success, setSuccess] = useState(false);
   const [url, setUrl] = useState("");
   const [value, setValue] = useState(initialState.fields);
+  const [alert, setAlert] = useState(initialState.alert);
 
   /*const handleAddCrane = async (event) => {
     event.preventDefault();
@@ -86,14 +90,25 @@ const AddFunction = ({ fields, setFields }) => {
             ...fields,
             image: url,
           })
-          .then((response) => {
-            console.log(response);
-
-            alert(` ${response.data.craneCaption} successfully added`);
+          .then(() => {
+            setAlert({ message: "Crane Added!", success: true });
+            setFields({
+              craneCaption: "",
+              craneRate: "",
+              craneBackgroundRate: "",
+              craneDescription: "",
+              markers: [{ lat: "", lng: "" }],
+              dateCreated: new Date(),
+            });
+            setValue({ selectedFile: undefined });
+            setCraneSlider(0);
+            setBackgroundSlider(0);
           })
           .catch((err) => {
-            alert(` ${fields.craneCaption} could not be added - check console`);
-            console.log(err);
+            setAlert({
+              message: "Server error. Please try again later.",
+              success: true,
+            });
           });
 
         // Put the fileType in the headers for the upload
@@ -121,13 +136,8 @@ const AddFunction = ({ fields, setFields }) => {
   return (
     <div className="add-function">
       <form id="addForm" className="add-crane-form" onSubmit={handleUpload}>
+        <input type="file" onChange={singleFileChangedHandler} />
         <input
-          type="file"
-          className="form-input-image"
-          onChange={singleFileChangedHandler}
-        />
-        <input
-          className="form-input"
           id="craneCaption"
           name="craneCaption"
           placeholder="Caption"
@@ -170,7 +180,6 @@ const AddFunction = ({ fields, setFields }) => {
           />
         </div>
         <input
-          className="form-input"
           id="craneDescription"
           name="craneDescription"
           placeholder="Comment"
@@ -189,6 +198,7 @@ const AddFunction = ({ fields, setFields }) => {
         >
           ADD CRANE
         </button>
+        <AddedAlert message={alert.message} success={alert.success} />
       </form>
     </div>
   );

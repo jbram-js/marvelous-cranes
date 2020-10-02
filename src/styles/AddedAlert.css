@@ -1,0 +1,27 @@
+.alert-error {
+  color: red;
+  background: #ffe5e5;
+  width: 70vw;
+  font-size: 2em;
+  padding: 8px 20px 8px 20px;
+  border-style: solid;
+  border-color: red;
+  border-radius: 5px;
+  border-width: 0.2px;
+  margin-bottom: 10px;
+  margin-left: 10vw;
+}
+
+.alert-success {
+  color: green;
+  background: #f4fef4;
+  width: 70vw;
+  font-size: 2em;
+  padding: 8px 20px 8px 20px;
+  border-style: solid;
+  border-color: green;
+  border-radius: 5px;
+  border-width: 0.1px;
+  margin-bottom: 10px;
+  margin-left: 10vw;
+}
