@@ -38,8 +38,8 @@ const FilterAndSort = ({
     setShowFilterButton(true);
   };
 
-  const handleRatesSlider = (data) => {
-    setFilterValue({
+  const handleRatesSlider = async (data) => {
+    await setFilterValue({
       bottomRate: craneRateRange[0],
       topRate: craneRateRange[1],
       bottomRateCrane: backgroundRateRange[0],
@@ -101,6 +101,22 @@ const FilterAndSort = ({
               )}
             >
               <strong>Location Rate:</strong> Ascending
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="links"
+              onClick={() => (setSortFunction("dateCreated"), setSortType(-1))}
+            >
+              <strong>Date posted:</strong> Latest
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="links"
+              onClick={() => (setSortFunction("dateCreated"), setSortType(1))}
+            >
+              <strong>Date posted:</strong> Oldest
             </Link>
           </li>
           <li>

@@ -100,14 +100,14 @@ const AddFunction = ({ fields, setFields }) => {
               markers: [{ lat: "", lng: "" }],
               dateCreated: new Date(),
             });
-            setValue({ selectedFile: undefined });
+            setValue({ selectedFile: null });
             setCraneSlider(0);
             setBackgroundSlider(0);
           })
           .catch((err) => {
             setAlert({
               message: "Server error. Please try again later.",
-              success: true,
+              success: false,
             });
           });
 

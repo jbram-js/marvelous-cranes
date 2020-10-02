@@ -11,7 +11,10 @@ import Header from "./Header";
 
 import "../styles/LogIn.css";
 
-const LogIn = ({ handleSubmit, handleInput, value }) => {
+const LogIn = ({ handleSubmit, value, setValue }) => {
+  const handleInput = (event) => {
+    setValue({ ...value, [event.target.name]: event.target.value });
+  };
   return (
     <div className="login">
       <img src={loginImage} className="login-image" alt="Cranes over river" />

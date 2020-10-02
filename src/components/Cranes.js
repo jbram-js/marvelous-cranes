@@ -6,8 +6,6 @@ import FilterAndSort from "./FilterAndSort";
 import NavBar from "./NavBar";
 import Header from "./Header";
 
-import placeholder from "../images/cranesafety.jpg";
-
 import "../styles/Cranes.css";
 
 const initialState = {
@@ -21,17 +19,19 @@ const initialState = {
 
 const Cranes = ({ userLocation }) => {
   const [allCranes, setAllCranes] = useState([]);
-  const [sortFunction, setSortFunction] = useState();
   const [filterValue, setFilterValue] = useState(initialState.fields);
   const [numberOfLikes, setNumberOfLikes] = useState();
-  const [sortType, setSortType] = useState();
+  const [sortFunction, setSortFunction] = useState("dateCreated");
+  const [sortType, setSortType] = useState(-1);
 
   // main request when cranes page loads
 
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("https://test-crane.herokuapp.com/all")
+        .get(
+          `https://test-crane.herokuapp.com/cranes?${sortFunction}=${sortType}`
+        )
         .then(({ data }) => {
           setAllCranes(data);
         })

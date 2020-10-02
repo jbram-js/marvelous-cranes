@@ -19,7 +19,7 @@ const Profile = ({ userId, userLocation }) => {
       .then(({ data }) => {
         setAllUsersCranes(data);
         axios
-          .get(`https://test-crane.herokuapp.com/${data.userID}/users`)
+          .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
           .then(({ data }) => {
             setUsername(data.username);
           });

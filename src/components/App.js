@@ -58,10 +58,6 @@ function App() {
       });
   };
 
-  const handleInput = (event) => {
-    setValue({ ...value, [event.target.name]: event.target.value });
-  };
-
   // logic to get users location
 
   useEffect(() => {
@@ -97,8 +93,8 @@ function App() {
               <LogIn
                 setUser={setUser}
                 handleSubmit={handleSubmit}
-                handleInput={handleInput}
                 value={value}
+                setValue={setValue}
               />
             )}
           ></Route>
