@@ -2,12 +2,6 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-const initialState = {
-  fields: {
-    selectedFile: null,
-  },
-};
-
 const ImageUpload = ({ sendImage, setSendImage }) => {
   const [success, setSuccess] = useState(false);
   const [url, setUrl] = useState("");
