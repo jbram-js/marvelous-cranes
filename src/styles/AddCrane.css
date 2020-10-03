@@ -1,6 +1,6 @@
 .search-add {
   position: relative;
-  margin: 0 0 -50px -4%;
+  margin: 5px 0 -50px -4%;
   width: 100%;
   max-width: 250px;
 }
@@ -12,7 +12,7 @@
 }
 
 .locate-add {
-  margin: 3% 0 0 83%;
+  margin: 10px 0 0 83%;
   background: none;
   border: none;
 }
