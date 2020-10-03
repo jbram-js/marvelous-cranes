@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import loginImage from "../images/login-image-final.jpg";
-
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";
 import instagram from "../icons/instagram.svg";
@@ -17,8 +15,7 @@ const LogIn = ({ handleSubmit, value, setValue }) => {
   };
   return (
     <div className="login">
-      <img src={loginImage} className="login-image" alt="Cranes over river" />
-
+      <p className="login-p">LOGIN</p>
       <form action="submit" className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"

@@ -4,7 +4,6 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
 
-import placeholder from "../images/cranesafety.jpg";
 import ProfileCraneCard from "./ProfileCraneCard";
 
 import "../styles/Profile.css";

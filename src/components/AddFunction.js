@@ -17,8 +17,8 @@ const initialState = {
 };
 
 const AddFunction = ({ fields, setFields }) => {
-  const [craneSlider, setCraneSlider] = useState(0);
-  const [backgroundSlider, setBackgroundSlider] = useState(0);
+  const [craneSlider, setCraneSlider] = useState(5);
+  const [backgroundSlider, setBackgroundSlider] = useState(5);
   const [success, setSuccess] = useState(false);
   const [url, setUrl] = useState("");
   const [value, setValue] = useState(initialState.fields);

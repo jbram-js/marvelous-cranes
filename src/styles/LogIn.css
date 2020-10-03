@@ -5,9 +5,15 @@
   left: 0;
 }
 
+.login-p {
+  font-size: 32px;
+  position: relative;
+  margin-top: 15px;
+}
+
 .login-form {
   position: relative;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .login-form input {

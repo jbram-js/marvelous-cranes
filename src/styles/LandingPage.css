@@ -12,12 +12,12 @@
   margin: 0 5% 5% 5%;
 }
 
-.rules-p {
+.landing-page-p {
   font-size: 18px;
   font-weight: 500;
   line-height: 25px;
   text-align: justify;
-  margin: 0 2% 0 2%;
+  margin: 0 4% 0 4%;
 }
 
 .roy-squad-list {
@@ -37,7 +37,7 @@ label {
   padding: 0 28px 0 28px;
 }
 
-.rules-button {
+.landing-page-button {
   width: 85vw;
   height: 50px;
   border-radius: 30px;

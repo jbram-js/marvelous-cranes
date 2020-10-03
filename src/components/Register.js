@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import Rules from "./Rules";
 import Header from "./Header";
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";

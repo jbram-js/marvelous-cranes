@@ -11,7 +11,7 @@ import {
   faAngleDown,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faOutlineHeart } from "@fortawesome/fontawesome-free-regular";
+
 import "../styles/CraneCard.css";
 
 const CraneCard = ({
@@ -152,7 +152,7 @@ const CraneCard = ({
             className="like-button"
             onClick={handleBothLikes}
           >
-            <FontAwesomeIcon icon={faOutlineHeart} className="like-icon" />
+            <FontAwesomeIcon icon={faHeart} className="like-icon" />
           </button>
         )}
         {unlikeButton && (
@@ -238,6 +238,7 @@ const CraneCard = ({
             bottom: "0px",
             background: "none",
             overflow: "auto",
+            outline: 0,
           },
         }}
       >

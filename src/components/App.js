@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
@@ -22,7 +27,7 @@ const initialState = {
   },
 };
 
-function App() {
+const App = () => {
   const [user, setUser] = useState();
   const [value, setValue] = useState(initialState.fields);
   const [userLocation, setUserLocation] = useState(initialState.location);
@@ -136,6 +141,6 @@ function App() {
       </>
     </div>
   );
-}
+};
 
 export default App;

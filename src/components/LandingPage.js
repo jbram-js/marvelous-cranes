@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
-import rulesImage from "../images/rules-image.jpg";
+import royMolloy from "../images/roy-molloy.jpg";
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";
 import instagram from "../icons/instagram.svg";
@@ -12,25 +12,25 @@ const LandingPage = () => {
   return (
     <div className="rules">
       <img
-        src={rulesImage}
+        src={royMolloy}
         className="first-image"
         alt="Roy Molloy in front of cranes"
       />
       <p className="cranger-p">Welcome to the god damn Cranger Zone!</p>
-      <p className="rules-p">
+      <p className="landing-page-p">
         Step in to the world of Sydney's own mighty Marvelous Crane - Roy
         Molloy. Only three requirements to be in the Roy Squad:
       </p>
       <ul className="roy-squad-list">
         <li>1. Respect yourself</li>
-        <li>2. respect others</li>
+        <li>2. Respect others</li>
         <li>3. Stick up for me in conversations</li>
       </ul>
       <Link to="/login">
         <button
           style={{ outline: "none" }}
           type="submit"
-          className="rules-button"
+          className="landing-page-button"
         >
           RESPECT
         </button>
