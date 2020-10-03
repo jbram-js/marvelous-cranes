@@ -118,7 +118,8 @@ const AddCrane = ({ user }) => {
 const Locate = ({ panTo }) => {
   return (
     <button
-      className="locate"
+      style={{ outline: "none" }}
+      className="locate-add"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -151,8 +152,9 @@ const Search = ({ panTo }) => {
   });
 
   return (
-    <div className="search">
+    <div className="search-add">
       <Combobox
+        style={{ outline: "none" }}
         onSelect={async (address) => {
           setValue(address, false);
           clearSuggestions();
@@ -166,6 +168,7 @@ const Search = ({ panTo }) => {
         }}
       >
         <ComboboxInput
+          style={{ outline: "none" }}
           value={value}
           onChange={(e) => {
             setValue(e.target.value);

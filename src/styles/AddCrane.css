@@ -1,1 +1,22 @@
+.search-add {
+  position: relative;
+  margin: 0 0 -50px -4%;
+  width: 100%;
+  max-width: 250px;
+}
 
+.search-add input {
+  padding: 6px;
+  font-size: 16px;
+  width: 70%;
+}
+
+.locate-add {
+  margin: 3% 0 0 83%;
+  background: none;
+  border: none;
+}
+
+.locate-add img {
+  width: 30px;
+}

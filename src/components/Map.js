@@ -129,6 +129,7 @@ const Map = () => {
 const Locate = ({ panTo }) => {
   return (
     <button
+      style={{ outline: "none" }}
       className="locate"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(
@@ -164,6 +165,7 @@ const Search = ({ panTo }) => {
   return (
     <div className="search">
       <Combobox
+        style={{ outline: "none" }}
         onSelect={async (address) => {
           setValue(address, false);
           clearSuggestions();
@@ -177,6 +179,7 @@ const Search = ({ panTo }) => {
         }}
       >
         <ComboboxInput
+          style={{ outline: "none" }}
           value={value}
           onChange={(e) => {
             setValue(e.target.value);
