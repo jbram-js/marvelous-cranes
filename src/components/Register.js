@@ -42,7 +42,7 @@ const Register = ({ setUserLoggedIn }) => {
           console.log(response);
           //setUserLoggedIn(true);
           alert("Successful registration, redirecting you to log in!");
-          history.push("/");
+          history.push("/login");
         })
         .catch((err) => {
           console.log(err);
