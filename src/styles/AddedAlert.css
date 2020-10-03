@@ -4,10 +4,6 @@
   width: 70vw;
   font-size: 22px;
   padding: 6px 16px 6px 16px;
-  border-style: solid;
-  border-color: red;
-  border-radius: 5px;
-  border-width: 0.1px;
   margin: 5% 10% 5% 10%;
 }
 
@@ -17,9 +13,5 @@
   width: 70vw;
   font-size: 22px;
   padding: 6px 16px 6px 16px;
-  border-style: solid;
-  border-color: green;
-  border-radius: 5px;
-  border-width: 0.1px;
   margin: 5% 10% 5% 10%;
 }
