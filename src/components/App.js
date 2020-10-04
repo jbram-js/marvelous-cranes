@@ -146,12 +146,12 @@ const App = () => {
             exact
             path="/profile"
             render={() => (
-              <Profile  userLocation={userLocation} />
+              <Profile  userId={user._id} userLocation={userLocation} />
             )}
           >
             {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
-          <Route exact path="/settings" render={() => <Settings  />}>
+          <Route exact path="/settings" render={() => <Settings  user={user}/>}>
             {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
         </Switch>
