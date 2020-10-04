@@ -57,9 +57,20 @@ const App = () => {
         })
         .then(({ data }) => {
           localStorage.setItem("token", data.accessToken);
-          grabUserInfo(data.accessToken)
+          //grabUserInfo(data.accessToken)
+          axios.get("https://test-crane.herokuapp.com/getUserInfo",{
+          headers: { 
+            'Authorization': 'Bearer ' + data.accessToken
+          }
+        })
+        .then(({ data }) => {
+          setUser(data[0])
           store.set('loggedIn', true);       
           history.push("/cranes");
+        })
+        .catch((err) => {
+        console.log(err);
+        });
         })
         .catch((err) => {
           console.log(err);
@@ -67,21 +78,7 @@ const App = () => {
         });
     };
   
-      const grabUserInfo = (accessToken) => {
-        
-          axios.get("https://test-crane.herokuapp.com/getUserInfo",{
-          headers: { 
-            'Authorization': 'Bearer ' + accessToken
-          }
-        })
-        .then(({ data }) => {
-          setUser(data[0])
-          
-        })
-        .catch((err) => {
-        console.log(err);
-        });
-      }
+
 
   // logic to get users location
 
@@ -132,18 +129,18 @@ const App = () => {
             path="/cranes"
             render={() => <Cranes userLocation={userLocation} />}
           >
-            {!initialState.isAuthenticated && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
           <Route
             exact
             path="/add-crane"
             render={() => <AddCrane user={user}/>}
           >
-            {!initialState.isAuthenticated && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
 
           <Route exact path="/map" render={() => <Map />}>
-            {!initialState.isAuthenticated && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
           <Route
             exact
@@ -152,10 +149,10 @@ const App = () => {
               <Profile  userLocation={userLocation} />
             )}
           >
-            {!initialState.isAuthenticated && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
           <Route exact path="/settings" render={() => <Settings  />}>
-            {!initialState.isAuthenticated && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/login" />}
           </Route>
         </Switch>
       </>
