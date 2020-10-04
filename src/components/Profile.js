@@ -11,21 +11,33 @@ import "../styles/Profile.css";
 const Profile = ({ userId, userLocation }) => {
   const [allUsersCranes, setAllUsersCranes] = useState([]);
   const [username, setUsername] = useState();
-
+  const [user, setUser] = useState();
   useEffect(() => {
-    axios
-      .get(`https://test-crane.herokuapp.com/craneUser?userID=${userId}`)
-      .then(({ data }) => {
-        setAllUsersCranes(data);
+    axios.get("https://test-crane.herokuapp.com/getUserInfo",{
+      headers: { 
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(({ data }) => {
+      setUser(data[0])
+      userId=data[0]._id
         axios
-          .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
+          .get(`https://test-crane.herokuapp.com/craneUser?userID=${userId}`)
           .then(({ data }) => {
-            setUsername(data.username);
+            setAllUsersCranes(data);
+            axios
+              .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
+              .then(({ data }) => {
+                setUsername(data.username);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
           });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }, []);
 
   return (

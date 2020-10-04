@@ -35,6 +35,7 @@
     "react-scripts": "3.4.3",
     "react-scroll": "^1.8.1",
     "reactstrap": "^8.6.0",
+    "store": "^2.0.12",
     "use-places-autocomplete": "^1.5.0"
   },
   "scripts": {

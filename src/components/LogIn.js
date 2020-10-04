@@ -80,8 +80,8 @@ const LogIn = ({ handleSubmit, value, setValue }) => {
 };
 
 LogIn.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleInput: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
+  handleInput: PropTypes.func,
   value: PropTypes.object.isRequired,
 };
 

@@ -7,6 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import axios from "axios";
+import store from "store";
 import { useMediaQuery } from "react-responsive";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
@@ -25,6 +26,8 @@ const initialState = {
     latitude: "",
     longitude: "",
   },
+  token: localStorage.getItem('token'),
+  isAuthenticated: localStorage.getItem('token') ? true : false
 };
 
 const App = () => {
@@ -33,7 +36,7 @@ const App = () => {
   const [userLocation, setUserLocation] = useState(initialState.location);
 
   const history = useHistory();
-  //const name = window.localStorage.getItem("login"); //temporary until cookies are implemented
+  
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -44,24 +47,41 @@ const App = () => {
 
     return null;
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("https://test-crane.herokuapp.com/login", {
-        username: value.username,
-        password: value.password,
-      })
-      .then(({ data }) => {
-        setUser(data);
-        localStorage.setItem("login", data.username);
-        history.push("/cranes");
-      })
-      .catch((err) => {
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      await axios
+        .post("https://test-crane.herokuapp.com/login", {
+          username: value.username,
+          password: value.password,
+        })
+        .then(({ data }) => {
+          localStorage.setItem("token", data.accessToken);
+          grabUserInfo(data.accessToken)
+          store.set('loggedIn', true);       
+          history.push("/cranes");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Error Logging in!");
+        });
+    };
+  
+      const grabUserInfo = (accessToken) => {
+        
+          axios.get("https://test-crane.herokuapp.com/getUserInfo",{
+          headers: { 
+            'Authorization': 'Bearer ' + accessToken
+          }
+        })
+        .then(({ data }) => {
+          setUser(data[0])
+          
+        })
+        .catch((err) => {
         console.log(err);
-        alert("Error Logging in!");
-      });
-  };
+        });
+      }
 
   // logic to get users location
 
@@ -112,30 +132,30 @@ const App = () => {
             path="/cranes"
             render={() => <Cranes userLocation={userLocation} />}
           >
-            {!user && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/" />}
           </Route>
           <Route
             exact
             path="/add-crane"
-            render={() => <AddCrane user={user} />}
+            render={() => <AddCrane user={user}/>}
           >
-            {!user && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/" />}
           </Route>
 
           <Route exact path="/map" render={() => <Map />}>
-            {!user && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/" />}
           </Route>
           <Route
             exact
             path="/profile"
             render={() => (
-              <Profile userId={user._id} userLocation={userLocation} />
+              <Profile  userLocation={userLocation} />
             )}
           >
-            {!user && <Redirect to="/" />}
+            {!initialState.isAuthenticated && <Redirect to="/" />}
           </Route>
-          <Route exact path="/settings" render={() => <Settings user={user} />}>
-            {!user && <Redirect to="/" />}
+          <Route exact path="/settings" render={() => <Settings  />}>
+            {!initialState.isAuthenticated && <Redirect to="/" />}
           </Route>
         </Switch>
       </>

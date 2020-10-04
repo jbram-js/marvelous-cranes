@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
 
 import "../styles/Settings.css";
 
-const Settings = ({ user }) => {
+const Settings = () => {
   const initialState = {
     fields: {
-      username: user.username,
-      phoneNumber: user.phoneNumber,
-      emailAddress: user.emailAddress,
+      username: "",
+      phoneNumber: "",
+      emailAddress: ""
     },
   };
   const [value, setValue] = useState(initialState.fields);
@@ -18,7 +18,22 @@ const Settings = ({ user }) => {
   const [showPhoneNumberInput, setShowPhoneNumberInput] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [user, setUser] = useState();
 
+  useEffect(() => {
+    axios.get("https://test-crane.herokuapp.com/getUserInfo",{
+      headers: { 
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(({ data }) => {
+      setValue(data[0])
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }, []);
+  
   const handleUpdateUserInfo = (e) => {
     e.preventDefault();
     if (
