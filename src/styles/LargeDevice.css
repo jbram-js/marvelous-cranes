@@ -1,6 +1,54 @@
 .large-device {
-  background: white;
-  height: 100vh;
-  width: 100vw;
-  overflow-y: hidden;
+  align-content: center;
+}
+
+.large-device-image {
+  width: 50vw;
+  padding-bottom: 5%;
+}
+
+.large-device p {
+  margin: 0 5% 5% 5%;
+  font-size: 28px;
+  text-align: center;
+}
+
+.social-icons-large-device {
+  width: 50px;
+}
+
+.social-links-large-device {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+  margin-left: -43px;
+  padding-top: 5%;
+}
+
+@media only screen and (max-width: 599px) {
+  .large-device {
+    display: none;
+  }
+
+  .large-device-image {
+    display: none;
+  }
+
+  .large-device p {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .large-device p {
+    font-size: 32px;
+  }
+}
+
+@media only screen and (min-width: 1240px) {
+  .large-device p {
+    font-size: 36px;
+  }
 }

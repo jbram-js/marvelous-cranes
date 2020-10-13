@@ -64,3 +64,17 @@
   list-style: none;
   margin-left: -43px;
 }
+
+@media only screen and (min-width: 600px) {
+  .register-p {
+    display: none;
+  }
+
+  .register-form {
+    display: none;
+  }
+
+  .login-link {
+    display: none;
+  }
+}

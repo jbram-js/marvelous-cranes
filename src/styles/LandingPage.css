@@ -65,3 +65,33 @@ label {
   list-style: none;
   margin: 25px 0 0 -43px;
 }
+
+@media only screen and (min-width: 600px) {
+  .first-image {
+    display: none;
+  }
+
+  .cranger-p {
+    display: none;
+  }
+
+  .first-image {
+    display: none;
+  }
+
+  .landing-page-p {
+    display: none;
+  }
+
+  .roy-squad-list {
+    display: none;
+  }
+
+  .landing-page-button {
+    display: none;
+  }
+
+  .social-icons {
+    display: none;
+  }
+}

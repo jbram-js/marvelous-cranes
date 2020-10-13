@@ -20,3 +20,9 @@
 .locate-add img {
   width: 30px;
 }
+
+@media only screen and (min-width: 600px) {
+  .map-area {
+    display: none;
+  }
+}
