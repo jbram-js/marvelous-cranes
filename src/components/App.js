@@ -4,10 +4,8 @@ import {
   Switch,
   Redirect,
   useLocation,
-  useHistory,
 } from "react-router-dom";
 import axios from "axios";
-import store from "store";
 import { useMediaQuery } from "react-responsive";
 import LogIn from "./LogIn";
 import Cranes from "./Cranes";
@@ -16,31 +14,28 @@ import Profile from "./Profile";
 import Register from "./Register";
 import Map from "./Map";
 import LandingPage from "./LandingPage";
+import { getToken, removeUserSession, setUserSession } from './utils';
+
 
 import "../styles/App.css";
 import Settings from "./Settings";
 import LargeDevice from "./LargeDevice";
 
 const initialState = {
-  fields: { username: "", password: "" },
   location: {
     latitude: "",
     longitude: "",
   },
-  token: localStorage.getItem("token"),
   isAuthenticated: localStorage.getItem("token") ? true : false,
 };
 
 const App = () => {
-  const [user, setUser] = useState();
-  const [value, setValue] = useState(initialState.fields);
   const [userLocation, setUserLocation] = useState(initialState.location);
-
+  const [authLoading, setAuthLoading] = useState(true);
+ 
   const largeScreen = useMediaQuery({
     query: "(min-device-width: 600px)",
   });
-
-  const history = useHistory();
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -50,37 +45,6 @@ const App = () => {
     }, [pathname]);
 
     return null;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios
-      .post("https://test-crane.herokuapp.com/login", {
-        username: value.username,
-        password: value.password,
-      })
-      .then(({ data }) => {
-        localStorage.setItem("token", data.accessToken);
-        //grabUserInfo(data.accessToken)
-        axios
-          .get("https://test-crane.herokuapp.com/getUserInfo", {
-            headers: {
-              Authorization: "Bearer " + data.accessToken,
-            },
-          })
-          .then(({ data }) => {
-            setUser(data[0]);
-            store.set("loggedIn", true);
-            history.push("/cranes");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Error Logging in!");
-      });
   };
 
   // logic to get users location
@@ -103,56 +67,46 @@ const App = () => {
     getLocation();
   }, []);
 
+//handles refresh 
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      return;
+    }
+
+    axios
+    .get("https://test-crane.herokuapp.com/getUserInfo", {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then(response => {
+      setUserSession(token, response.data[0]);
+      setAuthLoading(false);
+    }).catch(error => {
+      removeUserSession();
+      setAuthLoading(false);
+    });
+  }, []);
+ 
+  if (authLoading && getToken()) {
+    return <div className="content">Checking Authentication...</div>
+  }
+
+
   return (
     <div className="App">
       <ScrollToTop />
       {largeScreen && <LargeDevice />}
       <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
-        <Route
-          exact
-          path="/login"
-          render={() => (
-            <LogIn
-              setUser={setUser}
-              handleSubmit={handleSubmit}
-              value={value}
-              setValue={setValue}
-            />
-          )}
-        ></Route>
-        <Route exact path="/register">
-          <Register />
-        </Route>
-
-        <Route
-          exact
-          path="/cranes"
-          render={() => <Cranes userLocation={userLocation} />}
-        >
-          {!initialState.isAuthenticated && <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/add-crane" render={() => <AddCrane user={user} />}>
-          {!initialState.isAuthenticated && <Redirect to="/login" />}
-        </Route>
-
-        <Route exact path="/map" render={() => <Map />}>
-          {!initialState.isAuthenticated && <Redirect to="/login" />}
-        </Route>
-        <Route
-          exact
-          path="/profile"
-          render={() => (
-            <Profile userId={user._id} userLocation={userLocation} />
-          )}
-        >
-          {!initialState.isAuthenticated && <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/settings" render={() => <Settings user={user} />}>
-          {!initialState.isAuthenticated && <Redirect to="/login" />}
-        </Route>
+        <Route exact path="/" render={() => (<LandingPage />)}/>   
+        <Route exact path="/login" render={() => (<LogIn />)}/>
+        <Route exact path="/register" render={() => (<Register />)}/>
+        <Route exact path="/cranes" render={() => getToken() ? <Cranes userLocation={userLocation} /> : <Redirect to="/login" />} />
+        <Route exact path="/add-crane" render={() => getToken() ? <AddCrane /> : <Redirect to="/login" /> }/>
+        <Route exact path="/map" render={() => getToken() ? <Map /> : <Redirect to="/login" /> }/>
+        <Route exact path="/profile" render={() => getToken() ? <Profile  userLocation={userLocation} /> : <Redirect to="/login" /> }/>
+        <Route exact path="/settings" render={() => getToken() ? <Settings /> : <Redirect to="/login" /> }/>
       </Switch>
     </div>
   );

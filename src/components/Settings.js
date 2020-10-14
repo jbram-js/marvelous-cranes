@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
-
+import { removeUserSession, getUser } from './utils';
 import "../styles/Settings.css";
 
-const Settings = ({ user }) => {
+const Settings = () => {
+  const user = getUser();
+
   const initialState = {
     fields: {
       username: user.username,
@@ -53,10 +56,19 @@ const Settings = ({ user }) => {
     }
   };
 
+  const history = useHistory();
+  
+  const handleLogout = () => {
+    removeUserSession();
+    history.push("/login")
+  }
+
   const handleChange = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
   console.log(value);
+
+  
 
   return (
     <div className="settings">
@@ -144,6 +156,9 @@ const Settings = ({ user }) => {
         )}
         <button className="settings-button" onClick={handleUpdateUserInfo}>
           UPDATE
+        </button>
+        <button className="settings-button" onClick={handleLogout}>
+          LOG OUT
         </button>
       </form>
       <NavBar />

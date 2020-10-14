@@ -3,22 +3,24 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Header from "./Header";
-
+import { getUser } from './utils';
 import ProfileCraneCard from "./ProfileCraneCard";
 
 import "../styles/Profile.css";
 
-const Profile = ({ userId, userLocation }) => {
+const Profile = ({ userLocation }) => {
+  const user = getUser(); 
+  
   const [allUsersCranes, setAllUsersCranes] = useState([]);
   const [username, setUsername] = useState();
 
   useEffect(() => {
     axios
-      .get(`https://test-crane.herokuapp.com/craneUser?userID=${userId}`)
+      .get(`https://test-crane.herokuapp.com/craneUser?userID=${user._id}`)
       .then(({ data }) => {
         setAllUsersCranes(data);
         axios
-          .get(`https://test-crane.herokuapp.com/craneUser?userID=${userId}`)
+          .get(`https://test-crane.herokuapp.com/craneUser?userID=${user._id}`)
           .then(({ data }) => {
             setUsername(data.username);
           });

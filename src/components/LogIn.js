@@ -1,18 +1,59 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import spotify from "../icons/spotify.svg";
 import twitter from "../icons/twitter.svg";
 import instagram from "../icons/instagram.svg";
-
+import axios from "axios";
 import Header from "./Header";
-
+import { getToken, removeUserSession, setUserSession } from './utils';
 import "../styles/LogIn.css";
 
-const LogIn = ({ handleSubmit, value, setValue }) => {
+
+const initialState = {
+  fields: { username: "", password: "" },
+}
+
+const LogIn = () => {
+  const [value, setValue] = useState(initialState.fields);
+  const [authLoading, setAuthLoading] = useState(true);
+  const history = useHistory();
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("https://test-crane.herokuapp.com/login", {
+        username: value.username,
+        password: value.password,
+      })
+      .then(({ data }) => {
+        localStorage.setItem("token", data.accessToken);
+        axios
+          .get("https://test-crane.herokuapp.com/getUserInfo", {
+            headers: {
+              Authorization: "Bearer " + data.accessToken,
+            },
+          })
+          .then(({ data }) => {
+            setUserSession(localStorage.getItem("token"), data[0]);
+            history.push("/cranes");
+          })
+          .catch((err) => {
+            removeUserSession();
+            setAuthLoading(false);
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error Logging in!");
+      });
+  };
+
   const handleInput = (event) => {
     setValue({ ...value, [event.target.name]: event.target.value });
   };
+
   return (
     <div className="login">
       <p className="login-p">LOGIN</p>

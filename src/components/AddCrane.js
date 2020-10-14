@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import NavBar from "./NavBar";
 import Header from "./Header";
+import { getUser } from './utils';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -34,9 +35,10 @@ const center = {
   lng: -2.242631,
 };
 
-const AddCrane = ({ user }) => {
+const AddCrane = () => {
+  const user = getUser();
   const [markers, setMarkers] = useState([]);
-
+  
   const initialState = {
     fields: {
       craneCaption: "",
