@@ -100,23 +100,15 @@ const AddCrane = () => {
           />
         ))}
       </GoogleMap>
-      {markers.length !== 1 ? (
-        <p>Locate the crane using the map above.</p>
-      ) : (
-        console.log(markers)
-      )}
-      {markers.length === 1 ? (
-        <p>Now enter the cranes details below.</p>
-      ) : (
-        console.log(markers)
-      )}
+      {markers.length !== 1 ? (<p>Locate the crane using the map above.</p>) : (<p>Now enter the cranes details below.</p>)}
+      
       {<AddFunction fields={fields} setFields={setFields} />}
       <Header />
       <NavBar />
     </div>
   );
 };
-
+//{markers.length === 1 ? (<p>Now enter the cranes details below.</p>) : (console.log(markers))}
 const Locate = ({ panTo }) => {
   return (
     <button

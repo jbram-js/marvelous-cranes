@@ -6,7 +6,7 @@ import twitter from "../icons/twitter.svg";
 import instagram from "../icons/instagram.svg";
 import axios from "axios";
 import Header from "./Header";
-import { getToken, removeUserSession, setUserSession } from './utils';
+import { removeUserSession, setUserSession } from './utils';
 import "../styles/LogIn.css";
 
 
@@ -109,6 +109,7 @@ const LogIn = () => {
           <a
             href="https://open.spotify.com/artist/6kGMx9MqwnbKR2EYvZvvrG?si=_WTI0BvMRKewu8Zwod44cg"
             target="_blank"
+            
           >
             {" "}
             <img src={spotify} className="social-icons" alt="Spotify icon" />

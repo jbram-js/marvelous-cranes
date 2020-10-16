@@ -39,7 +39,7 @@ const Map = () => {
         .then(({ data }) => {
           setMarkers(data);
           axios
-            .get(`https://test-crane.herokuapp.com/${data[0].craneUser}/users`)
+            .get(`https://test-crane.herokuapp.com/${data[0].userID}/users`)
             .then(({ data }) => {
               setUsername(data.username);
             });
